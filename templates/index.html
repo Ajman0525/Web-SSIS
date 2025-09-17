@@ -1,50 +1,102 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ajman Mocsana | Student Information System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    
-    <!--Icons from Bootstrap-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  </head>
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            
+            <!--BOOTSTRAP CSS-->
+            <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"> -->
+            
+            <!-- BOOTSTRAP ICONS -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-  <body>
-    <div class="row" style="height: 100vh">
-      <div class="col-2 col-sm-3 col-x1-2 bg-dark">
-        <nav class="navbar bg-dark border-bottom border-white" data-bs-theme="dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-          </div>
-        </nav>
+            <!-- CUSTOM CSS -->
+            <link rel="stylesheet" href="../static/style.css">
 
-        <nav class="nav flex-column">
-          <a class="nav-link active text-white"  href="#">Active</a>
-          <a class="nav-link text-white" href="#">Link</a>
-          <a class="nav-link text-white" href="#">Link</a>
-          <a class="nav-link text-white" href="#">Link</a>
-          <a class="nav-link text-white" href="#">Link</a>
-        </nav>
+            <!-- BOXICONS CSS-->
+             <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+            
+            <title>Sidebar Test</title>
+        </head>
+        
+        <body>
+            <nav class="sidebar close">
+                <header>
+                    <div class="image-text">
+                        <span class="image">
+                            <img src="chick_icon.png" alt="logo">
+                        </span>
 
-      </div>  
-      <div class="col-10 col-sm-9 col-x1-10 p-0 m-0">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="bi bi-arrow-bar-right me-2"></i>Logout</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <div class="px-3">
-          <p>Test</p>
-          <p>Test</p>
-          <p>Test</p>
-        </div>
-      </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  </body>
-</html>
+                        <div class="text header-text">
+                            <span class="name">Eggnogs</span>
+                        </div>
+                    </div>
+
+                    <i class="bxr  bx-chevron-right toggle"></i> 
+                </header>
+
+                <div class="menu-bar">
+                    <div class="menu">
+                      <li class="search-box">
+                          <i class='bx  bx-search icon'  ></i>  
+                          <input type="search" placeholder="Search">
+                      </li>
+                      <ul class="menu-links">
+
+                        <li class="nav-link">
+                          <a href="#">
+                              <i class='bxr  bx-home-alt icon' ></i> 
+                              <span class="text nav-text">Home</span>
+                          </a>
+                        </li>
+
+                        <li class="nav-link">
+                          <a href="#">
+                              <i class='bxr  bx-home-alt icon' ></i> 
+                              <span class="text nav-text">Home</span>
+                          </a>
+                        </li>
+                        
+                        <li class="nav-link">
+                          <a href="#">
+                              <i class='bxr  bx-home-alt icon' ></i> 
+                              <span class="text nav-text">Home</span>
+                          </a>
+                        </li>
+
+                        <li class="nav-link">
+                          <a href="#">
+                              <i class='bxr  bx-home-alt icon' ></i> 
+                              <span class="text nav-text">Home</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div class="bottom-content">
+                      <li class="mode">
+                          <div class="moon-sun">
+                            <i class="bx bx-moon icon moon"></i>
+                            <i class="bx bx-sun icon sun"></i>
+                          </div>
+                          <span class="mode-text text">Dark Mode</span>
+
+                          <div class="toggle-switch">
+                            <span class="switch"></span>
+                          </div>
+                         
+                      </li>
+
+                    </div>
+                </div>
+            </nav>
+
+            <section class="home">
+              <div class="text">Dashboard</div>
+            </section>
+
+            <script src="../static/script.js"></script>
+        </body>
+        
+    </html>

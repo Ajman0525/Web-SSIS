@@ -6,6 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+ 
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+          document.write('<body class="dark">');
+        }
+      } catch (e) {
+        console.warn("Theme state error", e);
+      }
+    })();
+  </script>
+    
   <script>
     (function () {
       try {
@@ -50,7 +64,7 @@
   <!-- BOXICONS CSS-->
   <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 
-  <title>SSIS | Home</title>
+  <title>Student Information System | Ajman</title>
 </head>
 
 <body>

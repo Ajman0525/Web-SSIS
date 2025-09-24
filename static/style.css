@@ -22,7 +22,7 @@
     --bgColor--day: #ffbf71;
     --crescentMoon: #d9fbff;
 
-    /* ----Transition---- */
+    /* ----Transitions---- */
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;
     --tran-04: all 0.4s ease;
@@ -63,7 +63,6 @@ body.dark{
 }
 
 /* ---- Reusable CSS ---- */
-
 .sidebar .text{
     font-size: 16px;
     font-weight: 500;
@@ -185,6 +184,10 @@ body.dark .sidebar header .toggle{
     color: var(--sidebar-color);
 }
 
+body.dark .sidebar li a:hover{
+    background: var(--primary-color);
+}
+
 body.dark .sidebar li a:hover .icon,
 body.dark .sidebar li a:hover .text{
     color: var(--text-color);
@@ -208,13 +211,17 @@ body.dark .sidebar li a:hover .text{
     color: var(--sidebar-color);
 }
 
+body.dark .sidebar li.nav-link.active a{
+    background-color: var(--bgColor--night);
+    /* color: #fff; */
+    border-radius: 6px;
+}
+
 
 body.dark .sidebar li.nav-link.active a .icon,
 body.dark .sidebar li.nav-link.active a .text{
     color: var(--text-color);
 }
-    
-
 
 .menu-bar .mode{
     position: relative;
@@ -309,6 +316,7 @@ body.dark .switch::before{
     top: 7px;
     transform: rotate(180deg);
     background: var(--bgColor--night);
+    transition: var(--tran-03);
     box-shadow:
         -4px 0 0 1.5px var(--crescentMoon), /* moon crescent cutout */
         7px -4px 0 -3.5px rgba(255, 255, 255, 0.1),  
@@ -365,4 +373,16 @@ td button{
 
 td button i{
     font-size: 20px;
+}
+
+
+body.dark .home label,
+body.dark .dt-info
+{
+    color: var(--text-color);
+}
+
+/* MODAL LABEL */
+body.dark .modal-body .form-label{
+    color: var(--body-color);
 }

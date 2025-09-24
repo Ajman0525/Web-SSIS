@@ -6,16 +6,13 @@ $(document).ready(function () {
         $modeSwitch = $(".toggle-switch"),
         $modeText = $(".mode-text");
 
+  // --------- SIDEBAR --------- //
   const savedSidebar = localStorage.getItem("sidebarState");
   if (savedSidebar === "open") {
     $sidebar.removeClass("close");
   } else {
-    $sidebar.addClass("close"); // default collapsed
+    $sidebar.addClass("close"); 
   }
-  
-  // Sidebar toggle
-  // $toggle.on("click", () => $sidebar.toggleClass("close"));
-  // $searchBtn.on("click", () => $sidebar.removeClass("close"));
 
   $(window).on("load", function () {
   $("html").addClass("ready");
@@ -29,7 +26,7 @@ $(document).ready(function () {
     );
   });
 
-  // Load saved theme
+  // --------- DARK/LIGHT MODE TOGGLE --------- //
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     $body.addClass("dark");
@@ -50,18 +47,112 @@ $(document).ready(function () {
     }
   });
 
+  // --------- DATA TABLE --------- //
+  // Disable sorting in "Action" column
   $("table").each(function () {
-    // find index of "Actions" column for this table
     var actionsIndex = $(this).find("thead th")
       .filter(function () { return $(this).text().trim() === "Actions"; })
       .index();
 
-    // initialize DataTable
+    
     $(this).DataTable({
       columnDefs: [
         { orderable: false, targets: actionsIndex } // disable sorting
       ]
     });
+  });
+
+  // --------- COLLEGE SCREEN --------- //
+  //Edit College Popup
+  $('#editCollege').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); 
+    var modal  = $(this);
+
+    var collegeCode = button.data('collegeCode'); 
+    var collegeName = button.data('collegeName'); 
+
+    modal.find('#collegeCode').val(collegeCode);
+    modal.find('#collegeName').val(collegeName);
+  });
+
+  // Edit Confirmation Popup
+  $("#editForm").submit(function(e) {
+      e.preventDefault();
+      $("#editCollege").modal('hide');
+      $("#editConfirmation").modal('show');
+  });
+
+  //Delete College Popup
+  $("#deleteForm").submit(function (e) {
+      e.preventDefault();
+      $("#deleteConfirmationModal").modal('hide');
+      $("#deletionModal").modal('show');
+  });
+
+  // --------- PROGRAM SCREEN --------- //
+  //Edit Program Popup
+  $('#editCollege').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); 
+    var modal  = $(this);
+
+    var programCode = button.data('program-code'); 
+    var programName = button.data('program-name'); 
+    var collegeCode = button.data('college-code'); 
+
+    modal.find('#programCode').val(programCode);
+    modal.find('#programName').val(programName);
+    modal.find('#collegeCode').val(collegeCode);
+
+  });
+
+  // Edit Confirmation Popup
+  $("#editForm").submit(function(e) {
+      e.preventDefault();
+      $("#editProgram").modal('hide');
+      $("#editConfirmation").modal('show');
+  });
+
+   //Delete Program Popup
+  $("#deleteForm").submit(function (e) {
+      e.preventDefault();
+      $("#deleteConfirmationModal").modal('hide');
+      $("#deletionModal").modal('show');
+  });
+
+  // --------- STUDENT SCREEN --------- //
+  //Edit Student Popup
+  $('#editCollege').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); 
+    var modal  = $(this);
+
+    var studentID = button.data('student-id'); 
+    var firstName = button.data('first-name'); 
+    var lastName = button.data('last-name'); 
+    var programCode = button.data('program-code'); 
+    var yearLevel = button.data('year-level'); 
+    var gender = button.data('gender'); 
+
+    modal.find('#studentID').val(studentID);
+    modal.find('#firstName').val(firstName);
+    modal.find('#lastName').val(lastName);
+    modal.find('#programCode').val(programCode);
+    modal.find('#yearLevel').val(yearLevel);
+    modal.find('#gender').val(gender);
+
+  });
+
+  // Edit Confirmation Popup
+  $("#editForm").submit(function(e) {
+      e.preventDefault();
+      $("#editStudent").modal('hide');
+      $("#editConfirmation").modal('show');
+  });
+
+   //Delete Student Popup
+  $("#deleteForm").submit(function (e) {
+      e.preventDefault();
+      $("#deleteConfirmationModal").modal('hide');
+      $("#deletionModal").modal('show');
   });
 });
 

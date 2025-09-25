@@ -63,6 +63,13 @@ $(document).ready(function () {
   });
 
   // --------- COLLEGE SCREEN --------- //
+  //Add College Popup
+  $("#addForm").submit(function(e) {
+    e.preventDefault();
+    $("#addCollege").modal('hide');
+    $("#addConfirmation").modal('show');
+});
+
   //Edit College Popup
   $('#editCollege').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); 
@@ -90,6 +97,13 @@ $(document).ready(function () {
   });
 
   // --------- PROGRAM SCREEN --------- //
+  //Add Program Popup
+  $("#addForm").submit(function(e) {
+    e.preventDefault();
+    $("#addProgram").modal('hide');
+    $("#addConfirmation").modal('show');
+});
+
   //Edit Program Popup
   $('#editCollege').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); 
@@ -120,6 +134,13 @@ $(document).ready(function () {
   });
 
   // --------- STUDENT SCREEN --------- //
+  //Add Student Popup
+  $("#addForm").submit(function(e) {
+    e.preventDefault();
+    $("#addStudent").modal('hide');
+    $("#addConfirmation").modal('show');
+});
+
   //Edit Student Popup
   $('#editCollege').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); 

@@ -17,6 +17,17 @@
         </thead>
         <tbody>
             <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <button class="btn btn-success"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#addCollege">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
                 <td>CCS</td>
                 <td>College of Computer Studies</td>
                 <td>
@@ -118,6 +129,55 @@
     </table>
 </div>
 
+<!-- ADD COLLEGE MODAL -->
+<div class="modal fade" id="addCollege" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Register College</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="addForm">
+                    <div class="mb-3">
+                        <label for="collegeCode" class="form-label">College Code:</label>
+                        <input type="text" class="form-control" id="collegeCode" placeholder="e.g. CCS" required>
+                    </div>
+                    <div class="mb-3">  
+                        <label for="collegeName" class="form-label">College Name:</label>
+                        <input type="text" class="form-control" id="collegeName"
+                            placeholder="e.g. College of Computer Studies" required>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="addForm" class="btn btn-success">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ADD COLLEGE CONFIRMATION MODAL -->
+<div class="modal" id="addConfirmation" tabindex="-1" aria-labelledby="confirmationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100" id="confirmationModalLabel">College Registered Successfully</h5>
+            </div>
+            <div class="modal-body">
+                <p class="mt-3">College has been successfully registered.</p>
+            </div>
+            <div class="modal-footer justify-content-right">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal"> Confirm </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- EDIT COLLEGE MODAL -->
 <div class="modal fade" id="editCollege" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">

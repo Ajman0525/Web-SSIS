@@ -1,21 +1,21 @@
 
 $(document).ready(function () {
   const $body = $("body"),
-        $sidebar = $(".sidebar"),
-        $toggle = $(".toggle"),
-        $modeSwitch = $(".toggle-switch"),
-        $modeText = $(".mode-text");
+    $sidebar = $(".sidebar"),
+    $toggle = $(".toggle"),
+    $modeSwitch = $(".toggle-switch"),
+    $modeText = $(".mode-text");
 
   // --------- SIDEBAR --------- //
   const savedSidebar = localStorage.getItem("sidebarState");
   if (savedSidebar === "open") {
     $sidebar.removeClass("close");
   } else {
-    $sidebar.addClass("close"); 
+    $sidebar.addClass("close");
   }
 
   $(window).on("load", function () {
-  $("html").addClass("ready");
+    $("html").addClass("ready");
   });
 
   $toggle.on("click", () => {
@@ -54,7 +54,7 @@ $(document).ready(function () {
       .filter(function () { return $(this).text().trim() === "Actions"; })
       .index();
 
-    
+
     $(this).DataTable({
       columnDefs: [
         { orderable: false, targets: actionsIndex } // disable sorting
@@ -62,56 +62,89 @@ $(document).ready(function () {
     });
   });
 
-  // --------- COLLEGE SCREEN --------- //
-  //Add College Popup
-  $("#addForm").submit(function(e) {
+  $("#addForm").submit(function (e) {
     e.preventDefault();
     $("#addCollege").modal('hide');
     $("#addConfirmation").modal('show');
-});
+
+    $.post($(this).attr("action"), $(this).serialize(), function (response) {
+      if (response.success) {
+        $("#addCollege").modal("hide");
+        $("#addConfirmation").modal("show");
+        $("#addForm")[0].reset();
+
+        $("#addConfirmation").on("hidden.bs.modal", function () {
+          location.reload();
+        });
+      } else {
+        alert(response.message);
+      }
+    }).fail(function (xhr) {
+      alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+    });
+  });
 
   //Edit College Popup
   $('#editCollege').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); 
-    var modal  = $(this);
+    var button = $(event.relatedTarget);
+    var modal = $(this);
 
-    var collegeCode = button.data('collegeCode'); 
-    var collegeName = button.data('collegeName'); 
+    var collegeCode = button.data('collegeCode');
+    var collegeName = button.data('collegeName');
 
     modal.find('#collegeCode').val(collegeCode);
     modal.find('#collegeName').val(collegeName);
   });
 
   // Edit Confirmation Popup
-  $("#editForm").submit(function(e) {
-      e.preventDefault();
-      $("#editCollege").modal('hide');
-      $("#editConfirmation").modal('show');
+  $("#editForm").submit(function (e) {
+    e.preventDefault();
+    $("#editCollege").modal('hide');
+    $("#editConfirmation").modal('show');
   });
 
-  //Delete College Popup
-  $("#deleteForm").submit(function (e) {
-      e.preventDefault();
-      $("#deleteConfirmationModal").modal('hide');
-      $("#deletionModal").modal('show');
+  // Delete Popup
+  // When opening the delete modal, set the college code
+  $('#deleteConfirmationModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var code = button.data('college-code'); // Extract code from data attribute
+    $(this).find('#deleteCode').val(code); // Set value in hidden input
   });
+
+  $('#deleteForm').submit(function (e) {
+    e.preventDefault();
+    $.post("/colleges/delete", $(this).serialize(), function (response) {
+      if (response.success) {
+        $('#deleteConfirmationModal').modal('hide'); // hide the confirm modal
+        $('#deletionModal').modal('show'); // show "College Deleted" modal
+
+        // optional: reload table or page when deletion modal closes
+        $('#deletionModal').on('hidden.bs.modal', function () {
+          location.reload();
+        });
+      } else {
+        alert(response.message);
+      }
+    });
+  });
+
 
   // --------- PROGRAM SCREEN --------- //
   //Add Program Popup
-  $("#addForm").submit(function(e) {
+  $("#addForm").submit(function (e) {
     e.preventDefault();
     $("#addProgram").modal('hide');
     $("#addConfirmation").modal('show');
-});
+  });
 
   //Edit Program Popup
   $('#editCollege').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); 
-    var modal  = $(this);
+    var button = $(event.relatedTarget);
+    var modal = $(this);
 
-    var programCode = button.data('program-code'); 
-    var programName = button.data('program-name'); 
-    var collegeCode = button.data('college-code'); 
+    var programCode = button.data('program-code');
+    var programName = button.data('program-name');
+    var collegeCode = button.data('college-code');
 
     modal.find('#programCode').val(programCode);
     modal.find('#programName').val(programName);
@@ -120,38 +153,38 @@ $(document).ready(function () {
   });
 
   // Edit Confirmation Popup
-  $("#editForm").submit(function(e) {
-      e.preventDefault();
-      $("#editProgram").modal('hide');
-      $("#editConfirmation").modal('show');
+  $("#editForm").submit(function (e) {
+    e.preventDefault();
+    $("#editProgram").modal('hide');
+    $("#editConfirmation").modal('show');
   });
 
-   //Delete Program Popup
+  //Delete Program Popup
   $("#deleteForm").submit(function (e) {
-      e.preventDefault();
-      $("#deleteConfirmationModal").modal('hide');
-      $("#deletionModal").modal('show');
+    e.preventDefault();
+    $("#deleteConfirmationModal").modal('hide');
+    $("#deletionModal").modal('show');
   });
 
   // --------- STUDENT SCREEN --------- //
   //Add Student Popup
-  $("#addForm").submit(function(e) {
+  $("#addForm").submit(function (e) {
     e.preventDefault();
     $("#addStudent").modal('hide');
     $("#addConfirmation").modal('show');
-});
+  });
 
   //Edit Student Popup
   $('#editCollege').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); 
-    var modal  = $(this);
+    var button = $(event.relatedTarget);
+    var modal = $(this);
 
-    var studentID = button.data('student-id'); 
-    var firstName = button.data('first-name'); 
-    var lastName = button.data('last-name'); 
-    var programCode = button.data('program-code'); 
-    var yearLevel = button.data('year-level'); 
-    var gender = button.data('gender'); 
+    var studentID = button.data('student-id');
+    var firstName = button.data('first-name');
+    var lastName = button.data('last-name');
+    var programCode = button.data('program-code');
+    var yearLevel = button.data('year-level');
+    var gender = button.data('gender');
 
     modal.find('#studentID').val(studentID);
     modal.find('#firstName').val(firstName);
@@ -163,19 +196,19 @@ $(document).ready(function () {
   });
 
   // Edit Confirmation Popup
-  $("#editForm").submit(function(e) {
-      e.preventDefault();
-      $("#editStudent").modal('hide');
-      $("#editConfirmation").modal('show');
+  $("#editForm").submit(function (e) {
+    e.preventDefault();
+    $("#editStudent").modal('hide');
+    $("#editConfirmation").modal('show');
   });
 
-   //Delete Student Popup
+  //Delete Student Popup
   $("#deleteForm").submit(function (e) {
-      e.preventDefault();
-      $("#deleteConfirmationModal").modal('hide');
-      $("#deletionModal").modal('show');
+    e.preventDefault();
+    $("#deleteConfirmationModal").modal('hide');
+    $("#deletionModal").modal('show');
   });
 });
 
 
-  
+

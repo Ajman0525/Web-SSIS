@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.database import get_db
+import logging
 
 college_blueprint = Blueprint("college", __name__, template_folder="templates")
 
@@ -21,6 +22,7 @@ def colleges():
 
 @college_blueprint.route("/colleges/register", methods=["POST"])
 def register_college():
+    logging.warning("Adding input hit!")
     code = request.form.get("code", "").strip().upper()
     name = request.form.get("name", "").strip().title()
 

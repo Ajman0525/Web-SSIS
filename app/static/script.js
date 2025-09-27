@@ -239,7 +239,7 @@ $(document).ready(function () {
   });
 
   // Delete Program Popup
-   $('#programDeletionModal').on('show.bs.modal', function (event) {
+  $('#programDeletionModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); // Button that triggered the modal
     var code = button.data('program-code'); // Extract code from data attribute
     $(this).find('#deleteCode').val(code); // Set value in hidden input
@@ -251,7 +251,7 @@ $(document).ready(function () {
       if (response.success) {
         $('#programDeletionModal').modal('hide'); // hide the confirm modal
         $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
-        
+
         // optional: reload table or page when deletion modal closes
         $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
           location.reload();
@@ -266,12 +266,26 @@ $(document).ready(function () {
   //Add Student Popup
   $("#addStudentForm").submit(function (e) {
     e.preventDefault();
-    $("#addStudent").modal('hide');
-    $("#addConfirmation").modal('show');
+
+    $.post($(this).attr("action"), $(this).serialize(), function (response) {
+      if (response.success) {
+        $("#addStudent").modal("hide");
+        $("#addConfirmation").modal("show");
+        $("#addStudentForm")[0].reset();
+
+        $("#addConfirmation").on("hidden.bs.modal", function () {
+          location.reload();
+        });
+      } else {
+        alert(response.message);
+      }
+    }).fail(function (xhr) {
+      alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+    });
   });
 
   //Edit Student Popup
-  $('#editCollege').on('show.bs.modal', function (event) {
+  $('#editStudent').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var modal = $(this);
 
@@ -288,21 +302,55 @@ $(document).ready(function () {
     modal.find('#programCode').val(programCode);
     modal.find('#yearLevel').val(yearLevel);
     modal.find('#gender').val(gender);
+    modal.find('#original_id').val(studentID);
 
   });
 
   // Edit Confirmation Popup
-  $("#editForm").submit(function (e) {
+  $("#editStudentForm").submit(function (e) {
     e.preventDefault();
-    $("#editStudent").modal('hide');
-    $("#editConfirmation").modal('show');
+
+    $.post("/students/edit", $(this).serialize(), function (response) {
+      if (response.success) {
+        $("#editStudent").modal('hide');
+        $("#editConfirmation").modal('show');
+        $("#editStudentForm")[0].reset();
+
+
+        $('#editConfirmation').on('hidden.bs.modal', function () {
+          location.reload(); // reload table to show changes
+        });
+
+      } else {
+        alert("Error: " + response.message);
+      }
+    }).fail(function (xhr) {
+      alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+    });
   });
 
   //Delete Student Popup
-  $("#deleteStudentForm").submit(function (e) {
+  $('#studentDeletionModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); 
+    var id = button.data('student-id'); 
+    $(this).find('#deleteStudentID').val(id); // Set value in hidden input
+  });
+
+  $('#deleteStudentForm').submit(function (e) {
     e.preventDefault();
-    $("#deleteConfirmationModal").modal('hide');
-    $("#deletionModal").modal('show');
+    $.post("/students/delete", $(this).serialize(), function (response) {
+      if (response.success) {
+        $('#studentDeletionModal').modal('hide'); // hide the confirm modal
+        $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
+
+        // optional: reload table or page when deletion modal closes
+        $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
+          location.reload();
+        });
+      } else {
+        alert(response.message);
+      }
+    });
   });
 });
 

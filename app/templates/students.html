@@ -35,196 +35,35 @@
                     </button>
                 </td>
             </tr>
+            {% for student in students %}
             <tr>
-                <td>2022-0001</td>
-                <td>Miharu</td>
-                <td>Michishige</td>
-                <td>BSCS</td>    
-                <td>1</td>  
-                <td>Female</td>  
+                <td>{{student.id}}</td>
+                <td>{{student.f_name}}</td>
+                <td>{{student.l_name}}</td>
+                <td>{{student.program}}</td>    
+                <td>{{student.year_level}}</td>  
+                <td>{{student.gender}}</td>  
                 <td>
                     <button class="btn btn-primary"
                             data-bs-toggle="modal"
                             data-bs-target="#editStudent"
-                            data-student-id="2022-0001"
-                            data-first-name="Miharu"
-                            data-last-name="Michishige"
-                            data-program-code="BSCS"
-                            data-year-level="1"
-                            data-gender="Female">
+                            data-student-id="{{student.id}}"
+                            data-first-name="{{student.f_name}}"
+                            data-last-name="{{student.l_name}}"
+                            data-program-code="{{student.program}}"
+                            data-year-level="{{student.year_level}}"
+                            data-gender="{{student.gender}}">
                         <i class="bi bi-pencil-square"></i>
                     </button>
                     <button class="btn btn-danger"
                             data-bs-toggle="modal"  
-                            data-bs-target="#deleteConfirmationModal"
-                            data-student-id="2022-0001">
+                            data-bs-target="#studentDeletionModal"
+                            data-student-id="{{student.id}}">
                         <i class="bi bi-trash"></i></i>
                     </button>
                 </td>
             </tr>
-            <tr>
-                <td>2022-0002</td>
-                <td>Miharu</td>
-                <td>Michishige</td>
-                <td>BSCS</td>    
-                <td>1</td>  
-                <td>Female</td>  
-                <td>
-                    <button class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editStudent"
-                            data-student-id="2022-0001"
-                            data-first-name="Miharu"
-                            data-last-name="Michishige"
-                            data-program-code="BSCS"
-                            data-year-level="1"
-                            data-gender="Female">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button class="btn btn-danger"
-                            data-bs-toggle="modal"  
-                            data-bs-target="#deleteConfirmationModal"
-                            data-student-id="2022-0001">
-                        <i class="bi bi-trash"></i></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>2022-0003</td>
-                <td>Miharu</td>
-                <td>Michishige</td>
-                <td>BSCS</td>    
-                <td>1</td>  
-                <td>Female</td>  
-                <td>
-                    <button class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editStudent"
-                            data-student-id="2022-0001"
-                            data-first-name="Miharu"
-                            data-last-name="Michishige"
-                            data-program-code="BSCS"
-                            data-year-level="1"
-                            data-gender="Female">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button class="btn btn-danger"
-                            data-bs-toggle="modal"  
-                            data-bs-target="#deleteConfirmationModal"
-                            data-student-id="2022-0001">
-                        <i class="bi bi-trash"></i></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>2022-0004</td>
-                <td>Miharu</td>
-                <td>Michishige</td>
-                <td>BSCS</td>    
-                <td>1</td>  
-                <td>Female</td>  
-                <td>
-                    <button class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editStudent"
-                            data-student-id="2022-0001"
-                            data-first-name="Miharu"
-                            data-last-name="Michishige"
-                            data-program-code="BSCS"
-                            data-year-level="1"
-                            data-gender="Female">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button class="btn btn-danger"
-                            data-bs-toggle="modal"  
-                            data-bs-target="#deleteConfirmationModal"
-                            data-student-id="2022-0001">
-                        <i class="bi bi-trash"></i></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>2022-0005</td>
-                <td>Miharu</td>
-                <td>Michishige</td>
-                <td>BSCS</td>    
-                <td>1</td>  
-                <td>Female</td>  
-                <td>
-                    <button class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editStudent"
-                            data-student-id="2022-0001"
-                            data-first-name="Miharu"
-                            data-last-name="Michishige"
-                            data-program-code="BSCS"
-                            data-year-level="1"
-                            data-gender="Female">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button class="btn btn-danger"
-                            data-bs-toggle="modal"  
-                            data-bs-target="#deleteConfirmationModal"
-                            data-student-id="2022-0001">
-                        <i class="bi bi-trash"></i></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>2022-0006</td>
-                <td>Miharu</td>
-                <td>Michishige</td>
-                <td>BSCS</td>    
-                <td>1</td>  
-                <td>Female</td>  
-                <td>
-                    <button class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editStudent"
-                            data-student-id="2022-0001"
-                            data-first-name="Miharu"
-                            data-last-name="Michishige"
-                            data-program-code="BSCS"
-                            data-year-level="1"
-                            data-gender="Female">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button class="btn btn-danger"
-                            data-bs-toggle="modal"  
-                            data-bs-target="#deleteConfirmationModal"
-                            data-student-id="2022-0001">
-                        <i class="bi bi-trash"></i></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>2022-0007</td>
-                <td>Miharu</td>
-                <td>Michishige</td>
-                <td>BSCS</td>    
-                <td>1</td>  
-                <td>Female</td>  
-                <td>
-                    <button class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editStudent"
-                            data-student-id="2022-0001"
-                            data-first-name="Miharu"
-                            data-last-name="Michishige"
-                            data-program-code="BSCS"
-                            data-year-level="1"
-                            data-gender="Female">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <button class="btn btn-danger"
-                            data-bs-toggle="modal"  
-                            data-bs-target="#deleteConfirmationModal"
-                            data-student-id="2022-0001">
-                        <i class="bi bi-trash"></i></i>
-                    </button>
-                </td>
-            </tr>
-
+            {% endfor %}
         </tbody>
     </table>
   </div>
@@ -240,26 +79,31 @@
             </div>
 
             <div class="modal-body">
-                <form id="addStudentForm">
+                <form id="addStudentForm" method="POST" action="{{ url_for('student.register_student') }}">
                     <div class="mb-3">
                         <label for="studentID" class="form-label">ID Number:</label>
-                        <input type="text" class="form-control" id="studentID" placeholder="e.g. 2022-0525" required>
+                        <input type="text" class="form-control" id="studentID" name ="id" placeholder="e.g. 2022-0525" required>
                     </div>
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name:</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="e.g. Miharu" required>
+                        <input type="text" class="form-control" id="firstName" name ="f_name" placeholder="e.g. Miharu" required>
                     </div>
                     <div class="mb-3">
                         <label for="lastName" class="form-label">Last Name:</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="e.g. Michishige" required>
+                        <input type="text" class="form-control" id="lastName" name ="l_name" placeholder="e.g. Michishige" required>
                     </div>
                     <div class="mb-3">
                         <label for="programCode" class="form-label">Program Code:</label>
-                        <input type="text" class="form-control" id="programCode" placeholder="e.g. 	Bachelor of Science in Computer Science" required>
+                        <select class="form-select" id="programCode" name="program" required>
+                            <option value ="" selected disabled>Select a College</option>
+                            {% for program in programs %}
+                            <option value="{{ program.code }}">{{ program.code }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="yearLevel" class="form-label">Year Level:</label>
-                        <select class="form-select" id="yearLevel" required>
+                        <select class="form-select" id="yearLevel" name="year_level" required>
                             <option value ="" selected disabled>Select year</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -269,7 +113,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label">Gender:</label>
-                        <input type="text" class="form-control" id="gender" placeholder="Female" required>
+                        <input type="text" class="form-control" id="gender" name= "gender" placeholder="Female" required>
                     </div>
                 </form>
             </div>
@@ -312,27 +156,32 @@
 
             <div class="modal-body">
                 <form id="editStudentForm">
+                    <input type="hidden" id="original_id" name="original_id"> <!-- Hidden input -->
                     <div class="mb-3">
                         <label for="studentID" class="form-label">ID Number:</label>
-                        <input type="text" class="form-control" id="studentID" placeholder="e.g. 2022-0525" required>
+                        <input type="text" class="form-control" id="studentID" name ="id" placeholder="e.g. 2022-0525" required>
                     </div>
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name:</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="e.g. Miharu" required>
+                        <input type="text" class="form-control" id="firstName" name="f_name" placeholder="e.g. Miharu" required>
                     </div>
                     <div class="mb-3">
                         <label for="lastName" class="form-label">Last Name:</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="e.g. Michishige" required>
+                        <input type="text" class="form-control" id="lastName" name = "l_name" placeholder="e.g. Michishige" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="programCode" class="form-label">Program Code:</label>
-                        <input type="text" class="form-control" id="programCode"
-                            placeholder="e.g. BSCS" required>
+                        <select class="form-select" id="programCode" name="program" required>
+                            <option value ="" selected disabled>Select a College</option>
+                            {% for program in programs %}
+                            <option value="{{ program.code }}">{{ program.code }}</option>
+                            {% endfor %}
+                        </select>
                     </div>    
                     <div class="mb-3">
                         <label for="yearLevel" class="form-label">Year Level:</label>
-                        <select class="form-select" id="yearLevel" required>
+                        <select class="form-select" id="yearLevel" name="year_level" required>
                             <option value ="" selected disabled>Select year</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -342,7 +191,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="gender" class="form-label">Gender:</label>
-                        <input type="text" class="form-control" id="gender" placeholder="Female" required>
+                        <input type="text" class="form-control" id="gender" name="gender" placeholder="Female" required>
                     </div>
                 </form>
             </div>
@@ -375,12 +224,12 @@
 
 
 <!-- DELETE STUDENT MODAL -->
-<div class="modal" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel"
+<div class="modal" id="studentDeletionModal" tabindex="-1" aria-labelledby="studentDeletionModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title w-100" id="deleteConfirmationModalLabel">Confirm Student Deletion</h5>
+                <h5 class="modal-title w-100" id="studentDeletionModalLabel">Confirm Student Deletion</h5>
             </div>
             <div class="modal-body">
                 <p class="mt-3">
@@ -389,7 +238,8 @@
                 </p>
             </div>
             <div class="modal-footer justify-content-right">
-                <form id="deleteForm">
+                <form id="deleteStudentForm">
+                    <input type="hidden" name="id" id="deleteStudentID"> <!-- Hidden input -->
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Cancel </button>
                     <button type="submit" class="btn btn-success"> Confirm </button>
                 </form>
@@ -399,11 +249,11 @@
 </div>
 
 <!-- DELETE STUDENT CONFIRMATION MODAL -->
-<div class="modal" id="deletionModal" tabindex="-1" aria-labelledby="deletionModalLabel" aria-hidden="true">
+<div class="modal" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deletionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title w-100" id="deletionModalLabel">Student Deleted</h5>
+                <h5 class="modal-title w-100" id="deleteConfirmationModal">Student Deleted</h5>
             </div>
             <div class="modal-body">
                 <p class="mt-3">Student has been successfully deleted.</p>

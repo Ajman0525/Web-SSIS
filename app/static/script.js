@@ -63,32 +63,32 @@ $(document).ready(function () {
   // });
 
 
-var table = $('#myDataTable').DataTable({
+  var table = $('#myDataTable').DataTable({
     columnDefs: [
-        { orderable: false, targets: -1 } // disable sorting on last column
+      { orderable: false, targets: -1 } // disable sorting on last column
     ],
-    "rowCallback": function(row, data, index){
-        if($(row).hasClass('placeholder-row')){
-            $(row).addClass('dtr-disabled'); // optional styling
-            $(row).attr('data-search', 'false'); // ignore search
-            $(row).attr('data-order', 'false');  // ignore sort
-        }
+    "rowCallback": function (row, data, index) {
+      if ($(row).hasClass('placeholder-row')) {
+        $(row).addClass('dtr-disabled'); // optional styling
+        $(row).attr('data-search', 'false'); // ignore search
+        $(row).attr('data-order', 'false');  // ignore sort
+      }
     },
-    "infoCallback": function(settings, start, end, max, total, pre){
-    // Count only real rows
-    var realRows = $(settings.nTBody).find('tr:not(.placeholder-row)').length;
+    "infoCallback": function (settings, start, end, max, total, pre) {
+      // Count only real rows
+      var realRows = $(settings.nTBody).find('tr:not(.placeholder-row)').length;
 
-    if(realRows === 0){
+      if (realRows === 0) {
         start = 0;
         end = 0;
-    } else {
+      } else {
         start = 1;          // first real row
         end = realRows;     // last real row
-    }
+      }
 
-    return 'Showing ' + start + ' to ' + end + ' of ' + realRows + ' entries';
-}
-});
+      return 'Showing ' + start + ' to ' + end + ' of ' + realRows + ' entries';
+    }
+  });
 
 
   // Add College Popup
@@ -112,7 +112,7 @@ var table = $('#myDataTable').DataTable({
     });
   });
 
-  // //Edit College Popup
+  //Edit College Popup
   $('#editCollege').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var modal = $(this);
@@ -127,15 +127,15 @@ var table = $('#myDataTable').DataTable({
 
 
   // Edit College jQuery
-  $("#editForm").submit(function (e) {
+  $("#editCollegeForm").submit(function (e) {
     e.preventDefault();
-    $("#editCollege").modal('hide');
-    $("#editConfirmation").modal('show'); // optional confirmation modal
 
     $.post("/colleges/edit", $(this).serialize(), function (response) {
       if (response.success) {
-        $("#editForm")[0].reset();
-        $("#editCollege").modal("hide");
+        $("#editCollege").modal('hide');
+        $("#editConfirmation").modal('show'); // optional confirmation modal
+        $("#editCollegeForm")[0].reset();
+
 
         $('#editConfirmation').on('hidden.bs.modal', function () {
           location.reload(); // reload table to show changes
@@ -153,17 +153,17 @@ var table = $('#myDataTable').DataTable({
 
   // Delete Popup
   // When opening the delete modal, set the college code
-  $('#deletionModal').on('show.bs.modal', function (event) {
+  $('#collegeDeletionModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget); // Button that triggered the modal
     var code = button.data('college-code'); // Extract code from data attribute
     $(this).find('#deleteCode').val(code); // Set value in hidden input
   });
 
-  $('#deleteForm').submit(function (e) {
+  $('#deleteCollegeForm').submit(function (e) {
     e.preventDefault();
     $.post("/colleges/delete", $(this).serialize(), function (response) {
       if (response.success) {
-        $('#deletionModal').modal('hide'); // hide the confirm modal
+        $('#collegeDeletionModal').modal('hide'); // hide the confirm modal
         $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
 
         // optional: reload table or page when deletion modal closes
@@ -179,10 +179,8 @@ var table = $('#myDataTable').DataTable({
 
   // --------- PROGRAM SCREEN --------- //
   //Add Program Popup
-$("#addProgramForm").submit(function (e) {
+  $("#addProgramForm").submit(function (e) {
     e.preventDefault();
-    $("#addProgram").modal('hide');
-    $("#addConfirmation").modal('show');
 
     $.post($(this).attr("action"), $(this).serialize(), function (response) {
       if (response.success) {
@@ -202,32 +200,66 @@ $("#addProgramForm").submit(function (e) {
   });
 
   //Edit Program Popup
-  $('#editCollege').on('show.bs.modal', function (event) {
+  $('#editProgram').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var modal = $(this);
 
-    var programCode = button.data('program-code');
-    var programName = button.data('program-name');
-    var collegeCode = button.data('college-code');
+    var programCode = button.data('programCode');
+    var programName = button.data('programName');
+    var collegeCode = button.data('collegeCode');
 
     modal.find('#programCode').val(programCode);
     modal.find('#programName').val(programName);
     modal.find('#collegeCode').val(collegeCode);
+    modal.find('#originalCode').val(programCode);
 
   });
 
   // Edit Confirmation Popup
-  $("#editForm").submit(function (e) {
+  $("#editProgramForm").submit(function (e) {
     e.preventDefault();
-    $("#editProgram").modal('hide');
-    $("#editConfirmation").modal('show');
+
+    $.post("/programs/edit", $(this).serialize(), function (response) {
+      if (response.success) {
+        $("#editProgram").modal('hide');
+        $("#editConfirmation").modal('show');
+        $("#editProgramForm")[0].reset();
+
+
+        $('#editConfirmation').on('hidden.bs.modal', function () {
+          location.reload(); // reload table to show changes
+        });
+
+      } else {
+        alert("Error: " + response.message);
+      }
+    }).fail(function (xhr) {
+      alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+    });
   });
 
-  //Delete Program Popup
-  $("#deleteForm").submit(function (e) {
+  // Delete Program Popup
+   $('#programDeletionModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var code = button.data('program-code'); // Extract code from data attribute
+    $(this).find('#deleteCode').val(code); // Set value in hidden input
+  });
+
+  $('#deleteProgramForm').submit(function (e) {
     e.preventDefault();
-    $("#deleteConfirmationModal").modal('hide');
-    $("#deletionModal").modal('show');
+    $.post("/programs/delete", $(this).serialize(), function (response) {
+      if (response.success) {
+        $('#programDeletionModal').modal('hide'); // hide the confirm modal
+        $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
+        
+        // optional: reload table or page when deletion modal closes
+        $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
+          location.reload();
+        });
+      } else {
+        alert(response.message);
+      }
+    });
   });
 
   // --------- STUDENT SCREEN --------- //
@@ -267,7 +299,7 @@ $("#addProgramForm").submit(function (e) {
   });
 
   //Delete Student Popup
-  $("#deleteForm").submit(function (e) {
+  $("#deleteStudentForm").submit(function (e) {
     e.preventDefault();
     $("#deleteConfirmationModal").modal('hide');
     $("#deletionModal").modal('show');

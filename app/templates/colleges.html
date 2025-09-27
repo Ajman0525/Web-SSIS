@@ -35,7 +35,7 @@
                         data-college-code="{{college.code}}" data-college-name="{{college.name}}">
                         <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletionModal"
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#collegeDeletionModal"
                         data-college-code="{{college.code}}">
                         <i class="bi bi-trash"></i></i>
                     </button>
@@ -107,7 +107,7 @@
             </div>
 
             <div class="modal-body">
-                <form id="editForm">
+                <form id="editCollegeForm">
                     <input type="hidden" id="originalCode" name="original_code"> <!-- Hidden input -->
                     <div class="mb-3">
                         <label for="collegeCode" class="form-label">College Code:</label>
@@ -123,7 +123,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" form="editForm" class="btn btn-success">Update</button>
+                <button type="submit" form="editCollegeForm" class="btn btn-success">Update</button>
             </div>
         </div>
     </div>
@@ -148,7 +148,7 @@
 </div>
 
 <!-- DELETE COLLEGE MODAL -->
-<div class="modal" id="deletionModal" tabindex="-1" aria-labelledby="deletionModalLabel"
+<div class="modal" id="collegeDeletionModal" tabindex="-1" aria-labelledby="deletionModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -161,7 +161,7 @@
                 </p>
             </div>
             <div class="modal-footer justify-content-right">
-                <form id="deleteForm">
+                <form id="deleteCollegeForm">
                     <input type="hidden" name="code" id="deleteCode"> <!-- Hidden input -->
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cancel </button>
                     <button type="submit" class="btn btn-danger"> Confirm </button>

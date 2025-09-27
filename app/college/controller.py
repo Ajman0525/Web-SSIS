@@ -22,7 +22,6 @@ def colleges():
 
 @college_blueprint.route("/colleges/register", methods=["POST"])
 def register_college():
-    logging.warning("Adding input hit!")
     code = request.form.get("code", "").strip().upper()
     name = request.form.get("name", "").strip().title()
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.database import get_db
-import logging
+
 
 college_blueprint = Blueprint("college", __name__, template_folder="templates")
 

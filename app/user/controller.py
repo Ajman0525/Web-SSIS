@@ -11,14 +11,14 @@ def users():
     cursor.execute("""
                     SELECT username,
                            email,
-                           password
+                           password_length
                    FROM users
                    ORDER BY username ASC
                    """)
     users_data = cursor.fetchall()
     cursor.close()
 
-    users_list = [{"username": u[0], "email": u[1], "password": u[2]} for u in users_data]
+    users_list = [{"username": u[0], "email": u[1], "password_length": "•" * u[2]} for u in users_data]
 
     return render_template(
         "users.html",
@@ -43,12 +43,16 @@ def login():
             session["user_id"] = user[0]
             session["username"] = user[1]
             flash("Login successful!", "success")
-            return redirect(url_for("home"))  # 👈 this redirects to home.html
+            return redirect(url_for("home"))  # redirects to home.html
         else:
             flash("Invalid username or password", "danger")
 
     return render_template("login.html")
 
+@user_blueprint.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("user.login"))
 
 # --- SIGNUP ---
 @user_blueprint.route("/signup", methods=["POST"])
@@ -64,15 +68,22 @@ def signup():
     db = get_db()
     cursor = db.cursor()
 
+    # Check if username already exists
     cursor.execute("SELECT id FROM users WHERE username = %s", (username,))
     if cursor.fetchone():
         flash("Username already exists!", "danger")
         return redirect(url_for("user.login"))
 
+    # Hash password but also store its length
     hashed_pw = generate_password_hash(password)
+    pw_length = len(password)
+
     cursor.execute(
-        "INSERT INTO users (username, email, password) VALUES (%s, %s, %s)",
-        (username, email, hashed_pw),
+        """
+        INSERT INTO users (username, email, password, password_length)
+        VALUES (%s, %s, %s, %s)
+        """,
+        (username, email, hashed_pw, pw_length),
     )
     db.commit()
     cursor.close()

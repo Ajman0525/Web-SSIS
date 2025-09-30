@@ -117,6 +117,13 @@
               <span class="text nav-text">Colleges</span>
             </a>
           </li>
+
+          <li class="nav-link {% if request.endpoint == 'user.users' %}active{% endif %}">
+            <a href="{{ url_for('user.users') }}">
+              <i class="bi bi-people icon"></i>
+              <span class="text nav-text">Users</span>
+            </a>
+          </li>
         <!-- </ul> -->
       </div>
 

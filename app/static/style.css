@@ -386,3 +386,14 @@ body.dark .dt-info
 body.dark .modal-body .form-label{
     color: var(--body-color);
 }
+
+/* DASHBOARD TYPING ANIMATION */
+#welcome-message::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}

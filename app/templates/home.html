@@ -9,6 +9,7 @@
 </div>
 
 
+
 {% endblock %}
 
 {% block scripts %}
@@ -18,7 +19,7 @@
     $(function() {
         if (USER_NAME) {
             const USER_NAME_CAP = USER_NAME.charAt(0).toUpperCase() + USER_NAME.slice(1);
-            const message = `Welcome ${USER_NAME_CAP}.`;
+            const message = `Welcome, ${USER_NAME_CAP}.`;
             let index = 0;
 
             function typeWriter() {

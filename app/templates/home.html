@@ -4,6 +4,33 @@
 
 {% block content %}
 
-    <div class="text">Home</div>
+<div class="text header">
+    <h1 id="welcome-message"></h1>
+</div>
 
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const USER_NAME = {{ user_name | tojson }};
+
+    $(function() {
+        if (USER_NAME) {
+            const USER_NAME_CAP = USER_NAME.charAt(0).toUpperCase() + USER_NAME.slice(1);
+            const message = `Welcome ${USER_NAME_CAP}.`;
+            let index = 0;
+
+            function typeWriter() {
+                if (index < message.length) {
+                    $('#welcome-message').append(message.charAt(index));
+                    index++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+
+            typeWriter();
+        }
+    });
+</script>
 {% endblock %}

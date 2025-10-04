@@ -16,7 +16,7 @@
     --primary-color: #695cfe;
     --secondary-color: #BFBAF7;
     --primary-color-light: #f6f5ff ;
-    --toggle-color: #ddd;
+    /* --toggle-color: #ddd; */
     --text-color: #707070;
     --bgColor--night: #423966;
     --bgColor--day: #ffbf71;
@@ -41,7 +41,7 @@ body.dark{
     --sidebar-color: #242526;
     --primary-color: #3a3b3c;
     --primary-color-light: #3a3b3c ;
-    --toggle-color: #fffafa;
+    /* --toggle-color: #fffafa; */
     --text-color: #ccc;
 }
 
@@ -396,4 +396,74 @@ body.dark .modal-body .form-label{
 @keyframes blink {
     0%, 50%, 100% { opacity: 1; }
     25%, 75% { opacity: 0; }
+}
+
+/* Stats Cards Styling */
+.stats-card {
+    min-height: 220px;
+    border-radius: 15px;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-card:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.stats-card .card-body {
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.stats-card .card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.stats-card .display-3 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.stats-card .card-text {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+/* Bootstrap Icons Styling */
+.stats-card .icon {
+    font-size: 3rem;
+    opacity: 0.8;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stats-card {
+        min-height: 180px;
+    }
+    
+    .stats-card .display-3 {
+        font-size: 2.5rem;
+    }
+    
+    .stats-card .icon {
+        font-size: 2.5rem;
+    }
+}
+
+/* Container centering */
+.row.justify-content-center {
+    display: flex;
+    justify-content: center;
 }

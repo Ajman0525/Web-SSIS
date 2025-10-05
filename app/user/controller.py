@@ -48,7 +48,7 @@ def login():
             flash("Login successful!", "success")
             return redirect(url_for("home.home"))  # make sure you have this route!
         else:
-            login_form.username.errors.append("Invalid username or password")
+            login_form.username.errors.append("Incorrect username or password")
 
     return render_template("login.html", login_form=login_form, signup_form=signup_form, active_tab="login")
 

@@ -2,7 +2,7 @@
 
 
 /* Fonts */
-*{
+* {
     font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
@@ -10,14 +10,15 @@
 }
 
 /* Colors */
-:root{
-    --body-color: #e4e9f7;
-    --sidebar-color: #fffafa;
-    --primary-color: #695cfe;
-    --secondary-color: #BFBAF7;
-    --primary-color-light: #f6f5ff ;
-    /* --toggle-color: #ddd; */
-    --text-color: #707070;
+:root {
+    --body-color: #EEF1FB;
+    --sidebar-color: #FAF9FF;
+    --primary-color: #6A5DFE;
+    --secondary-color: #B9B3F9;
+    --primary-color-light: #E4E1FF;
+    --text-color: #3A3A3A;
+
+    /* Toggle colors for dark/light mode*/
     --bgColor--night: #423966;
     --bgColor--day: #ffbf71;
     --crescentMoon: #d9fbff;
@@ -30,40 +31,40 @@
     --tran-test: all 1.0s ease;
 }
 
-body{
-    height:100vh;
+body {
+    height: 100vh;
     background: var(--body-color);
     transition: var(--tran-05);
 }
 
-body.dark{
-    --body-color: #18191a;
-    --sidebar-color: #242526;
-    --primary-color: #3a3b3c;
-    --primary-color-light: #3a3b3c ;
-    /* --toggle-color: #fffafa; */
-    --text-color: #ccc;
+body.dark {
+    --body-color: #1D1E22;
+    --sidebar-color: #2A2B30;
+    --primary-color: #8177FF;
+    --secondary-color: #AAA3F7;
+    --primary-color-light: #383A42;
+    --text-color: #E6E6E6;
 }
 
 /* ---- Sidebar ---- */
-.sidebar{
-    position:fixed;
+.sidebar {
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 250px;
-    padding: 10px 14px ;
+    padding: 10px 14px;
     background: var(--sidebar-color);
     transition: var(--tran-05);
-    z-index: 100;   
+    z-index: 100;
 }
 
-.sidebar.close{
+.sidebar.close {
     width: 88px;
 }
 
 /* ---- Reusable CSS ---- */
-.sidebar .text{
+.sidebar .text {
     font-size: 16px;
     font-weight: 500;
     color: var(--text-color);
@@ -72,12 +73,12 @@ body.dark{
     opacity: 1;
 }
 
-.sidebar.close .text{
+.sidebar.close .text {
     opacity: 0;
 }
 
 /* Icon for sidebar */
-.sidebar .image{
+.sidebar .image {
     min-width: 60px;
     display: flex;
     align-items: center;
@@ -85,7 +86,7 @@ body.dark{
 }
 
 /* Icons */
-.sidebar li{
+.sidebar li {
     height: 50px;
     margin-top: 10px;
     list-style-type: none;
@@ -94,48 +95,48 @@ body.dark{
 }
 
 /* Icon alignment */
-.sidebar li .icon{
+.sidebar li .icon {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 60px;
     font-size: 20px;
-    
+
 }
 
 .sidebar li .icon,
-.sidebar li .text{
+.sidebar li .text {
     color: var(--text-color);
     transition: var(--tran-02);
 }
 
 /* Sidebar collapsable button */
-.sidebar header{
+.sidebar header {
     position: relative;
 }
 
 /* Sidebar Icon */
-.sidebar .image-text img{
+.sidebar .image-text img {
     width: 40px;
     border-radius: 6px;
 }
 
-.sidebar header .image-text{
+.sidebar header .image-text {
     display: flex;
     align-items: center;
 }
 
-header .image-text .header-text{
+header .image-text .header-text {
     display: flex;
     flex-direction: column;
 }
 
-.header-text .name{
+.header-text .name {
     font-weight: 600;
     margin-top: -2px;
 }
 
-.sidebar header .toggle{
+.sidebar header .toggle {
     position: absolute;
     top: 50%;
     right: -25px;
@@ -152,20 +153,20 @@ header .image-text .header-text{
     /* transition: var(--tran-03); */
 }
 
-.sidebar.close header .toggle{
+.sidebar.close header .toggle {
     transform: translateY(-50%);
 }
 
-body.dark .sidebar header .toggle{
+body.dark .sidebar header .toggle {
     color: var(--text-color);
 }
 
-.sidebar .menu{
+.sidebar .menu {
     margin-top: 35px;
 }
 
 /* Sidebar texts and icons */
-.sidebar li a{
+.sidebar li a {
     height: 100%;
     width: 100%;
     display: flex;
@@ -175,90 +176,91 @@ body.dark .sidebar header .toggle{
     transition: var(--tran-04);
 }
 
-.sidebar li a:hover{
-    background: var(--secondary-color);
+.sidebar li a:hover {
+    background: var(--primary-color-light);
 }
 
 .sidebar li a:hover .icon,
-.sidebar li a:hover .text{
-    color: var(--sidebar-color);
-}
-
-body.dark .sidebar li a:hover{
-    background: var(--primary-color);
-}
-
-body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text{
+.sidebar li a:hover .text {
     color: var(--text-color);
 }
 
-.sidebar .menu-bar{
+body.dark .sidebar li a:hover {
+    background: var(--primary-color-light);
+}
+
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text {
+    color: var(--text-color);
+}
+
+.sidebar .menu-bar {
     height: calc(100% - 50px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.sidebar li.nav-link.active a{
+.sidebar li.nav-link.active a {
     background-color: var(--primary-color);
     /* color: #fff; */
     border-radius: 6px;
 }
 
 .sidebar li.nav-link.active a .icon,
-.sidebar li.nav-link.active a .text{
+.sidebar li.nav-link.active a .text {
     color: var(--sidebar-color);
 }
 
-body.dark .sidebar li.nav-link.active a{
-    background-color: var(--bgColor--night);
+body.dark .sidebar li.nav-link.active a {
+    background-color: var(--primary-color);
     /* color: #fff; */
     border-radius: 6px;
 }
 
 
 body.dark .sidebar li.nav-link.active a .icon,
-body.dark .sidebar li.nav-link.active a .text{
+body.dark .sidebar li.nav-link.active a .text {
     color: var(--text-color);
 }
 
-.menu-bar .mode{
+.menu-bar .mode {
     position: relative;
     border-radius: 6px;
     background: var(--primary-color-light);
     transition: var(--tran-05);
 }
 
-.menu-bar .mode .moon-sun{
+.menu-bar .mode .moon-sun {
     height: 50px;
     width: 60px;
     display: flex;
     align-items: center;
 }
 
-.menu-bar .mode i{
+.menu-bar .mode i {
     position: absolute;
     transition: var(--tran-03);
 }
 
-.menu-bar .mode i.sun{
-    opacity: 1;
-}
-.menu-bar .mode i.moon{
-    opacity: 0;
-}
-
-body.dark .menu-bar .mode i.sun{
-    opacity: 0;
-}
-
-body.dark .menu-bar .mode i.moon{
+.menu-bar .mode i.sun {
     opacity: 1;
 }
 
+.menu-bar .mode i.moon {
+    opacity: 0;
+}
 
-.menu-bar .mode .toggle-switch{
+body.dark .menu-bar .mode i.sun {
+    opacity: 0;
+}
+
+body.dark .menu-bar .mode i.moon {
+    opacity: 1;
+}
+
+
+.menu-bar .mode .toggle-switch {
     position: absolute;
     right: 0;
     display: flex;
@@ -272,7 +274,7 @@ body.dark .menu-bar .mode i.moon{
     transition: var(--tran-05);
 }
 
-.toggle-switch .switch{
+.toggle-switch .switch {
     position: relative;
     height: 22px;
     width: 47px;
@@ -281,12 +283,12 @@ body.dark .menu-bar .mode i.moon{
     transition: var(--tran-05);
 }
 
-body.dark .toggle-switch .switch{
-    background: var(--bgColor--night);  
+body.dark .toggle-switch .switch {
+    background: var(--bgColor--night);
 }
 
 /* Switch Button Light Mode */
-.switch::before{
+.switch::before {
     content: '';
     position: absolute;
     height: 10px;
@@ -298,19 +300,27 @@ body.dark .toggle-switch .switch{
     background: var(--sidebar-color);
     transition: var(--tran-03);
     box-shadow:
-        0 -8px 0 -3px #fff,     /* top */
-        8px 0 0 -3px #fff,      /* right  */
-        0 8px 0 -3px #fff,      /* bottom */
-        -8px 0 0 -3px #fff,     /* left */
-        6px -5px 0 -4px #fff,   /* top-right - small */
-        -6px -5px 0 -4px #fff,  /* top-left - small */
-        6px 5px 0 -4px #fff,    /* bottom-right - small */
-        -6px 5px 0 -4px #fff;   /* bottom-left - small */
-    
+        0 -8px 0 -3px #fff,
+        /* top */
+        8px 0 0 -3px #fff,
+        /* right  */
+        0 8px 0 -3px #fff,
+        /* bottom */
+        -8px 0 0 -3px #fff,
+        /* left */
+        6px -5px 0 -4px #fff,
+        /* top-right - small */
+        -6px -5px 0 -4px #fff,
+        /* top-left - small */
+        6px 5px 0 -4px #fff,
+        /* bottom-right - small */
+        -6px 5px 0 -4px #fff;
+    /* bottom-left - small */
+
 }
 
 /* Switch Button Dark Mode */
-body.dark .switch::before{
+body.dark .switch::before {
     position: absolute;
     left: 24px;
     top: 7px;
@@ -318,24 +328,25 @@ body.dark .switch::before{
     background: var(--bgColor--night);
     transition: var(--tran-03);
     box-shadow:
-        -4px 0 0 1.5px var(--crescentMoon), /* moon crescent cutout */
-        7px -4px 0 -3.5px rgba(255, 255, 255, 0.1),  
-        -14px -2px 0 -4px rgba(255, 255, 255, 0.1),  
-        4px 8px 0 -4px rgba(255, 255, 255, 0.1),     
-        -10px 5px 0 -4px rgba(255, 255, 255, 0.1),   
-        15px 5px 0 -3px rgba(255, 255, 255, 0.1),   
-        10px 4px 0 -4px rgba(255, 255, 255, 0.1),  
-        3px -7px 0 -4px rgba(255, 255, 255, 0.1),     
-        13px 1px 0 -4px rgba(255, 255, 255, 0.1);       
+        -4px 0 0 1.5px var(--crescentMoon),
+        /* moon crescent cutout */
+        7px -4px 0 -3.5px rgba(255, 255, 255, 0.1),
+        -14px -2px 0 -4px rgba(255, 255, 255, 0.1),
+        4px 8px 0 -4px rgba(255, 255, 255, 0.1),
+        -10px 5px 0 -4px rgba(255, 255, 255, 0.1),
+        15px 5px 0 -3px rgba(255, 255, 255, 0.1),
+        10px 4px 0 -4px rgba(255, 255, 255, 0.1),
+        3px -7px 0 -4px rgba(255, 255, 255, 0.1),
+        13px 1px 0 -4px rgba(255, 255, 255, 0.1);
 
     border-radius: 50%;
-    
+
 }
 
 /* Main Screen */
-.home{
+.home {
     position: relative;
-    min-height:100vh;
+    min-height: 100vh;
     left: 250px;
     width: calc(100% - 250px);
     background: var(--body-color);
@@ -343,7 +354,7 @@ body.dark .switch::before{
 }
 
 /* Main Screen Text */
-.home .text{
+.home .text {
     font-size: 30px;
     font-weight: 500;
     color: var(--text-color);
@@ -351,39 +362,38 @@ body.dark .switch::before{
 }
 
 /* Main Screen interaction with Sidebar */
-.sidebar.close ~ .home{
+.sidebar.close~.home {
     left: 88px;
     width: calc(100% - 88px);
 }
 
 html:not(.ready) .sidebar,
 html:not(.ready) .home,
-html:not(.ready) .sidebar .text{
+html:not(.ready) .sidebar .text {
     transition: none !important;
 }
 
 
-table tr td{
+table tr td {
     vertical-align: middle;
 }
 
-td button{
+td button {
     margin: 5px;
 }
 
-td button i{
+td button i {
     font-size: 20px;
 }
 
 
 body.dark .home label,
-body.dark .dt-info
-{
+body.dark .dt-info {
     color: var(--text-color);
 }
 
 /* MODAL LABEL */
-body.dark .modal-body .form-label{
+body.dark .modal-body .form-label {
     color: var(--body-color);
 }
 
@@ -394,8 +404,17 @@ body.dark .modal-body .form-label{
 }
 
 @keyframes blink {
-    0%, 50%, 100% { opacity: 1; }
-    25%, 75% { opacity: 0; }
+
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+
+    25%,
+    75% {
+        opacity: 0;
+    }
 }
 
 /* Stats Cards Styling */
@@ -411,7 +430,7 @@ body.dark .modal-body .form-label{
 
 .stats-card:hover {
     transform: scale(1.05) translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
 .stats-card .card-body {
@@ -431,7 +450,7 @@ body.dark .modal-body .form-label{
 .stats-card .display-3 {
     font-size: 3rem;
     font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .stats-card .card-text {
@@ -444,7 +463,7 @@ body.dark .modal-body .form-label{
 .stats-card .icon {
     font-size: 3rem;
     opacity: 0.8;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* Responsive adjustments */
@@ -452,11 +471,11 @@ body.dark .modal-body .form-label{
     .stats-card {
         min-height: 180px;
     }
-    
+
     .stats-card .display-3 {
         font-size: 2.5rem;
     }
-    
+
     .stats-card .icon {
         font-size: 2.5rem;
     }

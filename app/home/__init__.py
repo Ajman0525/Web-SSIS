@@ -1,3 +1,3 @@
-# from flask import Blueprint
+from flask import Blueprint
 
-# from .controller import home_blueprint
+from .controller import home_blueprint

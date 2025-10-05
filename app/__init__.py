@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, session, url_for
 from app.college import college_blueprint
 from app.program import program_blueprint
 from app.student import student_blueprint
-# from app.home import home_blueprint
+from app.home import home_blueprint
 from app.user import user_blueprint
 from app.database import init_app
 from dotenv import load_dotenv
@@ -17,7 +17,7 @@ def create_app():
     app.register_blueprint(program_blueprint)
     app.register_blueprint(student_blueprint)
     app.register_blueprint(user_blueprint)
-    # app.register_blueprint(home_blueprint)
+    app.register_blueprint(home_blueprint)
 
 
     @app.route("/")

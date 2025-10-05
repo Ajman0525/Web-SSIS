@@ -1,7 +1,9 @@
+/* ---------------- */
+/*      FONTS       */
+/* ---------------- */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-
-/* Fonts */
 * {
     font-family: "Poppins", sans-serif;
     margin: 0;
@@ -9,7 +11,9 @@
     box-sizing: border-box;
 }
 
-/* Colors */
+/* ----------------------------------- */
+/*      COLOR THEME AND TRANSITIONS    */
+/* ----------------------------------- */
 :root {
     --body-color: #EEF1FB;
     --sidebar-color: #FAF9FF;
@@ -31,12 +35,6 @@
     --tran-test: all 1.0s ease;
 }
 
-body {
-    height: 100vh;
-    background: var(--body-color);
-    transition: var(--tran-05);
-}
-
 body.dark {
     --body-color: #1D1E22;
     --sidebar-color: #2A2B30;
@@ -46,7 +44,19 @@ body.dark {
     --text-color: #E6E6E6;
 }
 
-/* ---- Sidebar ---- */
+/* ---------------- */
+/*       BODY       */
+/* ---------------- */
+body {
+    height: 100vh;
+    background: var(--body-color);
+    transition: var(--tran-05);
+}
+
+
+/* ---------------- */
+/*     SIDEBAR      */
+/* ---------------- */
 .sidebar {
     position: fixed;
     top: 0;
@@ -63,7 +73,6 @@ body.dark {
     width: 88px;
 }
 
-/* ---- Reusable CSS ---- */
 .sidebar .text {
     font-size: 16px;
     font-weight: 500;
@@ -77,7 +86,6 @@ body.dark {
     opacity: 0;
 }
 
-/* Icon for sidebar */
 .sidebar .image {
     min-width: 60px;
     display: flex;
@@ -104,6 +112,7 @@ body.dark {
 
 }
 
+/* Sidebar icon and text color */
 .sidebar li .icon,
 .sidebar li .text {
     color: var(--text-color);
@@ -227,7 +236,7 @@ body.dark .sidebar li.nav-link.active a .text {
 .menu-bar .mode {
     position: relative;
     border-radius: 6px;
-    background: var(--primary-color-light);
+    background: var(--secondary-color);
     transition: var(--tran-05);
 }
 
@@ -270,7 +279,7 @@ body.dark .menu-bar .mode i.moon {
     min-width: 60px;
     cursor: pointer;
     border-radius: 6px;
-    background: var(--primary-color-light);
+    background: var(--secondary-color);
     transition: var(--tran-05);
 }
 

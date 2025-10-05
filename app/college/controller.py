@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from app.database import get_db
 
 
@@ -6,6 +6,9 @@ college_blueprint = Blueprint("college", __name__, template_folder="templates")
 
 @college_blueprint.route("/colleges")
 def colleges():
+    if "user_id" not in session:
+        return redirect(url_for("user.login"))
+    
     db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT * FROM colleges ORDER BY code ASC")

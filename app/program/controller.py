@@ -1,10 +1,13 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from app.database import get_db
 
 program_blueprint = Blueprint("program", __name__, template_folder="templates")
 
 @program_blueprint.route("/programs")
 def programs():
+    if "user_id" not in session:
+        return redirect(url_for("user.login"))
+        
     db = get_db()
     cursor = db.cursor()
     cursor.execute("""

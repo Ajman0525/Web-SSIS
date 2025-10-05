@@ -90,8 +90,8 @@
           <input type="search" placeholder="Search">
         </li> -->
         <!-- <ul class="menu-links"> -->
-          <li class="nav-link {% if request.endpoint == 'home' %}active{% endif %}">
-            <a href="{{ url_for('home') }}">
+          <li class="nav-link {% if request.endpoint == 'home.home' %}active{% endif %}">
+            <a href="{{ url_for('home.home') }}">
               <i class='bxr  bx-home-alt icon'></i>
               <span class="text nav-text">Home</span>
             </a>

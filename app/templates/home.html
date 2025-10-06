@@ -5,70 +5,82 @@
 {% block content %}
 
 <div class="text header">
-    <h1 id="welcome-message"></h1>
+  <h1 id="welcome-message"></h1>
 </div>
 
 <!-- Quick Stats Cards -->
-    <div class="container">
-    <div class="row mb-4 justify-content-center">
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card text-white bg-primary stats-card">
-                <div class="card-body text-center">
-                    <i class="bi bi-person icon"></i>
-                    <h5 class="card-title">Students</h5>
-                    <p class="display-3 font-weight-bold mb-2">{{ total_students or 0 }}</p>
-                    <p class="card-text">Total Students</p>
-                </div>
-            </div>
+<div class="container">
+  <div class="row mb-4 justify-content-center">
+
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+      <div class="card text-white stats-card students">
+        <div class="card-body text-center">
+          <i class="bi bi-person icon"></i>
+          <h5 class="card-title">Students</h5>
+          <p class="display-3 font-weight-bold mb-2">{{ total_students or 0 }}</p>
+          <p class="card-text">Total Students</p>
         </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card text-white bg-success stats-card">
-                <div class="card-body text-center">
-                    <i class="bi bi-mortarboard icon"></i>
-                    <h5 class="card-title">Programs</h5>
-                    <p class="display-3 font-weight-bold mb-2">{{ total_programs or 0 }}</p>
-                    <p class="card-text">Active Programs</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div class="card text-white bg-warning stats-card">
-                <div class="card-body text-center">
-                    <i class="bi bi-buildings icon"></i>
-                    <h5 class="card-title">Colleges</h5>
-                    <p class="display-3 font-weight-bold mb-2">{{ total_colleges or 0 }}</p>
-                    <p class="card-text">Total Colleges</p>
-                </div>
-            </div>
-        </div>
+        <a href="{{ url_for('student.students') }}" class="stats-btn">
+          Manage  <i class="bi bi-caret-right-fill"></i>
+        </a>
+      </div>
     </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+      <div class="card text-white stats-card programs">
+        <div class="card-body text-center">
+          <i class="bi bi-mortarboard icon"></i>
+          <h5 class="card-title">Programs</h5>
+          <p class="display-3 font-weight-bold mb-2">{{ total_programs or 0 }}</p>
+          <p class="card-text">Total Programs</p>
+        </div>
+        <a href="{{ url_for('program.programs') }}" class="stats-btn">
+          Manage  <i class="bi bi-caret-right-fill"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+      <div class="card text-white stats-card colleges">
+        <div class="card-body text-center">
+          <i class="bi bi-buildings icon"></i>
+          <h5 class="card-title">Colleges</h5>
+          <p class="display-3 font-weight-bold mb-2">{{ total_colleges or 0 }}</p>
+          <p class="card-text">Total Colleges</p>
+        </div>
+        <a href="{{ url_for('college.colleges') }}" class="stats-btn">
+          Manage  <i class="bi bi-caret-right-fill"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
 </div>
+
 
 
 {% endblock %}
 
 {% block scripts %}
 <script>
-    const USER_NAME = {{ user_name | tojson }};
+  const USER_NAME = {{ user_name | tojson }};
 
-    $(function() {
-        if (USER_NAME) {
-            const USER_NAME_CAP = USER_NAME.charAt(0).toUpperCase() + USER_NAME.slice(1);
-            const message = `Welcome, ${USER_NAME_CAP}.`;
-            let index = 0;
+  $(function () {
+    if (USER_NAME) {
+      const USER_NAME_CAP = USER_NAME.charAt(0).toUpperCase() + USER_NAME.slice(1);
+      const message = `Welcome, ${USER_NAME_CAP}.`;
+      let index = 0;
 
-            function typeWriter() {
-                if (index < message.length) {
-                    $('#welcome-message').append(message.charAt(index));
-                    index++;
-                    setTimeout(typeWriter, 100);
-                }
-            }
-
-            typeWriter();
+      function typeWriter() {
+        if (index < message.length) {
+          $('#welcome-message').append(message.charAt(index));
+          index++;
+          setTimeout(typeWriter, 100);
         }
-    });
+      }
+
+      typeWriter();
+    }
+  });
 </script>
 {% endblock %}

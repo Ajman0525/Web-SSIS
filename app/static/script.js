@@ -74,6 +74,11 @@ $(document).ready(function () {
         $(row).attr('data-order', 'false');  // ignore sort
       }
     },
+    "drawCallback": function (settings) {
+      // Always move placeholder-row back to the top after sorting or searching
+      var placeholder = $('.placeholder-row').detach();
+      $('#myDataTable tbody').prepend(placeholder);
+    },  
     "infoCallback": function (settings, start, end, max, total, pre) {
       // Count only real rows
       var realRows = $(settings.nTBody).find('tr:not(.placeholder-row)').length;
@@ -331,8 +336,8 @@ $(document).ready(function () {
 
   //Delete Student Popup
   $('#studentDeletionModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); 
-    var id = button.data('student-id'); 
+    var button = $(event.relatedTarget);
+    var id = button.data('student-id');
     $(this).find('#deleteStudentID').val(id); // Set value in hidden input
   });
 

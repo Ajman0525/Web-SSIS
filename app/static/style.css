@@ -442,7 +442,6 @@ body.dark .modal-body .form-label {
     border-radius: 18px;
     padding: 35px 20px;
     width: 100%;
-    /* height: 160px; */
     transition: var(--tran-03);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
@@ -450,6 +449,10 @@ body.dark .modal-body .form-label {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
+
+    flex: 1 1 260px;      /* flexible but with preferred width */
+    max-width: 280px;     /* cap width on large screens */
+    min-width: 240px;     /* keep nice minimum size */
 
     transition: transform 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease;
     transform-origin: center;
@@ -597,10 +600,16 @@ body.dark .stats-btn:hover {
 
 
 
-/* Container centering */
+/* -------------------------------- */
+/*     CARD LAYOUT AND SPACING      */
+/* -------------------------------- */
 .row.justify-content-center {
     display: flex;
     justify-content: center;
+    gap: 0.5rem;           /* gap between cards */
+    row-gap: 1rem;      
+    max-width: 75%;      /* card width */
+    margin: 3rem auto 0;      /* top padding */
 }
 
 .row.justify-content-center:has(.stats-card:hover) .stats-card:not(:hover) {
@@ -609,14 +618,9 @@ body.dark .stats-btn:hover {
 
 }
 
-/* But the hovered card grows larger */
-/* .row.justify-content-center .stats-card:hover {
-    transform: translateY(0) scale(1.1);
-    z-index: 5; 
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25),
-                0 0 20px rgba(106, 93, 254, 0.3);
-} */
-
+/* ----------------------- */
+/*     PERCENTAGE BAR      */
+/* ----------------------- */
 .progress-circle {
   width: 120px;
   height: 120px;

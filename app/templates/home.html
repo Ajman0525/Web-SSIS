@@ -24,15 +24,16 @@
         </div>
 
         <!-- PROGRESS BAR -->
-        <div class="progress-circle" data-value="75">
+        <div class="progress-circle" data-value="{{ student_percentage or 0 }}">
           <svg>
             <circle class="bg"></circle>
             <circle class="progress"></circle>
           </svg>
-          <div class="progress-number">75%</div>
+          <div class="progress-number">{{ student_percentage or 0}}%</div>
         </div>
 
         <!-- MANAGE BUTTON -->
+        <br>
         <a href="{{ url_for('student.students') }}" class="stats-btn">
           Manage <i class="bi bi-caret-right-fill"></i>
         </a>
@@ -52,15 +53,16 @@
         </div>
 
         <!-- PROGRESS BAR -->
-        <div class="progress-circle" data-value="75">
+        <div class="progress-circle" data-value="{{ program_percentage or 0 }}">
           <svg>
             <circle class="bg"></circle>
             <circle class="progress"></circle>
           </svg>
-          <div class="progress-number">75%</div>
+          <div class="progress-number">{{ program_percentage or 0 }}</div>
         </div>
 
         <!-- MANAGE BUTTON -->
+        <br>
         <a href="{{ url_for('program.programs') }}" class="stats-btn">
           Manage <i class="bi bi-caret-right-fill"></i>
         </a>
@@ -80,15 +82,16 @@
         </div>
 
         <!-- PROGRESS BAR -->
-        <div class="progress-circle" data-value="75">
+        <div class="progress-circle" data-value="{{ college_percentage or 0 }}">
           <svg>
             <circle class="bg"></circle>
             <circle class="progress"></circle>
           </svg>
-          <div class="progress-number">75%</div>
+          <div class="progress-number">{{ college_percentage or 0 }}</div>
         </div>
 
         <!-- MANAGE BUTTON -->
+        <br>
         <a href="{{ url_for('college.colleges') }}" class="stats-btn">
           Manage <i class="bi bi-caret-right-fill"></i>
         </a>

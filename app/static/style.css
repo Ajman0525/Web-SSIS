@@ -233,6 +233,9 @@ body.dark .sidebar li.nav-link.active a .text {
     color: var(--text-color);
 }
 
+/* -------------------------- */
+/*     LIGHT/DARK TOGGLE      */
+/* -------------------------- */
 .menu-bar .mode {
     position: relative;
     border-radius: 6px;
@@ -247,6 +250,7 @@ body.dark .sidebar li.nav-link.active a .text {
     align-items: center;
 }
 
+/* Light/Dark Icon */
 .menu-bar .mode i {
     position: absolute;
     transition: var(--tran-03);
@@ -426,146 +430,251 @@ body.dark .modal-body .form-label {
     }
 }
 
-/* Stats Cards Styling */
+/* ------------------------ */
+/*     HOME PAGE CARDS      */
+/* ------------------------ */
+.col-lg-3, .col-md-4, .col-sm-6 {
+  overflow: visible; 
+}
+
 .stats-card {
-  border: none;
-  border-radius: 18px;
-  padding: 35px 20px;
-  width: 100%;
-  min-height: 160px;
-  transition: var(--tran-03);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
-  color: #fff;
-  /* position:relative;
-  overflow: hidden; */
+    border: none;
+    border-radius: 18px;
+    padding: 35px 20px;
+    width: 100%;
+    /* height: 160px; */
+    transition: var(--tran-03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+
+    transition: transform 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease;
+    transform-origin: center;
+    will-change: transform;
 }
 
 /* Icon and text styles */
 .stats-card .icon {
-  font-size: 2.8rem;
-  margin-bottom: 12px;
-  opacity: 0.95;
-  transition: var(--tran-03);
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+    opacity: 0.95;
+    transition: var(--tran-03);
 }
 
 .stats-card .card-title {
-  font-weight: 600;
-  margin-bottom: 6px;
+    font-weight: 600;
+    margin-bottom: 6px;
 }
 
+/* Number Display */
 .stats-card .display-3 {
-  font-weight: 700;
-  font-size: 2.4rem;
+    font-weight: 700;
+    font-size: 2.4rem;
 }
 
 /* Hover highlight: glow + slight lift */
 .stats-card:hover {
-  transform: translateY(-8px) scale(1.03);
-  filter: brightness(1.15); /* subtly brighten without changing color */
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25),
-              0 0 15px rgba(106, 93, 254, 0.3); /* faint glow of your primary color */
+    /* height: 300px; */
+    transform: translateY(-8px) scale(1.18);
+    filter: brightness(1.15);
+    z-index: 15;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25),
+        0 0 15px rgba(106, 93, 254, 0.3);
+    /* faint glow of your primary color */
 }
 
 .stats-card:hover .icon {
-  transform: scale(1.15);
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+
 }
 
 /* Remove color variants – keep consistency */
 .stats-card.students,
 .stats-card.programs,
 .stats-card.colleges {
-  background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
 }
 
 /* Dark mode adjustments */
 body.dark .stats-card {
-  background: linear-gradient(145deg, var(--primary-color-light), var(--primary-color));
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+    background: linear-gradient(145deg, var(--primary-color-light), var(--primary-color));
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
 }
 
 body.dark .stats-card:hover {
-  filter: brightness(1.25);
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
-              0 0 15px rgba(129, 119, 255, 0.4);
+    filter: brightness(1.25);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1),
+        0 0 15px rgba(129, 119, 255, 0.4);
 }
 
 /* Entry animation */
 .stats-card {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeUp 0.6s ease forwards;
 }
 
-.stats-card:nth-child(1) { animation-delay: 0.1s; }
-.stats-card:nth-child(2) { animation-delay: 0.2s; }
-.stats-card:nth-child(3) { animation-delay: 0.3s; }
+.stats-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.stats-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.stats-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
 
 @keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    to {
+        opacity: 1;
+    }
 }
 
-/* Place the button exactly at bottom-right */
-.stats-btn {
-  position: absolute;
-  bottom: 12px;
-  right: 16px;
-  background-color: #fff;
-  color: var(--primary-color);
-  border: none;
-  border-radius: 8px;
-  padding: 6px 14px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: var(--tran-03);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
-   /* Animation setup */
-  opacity: 0;
-  transform: translateY(10px);
-  transition: var(--tran-04);
-  pointer-events: none; /* prevents accidental clicks when hidden */
+/* ---------------------- */
+/*     MANAGE BUTTON      */
+/* ---------------------- */
+.stats-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    background-color: #fff;
+    color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--tran-03);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    /* Animation setup */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: var(--tran-04);
+    pointer-events: none;
+    /* prevents accidental clicks when hidden */
 }
 
 .stats-card:hover .stats-btn {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto; /* enable click when visible */
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    /* enable click when visible */
 }
 
 /* Hover effect */
 .stats-btn:hover {
-  background-color: var(--secondary-color);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: var(--secondary-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Active click feedback */
 .stats-btn:active {
-  transform: scale(0.97);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transform: scale(0.97);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* Dark mode */
 body.dark .stats-btn {
-  background-color: var(--primary-color-light);
-  color: var(--text-color);
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
 }
 
 body.dark .stats-btn:hover {
-  background-color: var(--secondary-color);
-  color: #fff;
+    background-color: var(--secondary-color);
+    color: #fff;
 }
 
-    
+
 
 /* Container centering */
 .row.justify-content-center {
     display: flex;
     justify-content: center;
+}
+
+.row.justify-content-center:has(.stats-card:hover) .stats-card:not(:hover) {
+    transform: scale(0.9);
+    opacity: 1;
+
+}
+
+/* But the hovered card grows larger */
+/* .row.justify-content-center .stats-card:hover {
+    transform: translateY(0) scale(1.1);
+    z-index: 5; 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25),
+                0 0 20px rgba(106, 93, 254, 0.3);
+} */
+
+.progress-circle {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;           /* center horizontally inside card */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Hidden by default */
+  opacity: 0;
+  transform: scale(0.8);    /* shrink instead of collapse */
+  transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease;
+  margin-top: 0;
+  max-height: 0;
+  overflow: hidden;          /* hide contents */
+  transition: 
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    margin-top 0.4s ease,
+    max-height 0.4s ease;    /* animate the height */
+}
+
+.stats-card:hover .progress-circle {
+  opacity: 1;
+  transform: scale(1);      /* smoothly grow */
+  margin-top: 1rem;         /* add spacing when visible */
+  max-height: 200px;
+}
+
+.progress-circle svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* start from top */
+}
+
+.progress-circle circle {
+  fill: none;
+  stroke-width: 12;
+  cx: 60;
+  cy: 60;
+  r: 52;
+  stroke-linecap: round;
+}
+
+.progress-circle circle.bg {
+  stroke: rgba(255, 255, 255, 0.2); /* background track */
+}
+
+.progress-circle circle.progress {
+  stroke: var(--secondary-color);
+  stroke-dasharray: 326; /* 2πr = 2 * π * 52 */
+  stroke-dashoffset: 326; /* start hidden */
+  transition: stroke-dashoffset 1s ease;
+}
+
+.progress-circle .progress-number {
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
 }

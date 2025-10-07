@@ -95,6 +95,29 @@ $(document).ready(function () {
     }
   });
 
+  $(".progress-circle").each(function() {
+    let $circle = $(this);
+    let value = $circle.data("value"); // percentage
+    let $progress = $circle.find(".progress");
+    let $number = $circle.find(".progress-number");
+
+    let radius = 52;
+    let circumference = 2 * Math.PI * radius;
+
+    // start at 0
+    $progress.css("stroke-dasharray", circumference);
+    $progress.css("stroke-dashoffset", circumference);
+
+    // animate stroke
+    $({ percent: 0 }).animate({ percent: value }, {
+      duration: 1500,
+      step: function(now) {
+        let offset = circumference - (now / 100) * circumference;
+        $progress.css("stroke-dashoffset", offset);
+        $number.text(Math.floor(now) + "%");
+      }
+    });
+  });
 
   // Add College Popup
   $("#addCollegeForm").submit(function (e) {

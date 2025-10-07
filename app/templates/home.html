@@ -15,14 +15,22 @@
     <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
       <div class="card text-white stats-card students">
         <div class="card-body text-center">
-          <i class="bi bi-person icon"></i>
-          <h5 class="card-title">Students</h5>
-          <p class="display-3 font-weight-bold mb-2">{{ total_students or 0 }}</p>
-          <p class="card-text">Total Students</p>
-        </div>
-        <a href="{{ url_for('student.students') }}" class="stats-btn">
-          Manage  <i class="bi bi-caret-right-fill"></i>
-        </a>
+            <i class="bi bi-person icon"></i>
+            <h5 class="card-title">Students</h5>
+            <p class="display-3 font-weight-bold mb-2">{{ total_students or 0 }}</p>
+            <p class="card-text">Total Students</p>
+          </div>
+          <!-- <div class="extra"> -->
+            <div class="progress-circle" data-value="75">
+              <svg>
+                <circle class="bg"></circle>
+                <circle class="progress"></circle>
+              </svg>
+              <div class="progress-number">75%</div>
+            </div>
+            <a href="{{ url_for('student.students') }}" class="stats-btn">
+              Manage <i class="bi bi-caret-right-fill"></i>
+            </a>
       </div>
     </div>
 
@@ -35,7 +43,7 @@
           <p class="card-text">Total Programs</p>
         </div>
         <a href="{{ url_for('program.programs') }}" class="stats-btn">
-          Manage  <i class="bi bi-caret-right-fill"></i>
+          Manage <i class="bi bi-caret-right-fill"></i>
         </a>
       </div>
     </div>
@@ -49,7 +57,7 @@
           <p class="card-text">Total Colleges</p>
         </div>
         <a href="{{ url_for('college.colleges') }}" class="stats-btn">
-          Manage  <i class="bi bi-caret-right-fill"></i>
+          Manage <i class="bi bi-caret-right-fill"></i>
         </a>
       </div>
     </div>

@@ -4,7 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Login & Register Form</title>
+
+    <!--CUSTOM CSS-->
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+
+    <!--BOOTSTRAP CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -12,7 +17,9 @@
         <div class="curved-shape"></div>
         <div class="curved-shape2"></div>
 
-        <!-- LOGIN FORM -->
+        <!-----------------
+             LOGIN FORM   
+        ------------------>
         <div class="form-box Login">
             <h2 class="animation" style="--D:0; --S:21">Login</h2>
             <form method="POST" action="{{ url_for('user.login') }}">
@@ -23,7 +30,9 @@
                     <label>Username</label>
                     <box-icon type='solid' name='user' color="gray"></box-icon>
                     {% for error in login_form.username.errors %}
-                        <small class="error">{{ error }}</small>
+                        <small class="error">
+                            <i class="bi bi-exclamation-circle-fill"></i> {{ error }}
+                        </small>
                     {% endfor %}
                 </div>
 
@@ -32,7 +41,9 @@
                     <label>Password</label>
                     <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
                     {% for error in login_form.password.errors %}
-                        <small class="error">{{ error }}</small>
+                        <small class="error">
+                            <i class="bi bi-exclamation-circle-fill"></i> {{ error }}
+                        </small>
                     {% endfor %}
                 </div>
 
@@ -41,7 +52,7 @@
                 </div>
 
                 <div class="regi-link animation" style="--D:4; --S:25">
-                    <p>Don't have an account? <br> 
+                    <p>Don't have an account? <br>
                         <a href="#" class="SignUpLink">Sign Up</a>
                     </p>
                 </div>
@@ -54,7 +65,9 @@
                 we are here to help.</p>
         </div>
 
-        <!-- REGISTER FORM -->
+        <!-----------------
+            SIGNUP FORM   
+        ------------------>
         <div class="form-box Register">
             <h2 class="animation" style="--li:17; --S:0">Register</h2>
             <form method="POST" action="{{ url_for('user.signup') }}">
@@ -65,7 +78,9 @@
                     <label>Username</label>
                     <box-icon type='solid' name='user' color="gray"></box-icon>
                     {% for error in signup_form.username.errors %}
-                        <small class="error">{{ error }}</small>
+                        <small class="error">
+                            <i class="bi bi-exclamation-circle-fill"></i> {{ error }}
+                        </small>
                     {% endfor %}
                 </div>
 
@@ -74,7 +89,9 @@
                     <label>Email</label>
                     <box-icon name='envelope' type='solid' color="gray"></box-icon>
                     {% for error in signup_form.email.errors %}
-                        <small class="error">{{ error }}</small>
+                        <small class="error">
+                            <i class="bi bi-exclamation-circle-fill"></i> {{ error }}
+                        </small>
                     {% endfor %}
                 </div>
 
@@ -83,7 +100,9 @@
                     <label>Password</label>
                     <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
                     {% for error in signup_form.password.errors %}
-                        <small class="error">{{ error }}</small>
+                        <small class="error">
+                            <i class="bi bi-exclamation-circle-fill"></i> {{ error }}
+                        </small>
                     {% endfor %}
                 </div>
 
@@ -92,7 +111,7 @@
                 </div>
 
                 <div class="regi-link animation" style="--li:21; --S:5">
-                    <p>Already have an account? <br> 
+                    <p>Already have an account? <br>
                         <a href="#" class="SignInLink">Sign In</a>
                     </p>
                 </div>
@@ -101,7 +120,7 @@
 
         <div class="info-content Register">
             <h2 class="animation" style="--li:17; --S:0">WELCOME!</h2>
-            <p class="animation" style="--li:18; --S:1">We’re delighted to have you here. 
+            <p class="animation" style="--li:18; --S:1">We’re delighted to have you here.
                 If you need any assistance, feel free to reach out.</p>
         </div>
     </div>
@@ -111,4 +130,5 @@
     <script src="{{ url_for('static', filename='login.js') }}"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </body>
+
 </html>

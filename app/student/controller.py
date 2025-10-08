@@ -1,3 +1,4 @@
+import re
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from app.database import get_db
 
@@ -64,6 +65,10 @@ def register_student():
 
     if not student_id or not first_name or not last_name or not program or not year_level or not gender:
         return {"success": False, "message": "All fields are required."}, 400
+    
+    # ---- STUDENT ID VALIDATOR ---- #
+    if not re.match(r"^\d{4}-(?!0000)\d{4}$", student_id):
+        return {"success": False, "message": "Student ID must follow the format."}, 400
 
     db = get_db()
     cursor = db.cursor()

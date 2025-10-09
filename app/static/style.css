@@ -440,14 +440,11 @@ body.dark .modal-body .form-label {
 /* ------------------------ */
 /*     HOME PAGE CARDS      */
 /* ------------------------ */
-.col-lg-3, .col-md-4, .col-sm-6 {
-  overflow: visible; 
-}
 
 .stats-card {
     border: none;
     border-radius: 18px;
-    padding: 35px 20px;
+    padding: 30px;
     width: 100%;
     transition: var(--tran-03);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -457,9 +454,9 @@ body.dark .modal-body .form-label {
     position: relative;
     overflow: hidden;
 
-    flex: 1 1 260px;      /* flexible but with preferred width */
-    max-width: 280px;     /* cap width on large screens */
-    min-width: 240px;     /* keep nice minimum size */
+    flex: 1 1 300px;      
+    max-width: 350px;     
+    min-width: 240px;    
 
     transition: transform 0.35s ease, filter 0.35s ease, box-shadow 0.35s ease;
     transform-origin: center;
@@ -496,11 +493,11 @@ body.dark .modal-body .form-label {
     /* faint glow of your primary color */
 }
 
-.stats-card:hover .icon {
+/* .stats-card:hover .icon {
     transform: scale(1.2);
     transition: transform 0.3s ease;
 
-}
+} */
 
 /* Remove color variants – keep consistency */
 .stats-card.students,
@@ -546,6 +543,47 @@ body.dark .stats-card:hover {
     }
 }
 
+.stats-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.stats-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-right: 15px;
+}
+
+.stats-icon-wrapper .icon{
+    font-size: 1em;
+    margin: 0;
+}
+
+.stats-text-block{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.stats-text-block .label{
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin-bottom: 0;
+}
+
+.stats-text-block .total {
+    font-size: 2.8rem; 
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 /* ---------------------- */
 /*     MANAGE BUTTON      */
@@ -615,7 +653,7 @@ body.dark .stats-btn:hover {
     justify-content: center;
     gap: 0.5rem;           /* gap between cards */
     row-gap: 1rem;      
-    max-width: 75%;      /* card width */
+    max-width: 100%;      /* card width */
     margin: 3rem auto 0;      /* top padding */
 }
 
@@ -628,53 +666,60 @@ body.dark .stats-btn:hover {
 /* ----------------------- */
 /*     PERCENTAGE BAR      */
 /* ----------------------- */
+.stats-progress{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+}
+
 .progress-circle {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;           /* center horizontally inside card */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 120px;
+    height: 120px;
+    margin-top: 1rem; 
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
 
-  /* Hidden by default */
-  opacity: 0;
-  transform: scale(0.8);    /* shrink instead of collapse */
-  transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease;
-  margin-top: 0;
-  max-height: 0;
-  overflow: hidden;          /* hide contents */
-  transition: 
-    opacity 0.4s ease,
-    transform 0.4s ease,
-    margin-top 0.4s ease,
-    max-height 0.4s ease;    /* animate the height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    opacity: 1;
+    transform: scale(1);    
+    transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease;
+    overflow: visible;
 }
 
-.stats-card:hover .progress-circle {
-  opacity: 1;
-  transform: scale(1);      /* smoothly grow */
-  margin-top: 1rem;         /* add spacing when visible */
-  max-height: 200px;
+
+.progress-circle.progress-sm {
+    width: 84px;
+    height: 84px;
+    
+    
+    opacity: 1;
+    transform: scale(1);
+    margin: 0;
+    max-height: none;
+    transition: none;
 }
+
 
 .progress-circle svg {
   width: 100%;
   height: 100%;
-  transform: rotate(-90deg); /* start from top */
+  transform: rotate(-90deg); 
 }
 
-.progress-circle circle {
-  fill: none;
-  stroke-width: 12;
-  cx: 60;
-  cy: 60;
-  r: 52;
-  stroke-linecap: round;
+.progress-circle.progress-sm circle {
+    fill: none;
+    stroke-width: 8; 
+    cx: 40; 
+    cy: 40; 
+    r: 32; 
 }
 
-.progress-circle circle.bg {
-  stroke: rgba(255, 255, 255, 0.2); /* background track */
-}
 
 .progress-circle circle.progress {
   stroke: var(--secondary-color);
@@ -684,8 +729,14 @@ body.dark .stats-btn:hover {
 }
 
 .progress-circle .progress-number {
-  position: absolute;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600; 
+    margin: 0; 
+}
+
+.progress-circle.progress-sm .progress-number {
+  font-size: 1rem;
 }

@@ -14,90 +14,94 @@
 
     <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
       <div class="card text-white stats-card students">
-        
-        <!-- STUDENT CARD CONTENT -->
-        <div class="card-body text-center">
-          <i class="bi bi-person icon"></i>
-          <h5 class="card-title">Students</h5>
-          <p class="display-3 font-weight-bold mb-2">{{ total_students or 0 }}</p>
-          <p class="card-text">Total Students</p>
-        </div>
+        <div class="card-body">
+          <div class="stats-content">
+            <div class="stats-icon-wrapper">
+              <i class="bi bi-person icon"></i>
+            </div>
+            <div class="stats-text-block">
+              <p class="label">Total Students</p>
+              <p class="total">{{ total_students or 0 }}</p>
+            </div>
 
-        <!-- PROGRESS BAR -->
-        <div class="progress-circle" data-value="{{ student_percentage or 0 }}">
-          <svg>
-            <circle class="bg"></circle>
-            <circle class="progress"></circle>
-          </svg>
-          <div class="progress-number">{{ student_percentage or 0}}%</div>
+            <div class="stats-progress">
+              <div class="progress-circle progress-sm" data-value="{{ student_percentage or 0 }}">
+                <svg>
+                  <circle class="bg"></circle>
+                  <circle class="progress"></circle>
+                </svg>
+                <div class="progress-number">{{ student_percentage or 0 }}%</div>
+              </div>
+              <p class="subtext">Active Students</p>
+            </div>
+          </div>
         </div>
-
-        <!-- MANAGE BUTTON -->
-        <br>
         <a href="{{ url_for('student.students') }}" class="stats-btn">
           Manage <i class="bi bi-caret-right-fill"></i>
         </a>
-
       </div>
     </div>
 
     <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-      <div class="card text-white stats-card programs">
+      <div class="card text-white stats-card students">
+        <div class="card-body">
+          <div class="stats-content">
+            <div class="stats-icon-wrapper">
+              <i class="bi bi-mortarboard icon"></i>
+            </div>
+            <div class="stats-text-block">
+              <p class="label">Total Programs</p>
+              <p class="total">{{ total_programs or 0 }}</p>
+            </div>
 
-        <!-- PROGRAM CARD CONTENT -->
-        <div class="card-body text-center">
-          <i class="bi bi-mortarboard icon"></i>
-          <h5 class="card-title">Programs</h5>
-          <p class="display-3 font-weight-bold mb-2">{{ total_programs or 0 }}</p>
-          <p class="card-text">Total Programs</p>
+            <div class="stats-progress">
+              <div class="progress-circle progress-sm" data-value="{{ program_percentage or 0 }}">
+                <svg>
+                  <circle class="bg"></circle>
+                  <circle class="progress"></circle>
+                </svg>
+                <div class="progress-number">{{ program_percentage or 0 }}%</div>
+              </div>
+              <p class="subtext">Active Programs</p>
+            </div>
+          </div>
         </div>
-
-        <!-- PROGRESS BAR -->
-        <div class="progress-circle" data-value="{{ program_percentage or 0 }}">
-          <svg>
-            <circle class="bg"></circle>
-            <circle class="progress"></circle>
-          </svg>
-          <div class="progress-number">{{ program_percentage or 0 }}</div>
-        </div>
-
-        <!-- MANAGE BUTTON -->
-        <br>
         <a href="{{ url_for('program.programs') }}" class="stats-btn">
           Manage <i class="bi bi-caret-right-fill"></i>
         </a>
-
       </div>
     </div>
 
     <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-      <div class="card text-white stats-card colleges">
-        
-        <!-- COLLEGE CARD CONTENT -->
-        <div class="card-body text-center">
-          <i class="bi bi-buildings icon"></i>
-          <h5 class="card-title">Colleges</h5>
-          <p class="display-3 font-weight-bold mb-2">{{ total_colleges or 0 }}</p>
-          <p class="card-text">Total Colleges</p>
-        </div>
+      <div class="card text-white stats-card students">
+        <div class="card-body">
+          <div class="stats-content">
+            <div class="stats-icon-wrapper">
+              <i class="bi bi-buildings icon"></i>
+            </div>
+            <div class="stats-text-block">
+              <p class="label">Total Colleges</p>
+              <p class="total">{{ total_colleges or 0 }}</p>
+            </div>
 
-        <!-- PROGRESS BAR -->
-        <div class="progress-circle" data-value="{{ college_percentage or 0 }}">
-          <svg>
-            <circle class="bg"></circle>
-            <circle class="progress"></circle>
-          </svg>
-          <div class="progress-number">{{ college_percentage or 0 }}</div>
+            <div class="stats-progress">
+              <div class="progress-circle progress-sm" data-value="{{ college_percentage or 0 }}">
+                <svg>
+                  <circle class="bg"></circle>
+                  <circle class="progress"></circle>
+                </svg>
+                <div class="progress-number">{{ college_percentage or 0 }}%</div>
+              </div>
+              <p class="subtext">Active Colleges</p>
+            </div>
+          </div>
         </div>
-
-        <!-- MANAGE BUTTON -->
-        <br>
         <a href="{{ url_for('college.colleges') }}" class="stats-btn">
           Manage <i class="bi bi-caret-right-fill"></i>
         </a>
-
       </div>
     </div>
+
 
   </div>
 </div>

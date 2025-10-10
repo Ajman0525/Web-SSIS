@@ -706,10 +706,10 @@ body.dark .stats-btn:hover {
 
 .progress-circle.progress-sm circle {
     fill: none;
-    stroke-width: 8; 
-    cx: 40; 
-    cy: 40; 
-    r: 32;
+    stroke-width: 10; 
+    cx: 42; 
+    cy: 42; 
+    r: 37;
 }
 
 
@@ -721,16 +721,32 @@ body.dark .stats-btn:hover {
 }
 
 .progress-circle .progress-number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: static;
     font-weight: 600; 
     margin: 0; 
+    font-size: 1.8rem;
 }
 
 .progress-circle.progress-sm .progress-number {
   font-size: 1rem;
+}
+
+.progress-circle .progress-text-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.progress-circle.progress-sm .progress-label {
+    font-size: 0.65rem; 
+    opacity: 0.95;
+    margin-top: 0.1rem;
+    margin-bottom: 0;
+    font-weight: 500;
 }
 
 

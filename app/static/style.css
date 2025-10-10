@@ -572,7 +572,7 @@ body.dark .stats-card:hover {
 .stats-text-block .total {
     font-size: 2.8rem; 
     font-weight: 600;
-    margin-top: 0;
+    margin-top: -0.8rem;
     margin-bottom: 0;
 }
 
@@ -581,7 +581,7 @@ body.dark .stats-card:hover {
 /* ---------------------- */
 .stats-btn {
     position: absolute;
-    bottom: 7px;
+    bottom: 12px;
     right: 16px;
     background-color: #fff;
     color: var(--primary-color);
@@ -679,8 +679,6 @@ body.dark .stats-btn:hover {
     justify-content: center;
     position: relative;
 
-    opacity: 1;
-    transform: scale(1);    
     transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease;
     overflow: visible;
 }

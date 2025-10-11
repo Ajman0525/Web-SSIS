@@ -690,10 +690,11 @@ body.dark .stats-btn:hover {
     
     
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1.25);
     margin: 0;
     max-height: none;
     transition: none;
+    margin-right: 1.18rem;
 }
 
 
@@ -791,5 +792,9 @@ body.dark .stats-btn:hover {
     .stats-progress {
         margin-left: 0;
         margin-top: 0; /* Ensures the progress circle sits neatly below the text */
+    }
+
+    .progress-circle.progress-sm {
+        margin: 0;
     }
 }

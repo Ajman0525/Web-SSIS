@@ -798,3 +798,11 @@ body.dark .stats-btn:hover {
         margin: 0;
     }
 }
+
+/* ------------------------ */
+/*      RECENT ACTIVITY     */
+/* ------------------------ */
+.activity-text {
+  color: #000; /* or try black just to test: #000 */
+  /* border: 1px solid red; debug line */
+}

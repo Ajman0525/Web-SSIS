@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from app.database import get_db
-
+from app.utils import log_activity
 
 college_blueprint = Blueprint("college", __name__, template_folder="templates")
 
@@ -40,6 +40,10 @@ def register_college():
         )
         db.commit()
         cursor.close()
+
+        #-----RECENTLY ADDED LOGGING-----#
+        log_activity(f"Added new college: {name} ({code})", "bi-building-add")
+
         return {"success": True, "message": "College registered successfully!"}
     except Exception as e:
         db.rollback()
@@ -61,6 +65,10 @@ def edit_college():
         )
         db.commit()
         cursor.close()
+
+        #-----RECENTLY EDITED LOGGING-----#
+        log_activity(f"Updated college '{original_code}' → '{name}' ({code})", "bi-pencil-square")
+
         return {"success": True, "message": "College updated successfully!"}
     except Exception as e:
         db.rollback()
@@ -77,9 +85,17 @@ def delete_college():
     db = get_db()
     cursor = db.cursor()
     try:
+        cursor.execute("SELECT name FROM colleges WHERE code = %s", (code,))
+        row = cursor.fetchone()
+        name = row[0] if row else code
+
         cursor.execute("DELETE FROM colleges WHERE code = %s", (code,))
         db.commit()
         cursor.close()
+
+        #-----RECENTLY DLETED LOGGING-----#
+        log_activity(f"Deleted college: {name} ({code})", "bi-trash3")
+        
         return {"success": True, "message": "College deleted successfully!"}
     except Exception as e:
         db.rollback()

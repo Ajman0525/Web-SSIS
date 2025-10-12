@@ -1,6 +1,7 @@
 import re
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from app.database import get_db
+from app.utils import log_activity
 
 student_blueprint = Blueprint("student", __name__, template_folder="templates")
 
@@ -79,6 +80,10 @@ def register_student():
         )
         db.commit()
         cursor.close()
+
+        #-----RECENTLY ADDED LOGGING-----#
+        log_activity(f"Added student {first_name} {last_name} ({student_id}) in {program}.", "bi-person-plus")
+
         return {"success": True, "message": "Student registered successfully!"}
     except Exception as e:
         db.rollback()
@@ -104,6 +109,12 @@ def edit_student():
         )
         db.commit()
         cursor.close()
+
+        
+        #-----RECENTLY EDITED LOGGING-----#
+        log_activity(f"Updated student record for {first_name} {last_name} ({student_id}).", "bi-pencil-square")
+
+
         return {"success": True, "message": "Student updated successfully!"}
     except Exception as e:
         db.rollback()
@@ -123,6 +134,10 @@ def delete_student():
         cursor.execute("DELETE FROM students WHERE id = %s", (student_id,))
         db.commit()
         cursor.close()
+
+        #-----RECENTLY DELETED LOGGING-----#
+        log_activity(f"Deleted student record ({student_id}).", "bi-person-dash")
+
         return {"success": True, "message": "Student deleted successfully!"}
     except Exception as e:
         db.rollback()

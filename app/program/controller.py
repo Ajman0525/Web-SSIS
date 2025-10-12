@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from app.database import get_db
+from app.utils import log_activity
 
 program_blueprint = Blueprint("program", __name__, template_folder="templates")
 
@@ -61,6 +62,10 @@ def register_program():
         )
         db.commit()
         cursor.close()
+
+        #-----RECENTLY ADDED LOGGING-----#
+        log_activity(f"Added new program: {name} ({code}) under college '{college_code}'.", "bi-building-add")
+
         return {"success": True, "message": "Program registered successfully!"}
     except Exception as e:
         db.rollback()
@@ -83,6 +88,10 @@ def edit_program():
         )
         db.commit()
         cursor.close()
+
+        #-----RECENTLY EDITED LOGGING-----#
+        log_activity(f"Updated program: {code} ({name}) under college '{college_code}'.", "bi-pencil-square")
+
         return {"success": True, "message": "Program updated successfully!"}
     except Exception as e:
         db.rollback()
@@ -99,9 +108,17 @@ def delete_program():
     db = get_db()
     cursor = db.cursor()
     try:
+        cursor.execute("SELECT name FROM programs WHERE code = %s", (code,))
+        row = cursor.fetchone()
+        name = row[0] if row else code
+
         cursor.execute("DELETE FROM programs WHERE code = %s", (code,))
         db.commit()
         cursor.close()
+
+        #-----RECENTLY DLETED LOGGING-----#
+        log_activity(f"Deleted program: {name} ({code})", "bi-trash3")
+
         return {"success": True, "message": "Program deleted successfully!"}
     except Exception as e:
         db.rollback()

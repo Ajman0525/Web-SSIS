@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, session
 from app.database import get_db
+from datetime import datetime
 
 home_blueprint = Blueprint("home", __name__, template_folder="templates")
 
@@ -50,6 +51,34 @@ def home():
         if total_colleges > 0 else 0
     )
 
+    # ----- RECENT ACTIVITY LOGS ----- #
+    cursor.execute("""
+        SELECT message, icon, timestamp
+        FROM activity_logs
+        ORDER BY timestamp DESC
+        LIMIT 5
+    """)
+    rows = cursor.fetchall()
+
+    # Convert to list of dicts for easier template access
+    activities = []
+    for row in rows:
+        message, icon, ts = row
+        activities.append({
+            "message": message,
+            "icon": icon,
+            "timestamp": ts,
+            "time_ago": (lambda ts: (
+                f"{int((datetime.now() - ts).total_seconds() // 60)}m ago"
+                if (datetime.now() - ts).total_seconds() < 3600 else
+                f"{int((datetime.now() - ts).total_seconds() // 3600)}h ago"
+                if (datetime.now() - ts).total_seconds() < 86400 else
+                f"{int((datetime.now() - ts).total_seconds() // 86400)}d ago"
+            ))(ts)
+        })
+
+    cursor.close()
+
     user_name = session.get("username")
     return render_template(
         "home.html",
@@ -59,5 +88,6 @@ def home():
         total_colleges=total_colleges,
         student_percentage=student_percentage,
         program_percentage=program_percentage,
-        college_percentage=college_percentage
+        college_percentage=college_percentage,
+        recent_activities=activities
     )

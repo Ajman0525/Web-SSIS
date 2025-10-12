@@ -754,6 +754,10 @@ body.dark .stats-btn:hover {
 /* ----------------------------------- */
 
 @media (max-width: 1380px) {
+    .row.justify-content-center {
+        gap: 0.5rem; 
+    }
+
     .stats-card {
         max-width: 100%; 
         min-width: unset;

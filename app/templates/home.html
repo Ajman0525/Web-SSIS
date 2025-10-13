@@ -121,7 +121,7 @@
         {% for activity in recent_activities %}
           <div class="activity-item d-flex align-items-center mb-3">
             <div class="activity-icon me-3">
-              <i class="bi {{ activity.icon }} fs-4 text-info"></i>
+              <img src="{{ activity.icon }}" alt="icon" class= "activity-icon">
             </div>
             <div class="activity-details">
               <p class="activity-text mb-0">{{ activity.message }}</p>

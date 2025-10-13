@@ -82,7 +82,10 @@ def register_student():
         cursor.close()
 
         #-----RECENTLY ADDED LOGGING-----#
-        log_activity(f"Added student {first_name} {last_name} ({student_id}) in {program}.", "bi-person-plus")
+        log_activity(
+            f"Added student {first_name} {last_name} ({student_id}) in {program}.",
+            url_for('static', filename='add_student.svg')
+        )
 
         return {"success": True, "message": "Student registered successfully!"}
     except Exception as e:
@@ -112,7 +115,11 @@ def edit_student():
 
         
         #-----RECENTLY EDITED LOGGING-----#
-        log_activity(f"Updated student record for {first_name} {last_name} ({student_id}).", "bi-pencil-square")
+        log_activity(
+            f"Updated student record for {first_name} {last_name} ({student_id}).", 
+            url_for('static', filename='edit_student.svg')
+            
+        )
 
 
         return {"success": True, "message": "Student updated successfully!"}
@@ -136,7 +143,10 @@ def delete_student():
         cursor.close()
 
         #-----RECENTLY DELETED LOGGING-----#
-        log_activity(f"Deleted student record ({student_id}).", "bi-person-dash")
+        log_activity(
+            f"Deleted student record ({student_id}).", 
+            url_for('static', filename='delete_student.svg')
+        )
 
         return {"success": True, "message": "Student deleted successfully!"}
     except Exception as e:

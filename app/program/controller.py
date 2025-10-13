@@ -64,7 +64,10 @@ def register_program():
         cursor.close()
 
         #-----RECENTLY ADDED LOGGING-----#
-        log_activity(f"Added new program: {name} ({code}) under college '{college_code}'.", "bi-building-add")
+        log_activity(
+            f"Added new program: {name} ({code}) under college '{college_code}'.",
+            url_for('static', filename='add_program.svg')
+        )
 
         return {"success": True, "message": "Program registered successfully!"}
     except Exception as e:
@@ -90,7 +93,10 @@ def edit_program():
         cursor.close()
 
         #-----RECENTLY EDITED LOGGING-----#
-        log_activity(f"Updated program: {code} ({name}) under college '{college_code}'.", "bi-pencil-square")
+        log_activity(
+            f"Updated program: {code} ({name}) under college '{college_code}'.", 
+            url_for('static', filename='edit_program.svg')
+        )
 
         return {"success": True, "message": "Program updated successfully!"}
     except Exception as e:
@@ -117,7 +123,10 @@ def delete_program():
         cursor.close()
 
         #-----RECENTLY DLETED LOGGING-----#
-        log_activity(f"Deleted program: {name} ({code})", "bi-trash3")
+        log_activity(
+            f"Deleted program: {name} ({code})", 
+            url_for('static', filename='delete_program.svg')
+        )
 
         return {"success": True, "message": "Program deleted successfully!"}
     except Exception as e:

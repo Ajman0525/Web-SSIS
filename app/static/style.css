@@ -810,3 +810,9 @@ body.dark .stats-btn:hover {
   width: 40px;
   height: 40px;
 }
+
+.container.mt-5 {
+  
+  padding-bottom: 20px;
+  
+}

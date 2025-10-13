@@ -42,7 +42,10 @@ def register_college():
         cursor.close()
 
         #-----RECENTLY ADDED LOGGING-----#
-        log_activity(f"Added new college: {name} ({code})", "bi-building-add")
+        log_activity(
+            f"Added new college: {name} ({code})", 
+            url_for('static', filename='add_college.svg')
+        )
 
         return {"success": True, "message": "College registered successfully!"}
     except Exception as e:
@@ -67,7 +70,10 @@ def edit_college():
         cursor.close()
 
         #-----RECENTLY EDITED LOGGING-----#
-        log_activity(f"Updated college '{original_code}' → '{name}' ({code})", "bi-pencil-square")
+        log_activity(
+            f"Updated college '{original_code}' → '{name}' ({code})", 
+            url_for('static', filename='edit_college.svg')
+        )
 
         return {"success": True, "message": "College updated successfully!"}
     except Exception as e:
@@ -94,7 +100,10 @@ def delete_college():
         cursor.close()
 
         #-----RECENTLY DLETED LOGGING-----#
-        log_activity(f"Deleted college: {name} ({code})", "bi-trash3")
+        log_activity(
+            f"Deleted college: {name} ({code})", 
+            url_for('static', filename='delete_college.svg')
+        )
         
         return {"success": True, "message": "College deleted successfully!"}
     except Exception as e:

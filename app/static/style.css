@@ -803,12 +803,10 @@ body.dark .stats-btn:hover {
 /*      RECENT ACTIVITY     */
 /* ------------------------ */
 .activity-text {
-  color: #000; /* or try black just to test: #000 */
-  /* border: 1px solid red; debug line */
+  color: #000; 
 }
 
-.activity-icon img {
+.activity-icon {
   width: 40px;
   height: 40px;
-  object-fit: contain;
 }

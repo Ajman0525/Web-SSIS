@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* CSS COLOR VARIABLES */
+:root{
+    --body-color: #EEF1FB; /* Light mode background */
+    --sidebar-color: #FAF9FF; /* Light mode card background */
+    --primary-color: #6A5DFE; /* Project Primary Accent (Bright Purple) */
+    --secondary-color: #B9B3F9; /* Project Secondary Accent (Lighter Purple) */
+    --primary-color-light: #E4E1FF;
+    --text-color: #3A3A3A;
+
+    /* Dark Mode Theme Variables (for the login page's default dark aesthetic) */
+    --dark-bg: #2A2B30; /* Used for body and button/background fills */
+    --dark-card: #1D1E22; /* Used for subtle background elements */
+    --dark-text: #E6E6E6; /* Used for general text */
+    --accent: var(--primary-color); /* Bright Purple accent */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,15 +29,17 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #25252b;
+    background: var(--primary-color-light);
 }
 
+/* Login Form */
 .container {
     position: relative;
     width: 750px;
     height: 450px;
-    border: 2px solid #e46033;
-    box-shadow: 0 0 25px #e46033;
+    background: var(--sidebar-color);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 25px var(--accent);
     overflow: hidden;
 }
 
@@ -45,6 +63,7 @@ body {
     transition: .7s;
     opacity: 1;
     transition-delay: calc(.1s * var(--S));
+    color: var(--accent);
 }
 
 .container.active .form-box.Login .animation {
@@ -65,6 +84,7 @@ body {
     opacity: 0;
     filter: blur(10px);
     transition-delay: calc(.1s * var(--S));
+    color: var(--accent);
 }
 
 .container.active .form-box.Register .animation {
@@ -101,16 +121,16 @@ body {
     border: none;
     outline: none;
     font-size: 16px;
-    color: #fff;
+    color: var(--text-color);
     font-weight: 600;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid var(--text-color);
     padding-right: 23px;
     transition: .5s;
 }
 
 .input-box input:focus,
 .input-box input:valid {
-    border-bottom: 2px solid #e46033;
+    border-bottom: 2px solid var(--accent);
 }
 
 .input-box label {
@@ -119,14 +139,14 @@ body {
     left: 0;
     transform: translateY(-50%);
     font-size: 16px;
-    color: #fff;
+    color: var(--text-color);
     transition: .5s;
 }
 
 .input-box input:focus~label,
 .input-box input:not(:placeholder-shown)~label {
     top: 2px;
-    color: #e46033;
+    color: var(--accent);
 }
 
 small.error{
@@ -139,6 +159,7 @@ small.error{
     font-weight: 500;
 }
 
+/* Error Icon */
 small.error i{
     color: #ff6b6b;
     font-size: 0.7rem;
@@ -167,7 +188,7 @@ small.error i{
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
-    border: 2px solid #e46033;
+    border: 2px solid var(--accent);
     overflow: hidden;
     z-index: 1;
 }
@@ -177,7 +198,7 @@ small.error i{
     position: absolute;
     height: 300%;
     width: 100%;
-    background: linear-gradient(#25252b, #e46033, #25252b, #e46033);
+    background: linear-gradient(var(--dark-bg), var(--accent), var(--dark-bg), var(--accent));
     top: -100%;
     left: 0;
     z-index: -1;
@@ -194,9 +215,13 @@ small.error i{
     margin: 20px 0 10px;
 }
 
+.regi-link p{
+    color: var(--text-color)
+}
+
 .regi-link a {
     text-decoration: none;
-    color: #e46033;
+    color: var(--accent);
     font-weight: 600;
 }
 
@@ -274,7 +299,7 @@ small.error i{
     top: -5px;
     height: 600px;
     width: 850px;
-    background: linear-gradient(45deg, #25252b, #e46033);
+    background: linear-gradient(45deg,var(--dark-bg), var(--accent));
     /*transform: rotate(10deg) skewY(40deg);*/
     transform: rotate(10deg) skewY(40deg);
     transform-origin: bottom right;
@@ -287,14 +312,16 @@ small.error i{
     transition-delay: .5s;
 }
 
+
+/* Register Form Color */
 .container .curved-shape2 {
     position: absolute;
     left: 250px;
     top: 100%;
     height: 700px;
     width: 850px;
-    background: #25252b;
-    border-top: 3px solid #e46033;
+    background: var(--sidebar-color);
+    border-top: 3px solid var(--accent);
     transform: rotate(0deg) skewY(0deg);
     transform-origin: bottom left;
     transition: 1.5s ease;

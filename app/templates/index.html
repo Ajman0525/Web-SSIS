@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- 
+
   <script>
     (function () {
       try {
@@ -19,7 +19,7 @@
       }
     })();
   </script>
-    
+
   <script>
     (function () {
       try {
@@ -90,47 +90,47 @@
           <input type="search" placeholder="Search">
         </li> -->
         <!-- <ul class="menu-links"> -->
-          <li class="nav-link {% if request.endpoint == 'home.home' %}active{% endif %}">
-            <a href="{{ url_for('home.home') }}">
-              <i class='bxr  bx-home-alt icon'></i>
-              <span class="text nav-text">Home</span>
-            </a>
-          </li>
+        <li class="nav-link {% if request.endpoint == 'home.home' %}active{% endif %}">
+          <a href="{{ url_for('home.home') }}">
+            <i class='bxr  bx-home-alt icon'></i>
+            <span class="text nav-text">Home</span>
+          </a>
+        </li>
 
-          <li class="nav-link {% if request.endpoint == 'student.students' %}active{% endif %}">
-            <a href="{{ url_for('student.students') }}">
-              <i class="bi bi-person icon"></i>
-              <span class="text nav-text">Students</span>
-            </a>
-          </li>
+        <li class="nav-link {% if request.endpoint == 'student.students' %}active{% endif %}">
+          <a href="{{ url_for('student.students') }}">
+            <i class="bi bi-person icon"></i>
+            <span class="text nav-text">Students</span>
+          </a>
+        </li>
 
-          <li class="nav-link {% if request.endpoint == 'program.programs' %}active{% endif %}">
-            <a href="{{ url_for('program.programs') }}">
-              <i class="bi bi-mortarboard icon"></i>
-              <span class="text nav-text">Programs</span>
-            </a>
-          </li>
+        <li class="nav-link {% if request.endpoint == 'program.programs' %}active{% endif %}">
+          <a href="{{ url_for('program.programs') }}">
+            <i class="bi bi-mortarboard icon"></i>
+            <span class="text nav-text">Programs</span>
+          </a>
+        </li>
 
-          <li class="nav-link {% if request.endpoint == 'college.colleges' %}active{% endif %}">
-            <a href="{{ url_for('college.colleges') }}">
-              <i class="bi bi-buildings icon"></i>
-              <span class="text nav-text">Colleges</span>
-            </a>
-          </li>
+        <li class="nav-link {% if request.endpoint == 'college.colleges' %}active{% endif %}">
+          <a href="{{ url_for('college.colleges') }}">
+            <i class="bi bi-buildings icon"></i>
+            <span class="text nav-text">Colleges</span>
+          </a>
+        </li>
 
-          <li class="nav-link {% if request.endpoint == 'user.users' %}active{% endif %}">
-            <a href="{{ url_for('user.users') }}">
-              <i class="bi bi-people icon"></i>
-              <span class="text nav-text">Users</span>
-            </a>
-          </li>
+        <li class="nav-link {% if request.endpoint == 'user.users' %}active{% endif %}">
+          <a href="{{ url_for('user.users') }}">
+            <i class="bi bi-people icon"></i>
+            <span class="text nav-text">Users</span>
+          </a>
+        </li>
         <!-- </ul> -->
       </div>
 
       <div class="bottom-content">
 
         <li class="">
-          <a href="{{ url_for('user.logout' )}}">
+          <a href="#" data-bs-toggle= "modal" data-bs-target = "#logoutModal">
             <i class="bxr bx-arrow-out-up-left-stroke-circle icon"></i>
             <span class="text nav-text">Logout</span>
           </a>
@@ -160,6 +160,25 @@
 
     {% endblock %}
   </section>
+  
+  <!-- Logout Confirmation Modal -->
+  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to log out?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <a id="confirmLogoutButton" href="{{ url_for('user.logout' )}}" class="btn btn-danger">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- JQuery Library -->
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
@@ -176,7 +195,7 @@
   <!-- Javascript -->
   <script src="{{url_for('static', filename='script.js')}}"></script>
 
-  {% block scripts %}{% endblock %} 
+  {% block scripts %}{% endblock %}
 
 </body>
 

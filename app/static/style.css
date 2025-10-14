@@ -809,6 +809,9 @@ body.dark .stats-btn:hover {
 /* ------------------------ */
 /*      RECENT ACTIVITY     */
 /* ------------------------ */
+body.dark .section-title.mb-3{
+    color: var(--text-color);
+}
 
 .activity-text {
   color: #000; 

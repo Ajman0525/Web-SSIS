@@ -412,6 +412,13 @@ body.dark .dt-info {
     color: var(--text-color);
 }
 
+/* MODAL SHIFTING THE BODY PREVENTION */
+body.modal-open {
+    /* Forces padding to compensate for the missing scrollbar space (approx 17px) */
+    padding-right: 0 !important; 
+}
+
+
 /* MODAL LABEL */
 body.dark .modal-body .form-label {
     color: var(--body-color);
@@ -802,6 +809,7 @@ body.dark .stats-btn:hover {
 /* ------------------------ */
 /*      RECENT ACTIVITY     */
 /* ------------------------ */
+
 .activity-text {
   color: #000; 
 }

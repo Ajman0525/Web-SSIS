@@ -70,7 +70,6 @@ def edit_student():
         log_activity(
             f"Updated student record for {first_name} {last_name} ({student_id}).", 
             url_for('static', filename='edit_student.svg')
-            
         )
         return jsonify(success=True, message=message), 200
     else:

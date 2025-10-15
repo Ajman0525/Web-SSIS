@@ -51,6 +51,10 @@ def edit_program():
     college_code = request.form.get("college_code", "").strip().upper()
     original_code = request.form.get("original_code")
 
+    # -----REQUIRED FIELDS VALIDATION-----#
+    if not code or not name:
+        return jsonify(success=False, message="All fields are required."), 400
+
     success, message, field = ProgramModel.edit(original_code, code, name, college_code)
     if success:
         #-----RECENTLY EDITED LOGGING-----#

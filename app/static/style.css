@@ -386,12 +386,267 @@ html:not(.ready) .sidebar .text {
     transition: none !important;
 }
 
+/* ---------------------- */
+/*      DATA TABLES       */
+/* ---------------------- */
+
 .table {
     border-radius: 10px;
     overflow: hidden;
     border-collapse: separate;
     border-spacing: 0;
 
+}
+
+/* --------------------------------------------  */
+/*      DATA TABLE LIGHT MODE CUSTOMIZATION     */
+/* --------------------------------------------*/
+#myDataTable {
+    border: 1px solid var(--secondary-color) !important; /* Table outer border */
+}
+
+#myDataTable th,
+#myDataTable td {
+    border: none !important; /* Remove internal borders */
+    
+    background-color: var(--body-color) !important;
+    color: var(--text-color) !important;
+    
+    box-shadow: none !important;
+}
+
+#myDataTable thead th {
+    background-color: var(--sidebar-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Alternating rows */
+#myDataTable.table-striped > tbody > tr:nth-of-type(odd) > td {
+    /* Use the contrasting dark color for the stripe */
+    background-color: var(--primary-color-light) !important;
+}
+
+/* ----------------------------------------------  */
+/*       SEARCH FORM LIGHT MODE CUSTOMIZATION     */
+/* ----------------------------------------------*/
+#dt-search-0 {
+    /* Set ALL background properties */
+    background-color: var(--sidebar-color) !important; 
+    
+    /* Set ALL text properties */
+    color: var(--text-color) !important;
+    
+    /* Set ALL border properties */
+    border: 1px solid var(--primary-color-light) !important;
+
+    transition: background-color var(--tran-03), color var(--tran-03), border-color var(--tran-03), box-shadow var(--tran-03) !important;
+    
+    /* Crucial overrides to kill Bootstrap focus styles, shadows, and default appearance */
+    border-radius: .25rem !important; 
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+div.dataTables_wrapper .dataTables_filter .form-control.form-control-sm:focus,
+#dt-search-0:focus { 
+    background-color: var(--sidebar-color) !important; 
+    color: var(--text-color) !important;
+    border-color: var(--primary-color) !important; 
+    /* CRITICAL: Define the Box Shadow for the dark mode focus ring */
+    /* This overrides the default blue Bootstrap shadow */
+    box-shadow: 0 0 0 0.2rem rgba(129, 119, 255, 0.25) !important; /* Use Primary Color with opacity */
+}
+
+/* Target the focus state of the entries select dropdown */
+div.dataTables_wrapper .dataTables_length select:focus {
+    background-color: var(--sidebar-color) !important; 
+    color: var(--text-color) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 0.25rem rgba(129, 119, 255, 0.25) !important; 
+}
+
+/* ----------------------------------------------  */
+/*       SELECT FORM LIGHT MODE CUSTOMIZATION     */
+/* ----------------------------------------------*/
+
+div.dataTables_wrapper .dataTables_length select:focus,
+#dt-length-0:focus {
+    background-color: var(--sidebar-color) !important; 
+    border-color: var(--primary-color) !important; /* #8177FF */
+    box-shadow: 0 0 0 0.25rem rgba(129, 119, 255, 0.25) !important; 
+}
+
+#dt-length-0 {
+    transition: background-color var(--tran-03), color var(--tran-03), border-color var(--tran-03), box-shadow var(--tran-03) !important;
+}
+
+/* --------------------------------------------  */
+/*      PAGINATION LIGHT MODE CUSTOMIZATION     */
+/* --------------------------------------------*/
+/* Default State for All Buttons */
+.dt-paging-button .page-link {
+    background-color: var(--body-color) !important; 
+    color: var(--primary-color) !important; 
+    border-color: var(--primary-color-light) !important; 
+    transition: background-color var(--tran-03), color var(--tran-03), border-color var(--tran-03), box-shadow var(--tran-03);
+}
+
+/* Hover/Focus State for Inactive Buttons */
+.dt-paging-button .page-link:hover,
+.dt-paging-button .page-link:focus {
+    background-color: var(--primary-color-light) !important; /* Lighter background on hover */
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important; /* Highlight border with primary color */
+}
+
+/* Active Page Button */
+.dt-paging-button.active .page-link {
+    background-color: var(--primary-color) !important; 
+    color: var(--body-color) !important; /* White text on primary background */
+    border-color: var(--primary-color) !important;
+}
+
+/* Disabled State */
+.dt-paging-button.disabled .page-link {
+    background-color: var(--body-color) !important; 
+    color: var(--primary-color-light) !important; /* Muted gray text for disabled */
+    border-color: var(--primary-color-light) !important;
+}
+
+.dt-paging-button .page-link:focus,
+.dt-paging-button .page-link:active {
+    outline: 0 !important; /* Removes the standard focus ring */
+    box-shadow: none !important; /* Removes any default or Bootstrap box-shadow */
+}
+
+
+/* --------------------------------------------  */
+/*       DATA TABLE DARK MODE CUSTOMIZATION     */
+/* --------------------------------------------*/
+body.dark #myDataTable {
+    border: 1px solid var(--primary-color-light) !important;
+}
+
+body.dark #myDataTable th,
+body.dark #myDataTable td {
+    border: none !important; 
+    
+    background-color: var(--body-color) !important;
+    color: var(--text-color) !important;
+    
+    box-shadow: none !important;
+}
+
+body.dark #myDataTable thead th {
+    background-color: var(--sidebar-color) !important;
+    color: var(--text-color) !important;
+}
+
+body.dark #myDataTable.table-striped > tbody > tr:nth-of-type(odd) > td {
+    background-color: var(--primary-color-light) !important;
+}
+
+/* -----------------------------------------------*/
+/*       SEARCH FORM DARK MODE CUSTOMIZATION     */
+/* ---------------------------------------------*/
+body.dark #dt-search-0 {
+    background-color: var(--primary-color-light) !important; 
+    
+    color: var(--text-color) !important;
+    
+    border: 1px solid var(--primary-color-light) !important;
+
+    transition: background-color var(--tran-03), color var(--tran-03), border-color var(--tran-03), box-shadow var(--tran-03) !important;
+    
+    border-radius: .25rem !important; 
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+body.dark div.dataTables_wrapper .dataTables_filter .form-control.form-control-sm:focus,
+body.dark #dt-search-0:focus { 
+    background-color: var(--sidebar-color) !important; 
+    color: var(--text-color) !important;
+    border-color: var(--primary-color) !important; 
+    
+    box-shadow: 0 0 0 0.2rem rgba(129, 119, 255, 0.25) !important; 
+}
+
+body.dark div.dataTables_wrapper .dataTables_length select:focus {
+    background-color: var(--sidebar-color) !important; 
+    color: var(--text-color) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 0.25rem rgba(129, 119, 255, 0.25) !important; 
+}
+
+/* -----------------------------------  */
+/*       SELECT FORM CUSTOMIZATION     */
+/* -----------------------------------*/
+body.dark div.dataTables_wrapper .dataTables_length select,
+body.dark #dt-length-0 {
+    /* Use a contrasting background color, like primary-color-light or sidebar */
+    background-color: var(--primary-color-light) !important; /* #383A42 */
+    color: var(--text-color) !important; /* #E6E6E6 */
+    border: 1px solid var(--primary-color-light) !important;
+
+    transition: background-color var(--tran-03), color var(--tran-03), border-color var(--tran-03), box-shadow var(--tran-03) !important;
+
+    
+    /* CRITICAL: Dropdown Arrow (Dark Mode - Needs to be light/white) */
+    /* This SVG has a light gray stroke (%23E6E6E6 is your text color) */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23E6E6E6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+}
+
+/* Option Hover/Selection (Limited Style) */
+body.dark div.dataTables_wrapper .dataTables_length option {
+    /* Set the dropdown options background to a darker color for the list */
+    background-color: var(--sidebar-color) !important; 
+    color: var(--text-color) !important;
+    
+    /* The hover effect on options is OS-dependent, but this sets the base style */
+}
+
+/* Focus State (already present, included for context) */
+body.dark div.dataTables_wrapper .dataTables_length select:focus,
+body.dark #dt-length-0:focus {
+    background-color: var(--sidebar-color) !important; 
+    border-color: var(--primary-color) !important; /* #8177FF */
+    box-shadow: 0 0 0 0.25rem rgba(129, 119, 255, 0.25) !important; 
+}
+
+
+/* --------------------------------------------  */
+/*       PAGINATION DARK MODE CUSTOMIZATION     */
+/* --------------------------------------------*/
+body.dark .dt-paging-button .page-link {
+    background-color: var(--sidebar-color) !important; /* Dark background */
+    color: var(--text-color) !important; /* Light text */
+    border-color: var(--primary-color-light) !important; /* Subtle border */
+    transition: background-color var(--tran-03), color var(--tran-03), border-color var(--tran-03), box-shadow var(--tran-03);
+}
+
+/* Hover/Focus State for Inactive Buttons */
+body.dark .dt-paging-button .page-link:hover,
+body.dark .dt-paging-button .page-link:focus {
+    background-color: var(--primary-color-light) !important; /* Subtle change on hover */
+    color: var(--text-color) !important;
+    border-color: var(--primary-color) !important; /* Primary color border on hover */
+}
+
+/* Active Page Button */
+body.dark .dt-paging-button.active .page-link {
+    background-color: var(--primary-color) !important; /* Primary color background */
+    color: var(--text-color) !important; /* Light text */
+    border-color: var(--primary-color) !important;
+}
+
+/* Disabled State */
+body.dark .dt-paging-button.disabled .page-link {
+    background-color: var(--sidebar-color) !important; 
+    color: var(--primary-color-light) !important; /* Muted text for disabled */
+    border-color: var(--primary-color-light) !important;
 }
 
 table tr td {

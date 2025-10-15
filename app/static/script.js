@@ -319,8 +319,8 @@ $(document).ready(function () {
     var programName = button.data('programName');
     var collegeCode = button.data('collegeCode');
 
-    modal.find('#programCode').val(programCode);
-    modal.find('#programName').val(programName);
+    modal.find('#editProgramCode').val(programCode);
+    modal.find('#editProgramName').val(programName);
     modal.find('#collegeCode').val(collegeCode);
     modal.find('#originalCode').val(programCode);
 

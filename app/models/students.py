@@ -58,9 +58,8 @@ class StudentModel:
     @staticmethod
     def edit(original_id, student_id, first_name, last_name, program, year_level, gender):
         if student_id != original_id and StudentModel.exists_by_id(student_id):
-            cursor.close()
             return False, "Student ID already exists. Please use a different ID.", "student_id"
-
+        
 
         db = get_db()
         cursor = db.cursor()

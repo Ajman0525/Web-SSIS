@@ -82,7 +82,8 @@
                 <form id="addStudentForm" method="POST" action="{{ url_for('student.register_student') }}">
                     <div class="mb-3">
                         <label for="studentID" class="form-label">ID Number:</label>
-                        <input type="text" class="form-control" id="studentID" name ="id" placeholder="e.g. 2022-0525" required>
+                        <input type="text" class="form-control" id="addStudentID" name ="id" placeholder="e.g. 2022-0525" required>
+                        <div class="text-danger mt-1 small" id="addStudentIDError"></div> <!--Error Message-->
                     </div>
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name:</label>
@@ -159,7 +160,8 @@
                     <input type="hidden" id="original_id" name="original_id"> <!-- Hidden input -->
                     <div class="mb-3">
                         <label for="studentID" class="form-label">ID Number:</label>
-                        <input type="text" class="form-control" id="studentID" name ="id" placeholder="e.g. 2022-0525" required>
+                        <input type="text" class="form-control" id="editStudentID" name ="id" placeholder="e.g. 2022-0525" required>
+                        <div class="text-danger mt-1 small" id="editStudentIDError"></div> <!--Error Message-->
                     </div>
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name:</label>

@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
-from app.database import get_db
 from app.utils import log_activity
 from app.models.colleges import CollegeModel
 college_blueprint = Blueprint("college", __name__, template_folder="templates")

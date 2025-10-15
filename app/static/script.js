@@ -235,35 +235,35 @@ $(document).ready(function () {
   });
 
   $('#deleteCollegeForm').submit(function (e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  $.ajax({
-    url: "/colleges/delete",
-    type: "POST",
-    data: $(this).serialize(),
-    success: function (response) {
-      if (response.success) {
-        // Hide delete confirmation prompt modal
-        $('#collegeDeletionModal').modal('hide');
+    $.ajax({
+      url: "/colleges/delete",
+      type: "POST",
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.success) {
+          // Hide delete confirmation prompt modal
+          $('#collegeDeletionModal').modal('hide');
 
-        // Show success message modal
-        $('#deleteConfirmationModal').modal('show');
+          // Show success message modal
+          $('#deleteConfirmationModal').modal('show');
 
-        // Reload after success modal closes
-        $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
-          location.reload();
-        });
-      } else {
-        // If the backend returns an error message (like non-existent code)
-        alert(response.message || "Failed to delete college.");
+          // Reload after success modal closes
+          $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
+            location.reload();
+          });
+        } else {
+          // If the backend returns an error message (like non-existent code)
+          alert(response.message || "Failed to delete college.");
+        }
+      },
+      error: function (xhr) {
+        const response = xhr.responseJSON;
+        alert(response?.message || "An error occurred while deleting.");
       }
-    },
-    error: function (xhr) {
-      const response = xhr.responseJSON;
-      alert(response?.message || "An error occurred while deleting.");
-    }
+    });
   });
-});
 
 
   // --------- PROGRAM SCREEN --------- //
@@ -271,20 +271,42 @@ $(document).ready(function () {
   $("#addProgramForm").submit(function (e) {
     e.preventDefault();
 
-    $.post($(this).attr("action"), $(this).serialize(), function (response) {
-      if (response.success) {
-        $("#addProgram").modal("hide");
-        $("#addConfirmation").modal("show");
-        $("#addProgramForm")[0].reset();
+    // Clear previous errors
+    $("#addProgramCodeError").text("");
+    $("#addProgramNameError").text("");
+    $("#programCode, #programName").removeClass("is-invalid");
 
-        $("#addConfirmation").on("hidden.bs.modal", function () {
-          location.reload();
-        });
-      } else {
-        alert(response.message);
-      }
-    }).fail(function (xhr) {
-      alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+
+
+    $.post({
+      url: $(this).attr("action"),
+      type: "POST",
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.success) {
+          $("#addProgram").modal("hide");
+          $("#addConfirmation").modal("show");
+          $("#addProgramForm")[0].reset();
+
+          $("#addConfirmation").on("hidden.bs.modal", function () {
+            location.reload();
+          });
+        }
+      },
+      error: function (xhr) {
+        const response = xhr.responseJSON;
+        const msg = response?.message?.toLowerCase() || "Something went wrong.";
+
+        if (msg.includes("code")) {
+          $("#addProgramCodeError").text(response.message);
+          $("#programCode").addClass("is-invalid");
+        } else if (msg.includes("name")) {
+          $("#addProgramNameError").text(response.message);
+          $("#programName").addClass("is-invalid");
+        } else {
+          alert(response?.message || "An unexpected error occurred.");
+        }
+      },
     });
   });
 
@@ -308,24 +330,50 @@ $(document).ready(function () {
   $("#editProgramForm").submit(function (e) {
     e.preventDefault();
 
-    $.post("/programs/edit", $(this).serialize(), function (response) {
-      if (response.success) {
-        $("#editProgram").modal('hide');
-        $("#editConfirmation").modal('show');
-        $("#editProgramForm")[0].reset();
+    // Clear previous errors
+    $("#editProgramCodeError").text("");
+    $("#editProgramNameError").text("");
+    $("#editProgramCode, #editProgramName").removeClass("is-invalid");
 
+    $.ajax({
+      url: "/programs/edit",
+      type: "POST",
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.success) {
+          $("#editProgram").modal('hide');
+          $("#editConfirmation").modal('show');
+          $("#editProgramForm")[0].reset();
 
-        $('#editConfirmation').on('hidden.bs.modal', function () {
-          location.reload(); // reload table to show changes
-        });
+          $('#editConfirmation').on('hidden.bs.modal', function () {
+            location.reload(); // reload table to show changes
+          });
+        }
+      },
+      error: function (xhr) {
+        const response = xhr.responseJSON;
+        const msg = response?.message?.toLowerCase() || "Something went wrong.";
 
-      } else {
-        alert("Error: " + response.message);
-      }
-    }).fail(function (xhr) {
-      alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+        if (response?.field === "code" || msg.includes("code")) {
+          $("#editProgramCodeError").text(response.message);
+          $("#editProgramCode").addClass("is-invalid");
+        } else if (response?.field === "name" || msg.includes("name")) {
+          $("#editProgramNameError").text(response.message);
+          $("#editProgramName").addClass("is-invalid");
+        } else {
+          alert(response?.message || "An unexpected error occurred.");
+        }
+      },
     });
   });
+
+  $("#editProgram").on("hidden.bs.modal", function () {
+    $("#editProgramForm")[0].reset(); // clear inputs
+    $("#editProgramCode, #editProgramName").removeClass("is-invalid");
+    $("#editProgramCodeError").text("");
+    $("#editProgramNameError").text("");
+  });
+
 
   // Delete Program Popup
   $('#programDeletionModal').on('show.bs.modal', function (event) {
@@ -336,17 +384,28 @@ $(document).ready(function () {
 
   $('#deleteProgramForm').submit(function (e) {
     e.preventDefault();
-    $.post("/programs/delete", $(this).serialize(), function (response) {
-      if (response.success) {
-        $('#programDeletionModal').modal('hide'); // hide the confirm modal
-        $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
 
-        // optional: reload table or page when deletion modal closes
-        $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
-          location.reload();
-        });
-      } else {
-        alert(response.message);
+    $.post({
+      url: "/programs/delete",
+      type: "POST",
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.success) {
+          $('#programDeletionModal').modal('hide'); // hide the confirm modal
+
+          $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
+
+          // optional: reload table or page when deletion modal closes
+          $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
+            location.reload();
+          });
+        } else {
+          alert(response.message || "Failed to delete program.");
+        }
+      },
+      error: function (xhr) {
+        const response = xhr.responseJSON;
+        alert(response?.message || "An error occurred while deleting.");
       }
     });
   });

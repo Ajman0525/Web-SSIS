@@ -78,7 +78,7 @@ $(document).ready(function () {
       // Always move placeholder-row back to the top after sorting or searching
       var placeholder = $('.placeholder-row').detach();
       $('#myDataTable tbody').prepend(placeholder);
-    },  
+    },
     "infoCallback": function (settings, start, end, max, total, pre) {
       // Count only real rows
       var realRows = $(settings.nTBody).find('tr:not(.placeholder-row)').length;
@@ -95,7 +95,7 @@ $(document).ready(function () {
     }
   });
 
-  $(".progress-circle").each(function() {
+  $(".progress-circle").each(function () {
     let $circle = $(this);
     let value = $circle.data("value"); // percentage
     let $progress = $circle.find(".progress");
@@ -111,7 +111,7 @@ $(document).ready(function () {
     // animate stroke
     $({ percent: 0 }).animate({ percent: value }, {
       duration: 1500,
-      step: function(now) {
+      step: function (now) {
         let offset = circumference - (now / 100) * circumference;
         $progress.css("stroke-dashoffset", offset);
         $number.text(Math.floor(now) + "%");
@@ -120,10 +120,19 @@ $(document).ready(function () {
   });
 
   // Add College Popup
-  $("#addCollegeForm").submit(function (e) {
-    e.preventDefault();
+$("#addCollegeForm").submit(function (e) {
+  e.preventDefault();
 
-    $.post($(this).attr("action"), $(this).serialize(), function (response) {
+  // Clear previous errors
+  $("#addCodeError").text("");
+  $("#addNameError").text("");
+  $("#collegeCode, #collegeName").removeClass("is-invalid");
+
+  $.ajax({
+    url: $(this).attr("action"),
+    type: "POST",
+    data: $(this).serialize(),
+    success: function (response) {
       if (response.success) {
         $("#addCollege").modal("hide");
         $("#addConfirmation").modal("show");
@@ -132,13 +141,25 @@ $(document).ready(function () {
         $("#addConfirmation").on("hidden.bs.modal", function () {
           location.reload();
         });
-      } else {
-        alert(response.message);
       }
-    }).fail(function (xhr) {
-      alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
-    });
+    },
+    error: function (xhr) {
+      const response = xhr.responseJSON;
+      const msg = response?.message?.toLowerCase() || "Something went wrong.";
+
+      if (msg.includes("code")) {
+        $("#addCodeError").text(response.message);
+        $("#collegeCode").addClass("is-invalid");
+      } else if (msg.includes("name")) {
+        $("#addNameError").text(response.message);
+        $("#collegeName").addClass("is-invalid");
+      } else {
+        alert(response?.message || "An unexpected error occurred.");
+      }
+    },
   });
+});
+
 
   //Edit College Popup
   $('#editCollege').on('show.bs.modal', function (event) {

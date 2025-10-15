@@ -1,6 +1,5 @@
 # app/models/college_model.py
 from app.database import get_db
-from flask import jsonify
 
 class CollegeModel:
     @staticmethod

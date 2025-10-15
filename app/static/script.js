@@ -278,7 +278,7 @@ $(document).ready(function () {
 
 
 
-    $.post({
+    $.ajax({
       url: $(this).attr("action"),
       type: "POST",
       data: $(this).serialize(),
@@ -415,20 +415,38 @@ $(document).ready(function () {
   $("#addStudentForm").submit(function (e) {
     e.preventDefault();
 
-    $.post($(this).attr("action"), $(this).serialize(), function (response) {
-      if (response.success) {
-        $("#addStudent").modal("hide");
-        $("#addConfirmation").modal("show");
-        $("#addStudentForm")[0].reset();
+    // Clear previous errors
+    $("#addStudentIDError").text("");
+    $("#addStudentID").removeClass("is-invalid");
 
-        $("#addConfirmation").on("hidden.bs.modal", function () {
-          location.reload();
-        });
-      } else {
-        alert(response.message);
-      }
-    }).fail(function (xhr) {
-      alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+
+    $.post({
+      url: $(this).attr("action"),
+      type: "POST",
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.success) {
+          $("#addStudent").modal("hide");
+          $("#addConfirmation").modal("show");
+          $("#addStudentForm")[0].reset();
+
+          $("#addConfirmation").on("hidden.bs.modal", function () {
+            location.reload();
+          });
+        }
+      },
+      error: function (xhr) {
+        const response = xhr.responseJSON;
+        const msg = response?.message?.toLowerCase() || "Something went wrong.";
+
+        if (msg.includes("id")) {
+          $("#addStudentIDError").text(response.message);
+          $("#addStudentID").addClass("is-invalid");
+        } else {
+          alert(response?.message || "An unexpected error occurred.");
+        }
+
+      },
     });
   });
 
@@ -444,7 +462,7 @@ $(document).ready(function () {
     var yearLevel = button.data('year-level');
     var gender = button.data('gender');
 
-    modal.find('#studentID').val(studentID);
+    modal.find('#editStudentID').val(studentID);
     modal.find('#firstName').val(firstName);
     modal.find('#lastName').val(lastName);
     modal.find('#programCode').val(programCode);
@@ -458,23 +476,44 @@ $(document).ready(function () {
   $("#editStudentForm").submit(function (e) {
     e.preventDefault();
 
-    $.post("/students/edit", $(this).serialize(), function (response) {
-      if (response.success) {
-        $("#editStudent").modal('hide');
-        $("#editConfirmation").modal('show');
-        $("#editStudentForm")[0].reset();
+    // Clear previous errors
+    $("#editStudentIDError").text("");
+    $("#editStudentID").removeClass("is-invalid");
+
+    $.ajax({
+      url: "/students/edit",
+      type: "POST",
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.success) {
+          $("#editStudent").modal('hide');
+          $("#editConfirmation").modal('show');
+          $("#editStudentForm")[0].reset();
 
 
-        $('#editConfirmation').on('hidden.bs.modal', function () {
-          location.reload(); // reload table to show changes
-        });
+          $('#editConfirmation').on('hidden.bs.modal', function () {
+            location.reload(); // reload table to show changes
+          });
+        }
+      },
+      error: function (xhr) {
+        const response = xhr.responseJSON;
+        const msg = response?.message?.toLowerCase() || "Something went wrong.";
 
-      } else {
-        alert("Error: " + response.message);
-      }
-    }).fail(function (xhr) {
-      alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+        if (response?.field === "id" || msg.includes("id")) {
+          $("#editStudentIDError").text(response.message);
+          $("#editStudentID").addClass("is-invalid");
+        } else {
+          alert(response?.message || "An unexpected error occurred.");
+        }
+      },
     });
+  });
+
+  $("#editStudent").on("hidden.bs.modal", function () {
+    $("#editStudentForm")[0].reset(); // clear inputs
+    $("#editStudentID").removeClass("is-invalid");
+    $("#editStudentIDError").text("");
   });
 
   //Delete Student Popup
@@ -486,18 +525,23 @@ $(document).ready(function () {
 
   $('#deleteStudentForm').submit(function (e) {
     e.preventDefault();
-    $.post("/students/delete", $(this).serialize(), function (response) {
-      if (response.success) {
-        $('#studentDeletionModal').modal('hide'); // hide the confirm modal
-        $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
+    $.ajax({
+      url: "/students/delete",
+      type: "POST",
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.success) {
+          $('#studentDeletionModal').modal('hide'); // hide the confirm modal
+          $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
 
-        // optional: reload table or page when deletion modal closes
-        $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
-          location.reload();
-        });
-      } else {
-        alert(response.message);
-      }
+          // optional: reload table or page when deletion modal closes
+          $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
+            location.reload();
+          });
+        } else {
+          alert(response.message || "Failed to delete student record.");
+        }
+      },
     });
   });
 });

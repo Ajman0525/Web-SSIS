@@ -26,15 +26,7 @@ def register_college():
     if not code or not name:
         return jsonify(success=False, message="All fields are required."), 400
 
-    existing_code = CollegeModel.exists_by_code(code)
-    existing_name = CollegeModel.exists_by_name(name)
-    
-    if existing_code:
-        return jsonify(success=False, message="College code already exists."), 400
-    elif existing_name:
-        return jsonify(success=False, message="College name already exists."), 400
-    
-    success, message = CollegeModel.add(code, name)
+    success, message, field = CollegeModel.add(code, name)
     if success:
         #-----RECENTLY ADDED LOGGING-----#
         log_activity(
@@ -43,7 +35,7 @@ def register_college():
         )
         return jsonify(success=True, message=message), 200
     else:
-        return jsonify(success=False, message=message), 400
+        return jsonify(success=False, message=message, field=field), 400
 
  
 

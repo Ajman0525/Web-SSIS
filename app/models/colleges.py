@@ -33,9 +33,9 @@ class CollegeModel:
     @staticmethod
     def add(code, name):
         if CollegeModel.exists_by_code(code):
-            return jsonify(success=False, field="code", message="College code already exists."), 400
+            return False, "College code already exists. Please use a different code.", "code"
         if CollegeModel.exists_by_name(name):
-            return jsonify(success=False, field="name", message="College name already exists."), 400
+             return False, "College name already exists. Please use a different name.", "name"
 
         db = get_db()
         cursor = db.cursor()
@@ -46,29 +46,21 @@ class CollegeModel:
             )
             db.commit()
             cursor.close()
-            return True, "College registered successfully!"
+            return True, "College registered successfully!", None
         except Exception as e:
             db.rollback()
             cursor.close()
-            return False, str(e)
+            return False, str(e), None
 
     @staticmethod
     def edit(original_code, code, name):
-        db = get_db()
-
         # Check for duplicates only if user changed code/name
         if code != original_code and CollegeModel.exists_by_code(code):
-            return False, "College code already exists."
+            return jsonify(success=False, field="code", message= "College code already exists."), 400
         if CollegeModel.exists_by_name(name):
-            cursor = db.cursor()
-            cursor.execute(
-                "SELECT code FROM colleges WHERE name = %s", (name,)
-            )
-            row = cursor.fetchone()
-            cursor.close()
-            if row and row[0] != original_code:
-                return False, "College name already exists."
-
+            return jsonify(success=False, field="name", message="College name already exists."), 400
+       
+        db = get_db()
         cursor = db.cursor()
         try:
             cursor.execute(

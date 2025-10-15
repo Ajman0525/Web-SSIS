@@ -28,7 +28,7 @@ def register_program():
 
     # -----REQUIRED FIELDS VALIDATION-----#
     if not code or not name:
-        return {"success": False, "message": "All fields are required."}, 400
+        return jsonify(success=False, message="All fields are required."), 400
 
     db = get_db()
     cursor = db.cursor()

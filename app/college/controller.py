@@ -45,54 +45,35 @@ def edit_college():
     name = request.form.get("name", "").strip().title()
     original_code = request.form.get("original_code")
 
-    db = get_db()
-    cursor = db.cursor()
-    try:
-        cursor.execute(
-            "UPDATE colleges SET code = %s, name = %s WHERE code = %s",
-            (code, name, original_code),
-        )
-        db.commit()
-        cursor.close()
-
+    # -----REQUIRED FIELDS VALIDATION-----#
+    if not code or not name:
+        return jsonify(success=False, message="All fields are required."), 400
+    
+    success, message, field = CollegeModel.edit(original_code, code, name)
+    if success:
         #-----RECENTLY EDITED LOGGING-----#
         log_activity(
             f"Updated college '{original_code}' → '{name}' ({code})", 
             url_for('static', filename='edit_college.svg')
         )
-
-        return {"success": True, "message": "College updated successfully!"}
-    except Exception as e:
-        db.rollback()
-        cursor.close()
-        return {"success": False, "message": str(e)}, 500
+        return jsonify(success=True, message=message), 200
+    else:
+        return jsonify(success=False, message=message, field=field), 400
 
 @college_blueprint.route("/colleges/delete", methods=["POST"])
 def delete_college():
     code = request.form.get("code", "").strip().upper()
 
     if not code:
-        return {"success": False, "message": "College code is required to delete."}, 400
+        return jsonify(success=False, message="College code is required to delete."), 400
 
-    db = get_db()
-    cursor = db.cursor()
-    try:
-        cursor.execute("SELECT name FROM colleges WHERE code = %s", (code,))
-        row = cursor.fetchone()
-        name = row[0] if row else code
-
-        cursor.execute("DELETE FROM colleges WHERE code = %s", (code,))
-        db.commit()
-        cursor.close()
-
+    success, message = CollegeModel.delete(code)
+    if success:
         #-----RECENTLY DLETED LOGGING-----#
         log_activity(
-            f"Deleted college: {name} ({code})", 
+            f"Deleted college: {code})", 
             url_for('static', filename='delete_college.svg')
         )
-        
-        return {"success": True, "message": "College deleted successfully!"}
-    except Exception as e:
-        db.rollback()
-        cursor.close()
-        return {"success": False, "message": str(e)}, 500
+        return jsonify(success=True, message=message), 200
+    else:
+        return jsonify(success=False, message=message), 400

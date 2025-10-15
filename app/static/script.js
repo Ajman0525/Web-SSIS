@@ -120,45 +120,45 @@ $(document).ready(function () {
   });
 
   // Add College Popup
-$("#addCollegeForm").submit(function (e) {
-  e.preventDefault();
+  $("#addCollegeForm").submit(function (e) {
+    e.preventDefault();
 
-  // Clear previous errors
-  $("#addCodeError").text("");
-  $("#addNameError").text("");
-  $("#collegeCode, #collegeName").removeClass("is-invalid");
+    // Clear previous errors
+    $("#addCodeError").text("");
+    $("#addNameError").text("");
+    $("#collegeCode, #collegeName").removeClass("is-invalid");
 
-  $.ajax({
-    url: $(this).attr("action"),
-    type: "POST",
-    data: $(this).serialize(),
-    success: function (response) {
-      if (response.success) {
-        $("#addCollege").modal("hide");
-        $("#addConfirmation").modal("show");
-        $("#addCollegeForm")[0].reset();
+    $.ajax({
+      url: $(this).attr("action"),
+      type: "POST",
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.success) {
+          $("#addCollege").modal("hide");
+          $("#addConfirmation").modal("show");
+          $("#addCollegeForm")[0].reset();
 
-        $("#addConfirmation").on("hidden.bs.modal", function () {
-          location.reload();
-        });
-      }
-    },
-    error: function (xhr) {
-      const response = xhr.responseJSON;
-      const msg = response?.message?.toLowerCase() || "Something went wrong.";
+          $("#addConfirmation").on("hidden.bs.modal", function () {
+            location.reload();
+          });
+        }
+      },
+      error: function (xhr) {
+        const response = xhr.responseJSON;
+        const msg = response?.message?.toLowerCase() || "Something went wrong.";
 
-      if (msg.includes("code")) {
-        $("#addCodeError").text(response.message);
-        $("#collegeCode").addClass("is-invalid");
-      } else if (msg.includes("name")) {
-        $("#addNameError").text(response.message);
-        $("#collegeName").addClass("is-invalid");
-      } else {
-        alert(response?.message || "An unexpected error occurred.");
-      }
-    },
+        if (msg.includes("code")) {
+          $("#addCodeError").text(response.message);
+          $("#collegeCode").addClass("is-invalid");
+        } else if (msg.includes("name")) {
+          $("#addNameError").text(response.message);
+          $("#collegeName").addClass("is-invalid");
+        } else {
+          alert(response?.message || "An unexpected error occurred.");
+        }
+      },
+    });
   });
-});
 
 
   //Edit College Popup
@@ -179,23 +179,49 @@ $("#addCollegeForm").submit(function (e) {
   $("#editCollegeForm").submit(function (e) {
     e.preventDefault();
 
-    $.post("/colleges/edit", $(this).serialize(), function (response) {
-      if (response.success) {
-        $("#editCollege").modal('hide');
-        $("#editConfirmation").modal('show'); // optional confirmation modal
-        $("#editCollegeForm")[0].reset();
+    // Clear previous errors
+    $("#editCodeError").text("");
+    $("#editNameError").text("");
+    $("#editCollegeCode, #editCollegeName").removeClass("is-invalid");
 
+    $.ajax({
+      url: "/colleges/edit", // Your Flask route for editing
+      type: "POST",
+      data: $(this).serialize(),
+      success: function (response) {
+        if (response.success) {
+          $("#editCollege").modal("hide");
+          $("#editConfirmation").modal("show");
+          $("#editCollegeForm")[0].reset();
 
-        $('#editConfirmation').on('hidden.bs.modal', function () {
-          location.reload(); // reload table to show changes
-        });
+          $("#editConfirmation").on("hidden.bs.modal", function () {
+            location.reload();
+          });
+        }
+      },
+      error: function (xhr) {
+        const response = xhr.responseJSON;
+        const msg = response?.message?.toLowerCase() || "Something went wrong.";
 
-      } else {
-        alert("Error: " + response.message);
-      }
-    }).fail(function (xhr) {
-      alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+        if (response?.field === "code" || msg.includes("code")) {
+          $("#editCodeError").text(response.message);
+          $("#editCollegeCode").addClass("is-invalid");
+        } else if (response?.field === "name" || msg.includes("name")) {
+          $("#editNameError").text(response.message);
+          $("#editCollegeName").addClass("is-invalid");
+        } else {
+          alert(response?.message || "An unexpected error occurred.");
+        }
+      },
     });
+  });
+
+
+  $("#editCollege").on("hidden.bs.modal", function () {
+    $("#editCollegeForm")[0].reset(); // clear inputs
+    $("#editCollegeCode, #editCollegeName").removeClass("is-invalid");
+    $("#editCodeError").text("");
+    $("#editNameError").text("");
   });
 
 
@@ -209,21 +235,35 @@ $("#addCollegeForm").submit(function (e) {
   });
 
   $('#deleteCollegeForm').submit(function (e) {
-    e.preventDefault();
-    $.post("/colleges/delete", $(this).serialize(), function (response) {
-      if (response.success) {
-        $('#collegeDeletionModal').modal('hide'); // hide the confirm modal
-        $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
+  e.preventDefault();
 
-        // optional: reload table or page when deletion modal closes
+  $.ajax({
+    url: "/colleges/delete",
+    type: "POST",
+    data: $(this).serialize(),
+    success: function (response) {
+      if (response.success) {
+        // Hide delete confirmation prompt modal
+        $('#collegeDeletionModal').modal('hide');
+
+        // Show success message modal
+        $('#deleteConfirmationModal').modal('show');
+
+        // Reload after success modal closes
         $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
           location.reload();
         });
       } else {
-        alert(response.message);
+        // If the backend returns an error message (like non-existent code)
+        alert(response.message || "Failed to delete college.");
       }
-    });
+    },
+    error: function (xhr) {
+      const response = xhr.responseJSON;
+      alert(response?.message || "An error occurred while deleting.");
+    }
   });
+});
 
 
   // --------- PROGRAM SCREEN --------- //

@@ -57,13 +57,41 @@ class StudentModel:
         
     @staticmethod
     def edit(original_id, student_id, first_name, last_name, program, year_level, gender):
-        if student_id != original_id and StudentModel.exists_by_id(student_id):
-            return False, "Student ID already exists. Please use a different ID.", "student_id"
-        
-
         db = get_db()
         cursor = db.cursor()
         try:
+            cursor.execute("""
+                    SELECT f_name, 
+                           l_name, 
+                           program, 
+                           year_level, 
+                           gender 
+                    FROM   students
+                    WHERE  id = %s   
+                    """, 
+                    (original_id,)
+                )
+            row = cursor.fetchone()
+            if not row: 
+                cursor.close()
+                return False, "Student not found.", None
+            
+            original_fname, original_lname, original_program, original_year, original_gender = row
+
+            # Check for changes
+            if (student_id == original_id and
+                first_name == original_fname and
+                last_name == original_lname and
+                program == original_program and
+                year_level == original_year and 
+                gender == original_gender):
+                return "no_change", None, None
+            
+            # Check for duplicates
+            if student_id != original_id and StudentModel.exists_by_id(student_id):
+                cursor.close()
+                return False, "Student ID already exists. Please use a different ID.", "student_id"
+
             cursor.execute(
                 "UPDATE students SET id = %s, f_name = %s, l_name = %s, program = %s, year_level = %s, gender = %s WHERE id = %s",
                 (student_id, first_name, last_name, program, year_level, gender, original_id),

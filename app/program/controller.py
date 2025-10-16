@@ -55,8 +55,13 @@ def edit_program():
     if not code or not name:
         return jsonify(success=False, message="All fields are required."), 400
 
-    success, message, field = ProgramModel.edit(original_code, code, name, college_code)
-    if success:
+    # ----- CHECK FOR CHANGES -----#
+
+    result, message, field = ProgramModel.edit(original_code, code, name, college_code)
+    if result == "no_change":
+        return jsonify(no_change = True), 200
+    
+    elif result is True:
         #-----RECENTLY EDITED LOGGING-----#
         log_activity(
             f"Updated program: {code} ({name}) under college '{college_code}'.", 

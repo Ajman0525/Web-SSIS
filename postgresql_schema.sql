@@ -68,6 +68,16 @@ CREATE TABLE public.users (
     CONSTRAINT users_pkey PRIMARY KEY (id)
 );
 
+-- Activity Logs Table
+CREATE TABLE public.activity_logs (
+    id INTEGER GENERATED ALWAYS AS IDENTITY
+        (START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1),
+    message TEXT NOT NULL,
+    icon VARCHAR(50),
+    "timestamp" TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT activity_logs_pkey PRIMARY KEY (id)
+);
+
 -- ==========================================
 -- OWNERSHIP (if using postgres as default user)
 -- ==========================================
@@ -75,6 +85,7 @@ ALTER TABLE public.colleges OWNER TO postgres;
 ALTER TABLE public.programs OWNER TO postgres;
 ALTER TABLE public.students OWNER TO postgres;
 ALTER TABLE public.users OWNER TO postgres;
+ALTER TABLE public.activity_logs OWNER TO postgres;
 
 -- ==========================================
 -- END OF SCHEMA

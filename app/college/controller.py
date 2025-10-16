@@ -73,7 +73,7 @@ def delete_college():
     if success:
         #-----RECENTLY DLETED LOGGING-----#
         log_activity(
-            f"Deleted college: {code})", 
+            f"Deleted college: {code}", 
             url_for('static', filename='delete_college.svg')
         )
         return jsonify(success=True, message=message), 200

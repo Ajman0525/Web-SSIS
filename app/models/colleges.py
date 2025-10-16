@@ -65,6 +65,11 @@ class CollegeModel:
 
         original_name = row[0]
 
+        # Check for changes
+        if code == original_code and name == original_name:
+            cursor.close()
+            return "no_change", None, None
+
         # Check for duplicates only if user changed code or name
         if code != original_code and CollegeModel.exists_by_code(code):
             cursor.close()

@@ -189,7 +189,7 @@ $(document).ready(function () {
       type: "POST",
       data: $(this).serialize(),
       success: function (response) {
-        if (response.success) {
+        if (response.success === true) {
           $("#editCollege").modal("hide");
           $("#editConfirmation").modal("show");
           $("#editCollegeForm")[0].reset();
@@ -197,6 +197,8 @@ $(document).ready(function () {
           $("#editConfirmation").on("hidden.bs.modal", function () {
             location.reload();
           });
+        } else if (response.no_change) {
+            $("#editCollege").modal("hide");
         }
       },
       error: function (xhr) {
@@ -340,7 +342,7 @@ $(document).ready(function () {
       type: "POST",
       data: $(this).serialize(),
       success: function (response) {
-        if (response.success) {
+        if (response.success == true) {
           $("#editProgram").modal('hide');
           $("#editConfirmation").modal('show');
           $("#editProgramForm")[0].reset();
@@ -348,6 +350,8 @@ $(document).ready(function () {
           $('#editConfirmation').on('hidden.bs.modal', function () {
             location.reload(); // reload table to show changes
           });
+        } else if (response.no_change){
+            $("#editProgram").modal('hide');
         }
       },
       error: function (xhr) {
@@ -385,7 +389,7 @@ $(document).ready(function () {
   $('#deleteProgramForm').submit(function (e) {
     e.preventDefault();
 
-    $.post({
+    $.ajax({
       url: "/programs/delete",
       type: "POST",
       data: $(this).serialize(),
@@ -420,7 +424,7 @@ $(document).ready(function () {
     $("#addStudentID").removeClass("is-invalid");
 
 
-    $.post({
+    $.ajax({
       url: $(this).attr("action"),
       type: "POST",
       data: $(this).serialize(),
@@ -485,7 +489,7 @@ $(document).ready(function () {
       type: "POST",
       data: $(this).serialize(),
       success: function (response) {
-        if (response.success) {
+        if (response.success == true) {
           $("#editStudent").modal('hide');
           $("#editConfirmation").modal('show');
           $("#editStudentForm")[0].reset();
@@ -494,6 +498,8 @@ $(document).ready(function () {
           $('#editConfirmation').on('hidden.bs.modal', function () {
             location.reload(); // reload table to show changes
           });
+        } else if (response.no_change){
+            $("#editStudent").modal('hide');
         }
       },
       error: function (xhr) {

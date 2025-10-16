@@ -64,8 +64,11 @@ def edit_student():
     if not re.match(r"^\d{4}-(?!0000)\d{4}$", student_id):
         return jsonify(success= False, message= "Student ID must follow the format."), 400
 
-    success, message, field = StudentModel.edit(original_id, student_id, first_name, last_name, program, year_level, gender)
-    if success:
+    result, message, field = StudentModel.edit(original_id, student_id, first_name, last_name, program, year_level, gender)
+    if result == "no_change":
+        return jsonify(no_change = True), 200
+    
+    elif result is True:
         #-----RECENTLY EDITED LOGGING-----#
         log_activity(
             f"Updated student record for {first_name} {last_name} ({student_id}).", 

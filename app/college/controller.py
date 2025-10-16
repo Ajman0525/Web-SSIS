@@ -48,8 +48,11 @@ def edit_college():
     if not code or not name:
         return jsonify(success=False, message="All fields are required."), 400
     
-    success, message, field = CollegeModel.edit(original_code, code, name)
-    if success:
+    result, message, field = CollegeModel.edit(original_code, code, name)
+    if result == "no_change":
+        return jsonify(no_change = True), 200
+
+    elif result is True:
         #-----RECENTLY EDITED LOGGING-----#
         log_activity(
             f"Updated college '{original_code}' → '{name}' ({code})", 

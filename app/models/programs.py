@@ -64,13 +64,18 @@ class ProgramModel:
         db = get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT name FROM programs WHERE code = %s", (original_code,))
+        cursor.execute("SELECT name, college_code FROM programs WHERE code = %s", (original_code,))
         row = cursor.fetchone()
         if not row:
             cursor.close()
-            return False, "College not found.", None
+            return False, "Program not found.", None
 
-        original_name = row[0] 
+        original_name, original_college  = row
+
+        # Check for changes
+        if code == original_code and name == original_name and college_code == original_college:
+            cursor. close()
+            return "no_change", None, None
 
         if code != original_code and ProgramModel.exists_by_code(code):
             cursor.close()
@@ -80,8 +85,6 @@ class ProgramModel:
             cursor.close()
             return False, "Program name already exists. Please use a different name.", "name"
         
-        db = get_db()
-        cursor = db.cursor()
         try:
             cursor.execute(
                 """

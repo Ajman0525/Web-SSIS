@@ -1069,7 +1069,16 @@ body.dark .section-title.mb-3{
 }
 
 .activity-text {
-  color: #000; 
+    color: var(--text-color); 
+}
+
+body.dark .activity-text{
+    color: var(--text-color);
+}
+
+body.dark .activity-time.text-muted {
+    color: var(--text-color) !important;
+    opacity: 0.8;
 }
 
 .activity-icon {
@@ -1081,4 +1090,14 @@ body.dark .section-title.mb-3{
   
   padding-bottom: 20px;
   
+}
+
+body.dark .card-body.activity{
+    background: transparent; 
+    border-radius: inherit;
+}
+
+body.dark .activity-card {
+  background: var(--primary-color-light);
+  border: 1px solid var(--text-color);
 }

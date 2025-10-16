@@ -2,26 +2,15 @@ from flask import Blueprint, render_template, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.database import get_db
 from app.user.forms import LoginForm, SignupForm
+from app.models.users import UserModel
 
 user_blueprint = Blueprint("user", __name__, template_folder="templates")
 
 # --- USERS LIST ---
 @user_blueprint.route("/users")
 def users():
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute("""
-        SELECT username, email, password_length
-        FROM users
-        ORDER BY username ASC
-    """)
-    users_data = cursor.fetchall()
-    cursor.close()
 
-    users_list = [
-        {"username": u[0], "email": u[1], "password_length": "•" * u[2]}
-        for u in users_data
-    ]
+    users_list = UserModel.get_all()
 
     return render_template("users.html", page_title="Users", users=users_list)
 
@@ -36,11 +25,7 @@ def login():
         username = login_form.username.data.strip()
         password = login_form.password.data.strip()
 
-        db = get_db()
-        cursor = db.cursor()
-        cursor.execute("SELECT id, username, password FROM users WHERE username = %s", (username,))
-        user = cursor.fetchone()
-        cursor.close()
+        user = UserModel.get_by_username(username)
 
         if user and check_password_hash(user[2], password):
             session["user_id"] = user[0]
@@ -72,35 +57,23 @@ def signup():
         email = signup_form.email.data.strip()
         password = signup_form.password.data.strip()
 
-        db = get_db()
-        cursor = db.cursor()
-        cursor.execute(
-            "SELECT username, email FROM users WHERE username=%s OR email=%s",
-            (username, email)
-        )
-        rows = cursor.fetchall()
-        for existing in rows:
+        existing_users = UserModel.exists(username, email)
+
+        for existing in existing_users:
             if existing[0] == username:
                 signup_form.username.errors.append("Username already exists!")
             if existing[1] == email:
                 signup_form.email.errors.append("Email already registered!")
     
         if signup_form.errors:
-            cursor.close()
             return render_template("login.html", login_form=login_form, signup_form=signup_form, active_tab="signup")
 
-        # Insert new user
-        hashed_pw = generate_password_hash(password)
-        pw_length = len(password)
-        cursor.execute(
-            "INSERT INTO users (username, email, password, password_length) VALUES (%s, %s, %s, %s)",
-            (username, email, hashed_pw, pw_length)
-        )
-        db.commit()
-        cursor.close()
-
-        flash("Account created successfully! Please log in.", "success")
-        return redirect(url_for("user.login"))
+        success, message = UserModel.create(username, email, password)
+        if success:
+            flash(message, "success")
+            return redirect(url_for("user.login"))
+        else:
+            flash(message, "danger")
 
     # GET request or invalid form
     return render_template("login.html", login_form=login_form, signup_form=signup_form)

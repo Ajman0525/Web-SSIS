@@ -6,15 +6,6 @@ from app.models.users import UserModel
 
 user_blueprint = Blueprint("user", __name__, template_folder="templates")
 
-# --- USERS LIST ---
-@user_blueprint.route("/users")
-def users():
-
-    users_list = UserModel.get_all()
-
-    return render_template("users.html", page_title="Users", users=users_list)
-
-
 # --- LOGIN ---
 @user_blueprint.route("/login", methods=["GET", "POST"])
 def login():

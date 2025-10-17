@@ -143,6 +143,7 @@ header .image-text .header-text {
 .header-text .name {
     font-weight: 600;
     margin-top: -2px;
+    font-size: 16px;
 }
 
 .sidebar header .toggle {

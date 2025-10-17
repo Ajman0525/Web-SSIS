@@ -85,11 +85,7 @@
 
     <div class="menu-bar">
       <div class="menu">
-        <!-- <li class="search-box">
-          <i class='bx  bx-search icon'></i>
-          <input type="search" placeholder="Search">
-        </li> -->
-        <!-- <ul class="menu-links"> -->
+        
         <li class="nav-link {% if request.endpoint == 'home.home' %}active{% endif %}">
           <a href="{{ url_for('home.home') }}">
             <i class='bxr  bx-home-alt icon'></i>
@@ -117,14 +113,7 @@
             <span class="text nav-text">Colleges</span>
           </a>
         </li>
-
-        <li class="nav-link {% if request.endpoint == 'user.users' %}active{% endif %}">
-          <a href="{{ url_for('user.users') }}">
-            <i class="bi bi-people icon"></i>
-            <span class="text nav-text">Users</span>
-          </a>
-        </li>
-        <!-- </ul> -->
+        
       </div>
 
       <div class="bottom-content">

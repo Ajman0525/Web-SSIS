@@ -120,6 +120,22 @@ $(document).ready(function () {
   });
 
 
+  // --------- INPUT RESTRICTIONS --------- //
+  $('#collegeName, #editCollegeName, #programName, #editProgramName').on('input', function () {
+    this.value = this.value.replace(/[^a-zA-Z\s,]/g, '');
+  });
+
+  $('#collegeCode, #editCollegeCode, #programCode, #editProgramCode').on('input', function () {
+    this.value = this.value.replace(/[^A-Za-z]/g, '');
+  });
+
+  $('#firstName, #lastName, #gender').on('input', function () {
+    let cleaned = $(this).val().replace(/[^a-zA-Z\s]/g, '');
+    $(this).val(cleaned);
+  });
+
+
+
   // --------- COLLEGE MODALS --------- //
   // Add College Popup
   $("#addCollegeForm").submit(function (e) {

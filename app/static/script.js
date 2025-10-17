@@ -121,7 +121,6 @@ $(document).ready(function () {
 
 
   // --------- COLLEGE MODALS --------- //
-
   // Add College Popup
   $("#addCollegeForm").submit(function (e) {
     e.preventDefault();

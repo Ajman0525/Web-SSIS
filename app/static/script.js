@@ -129,6 +129,12 @@ $(document).ready(function () {
     this.value = this.value.replace(/[^A-Za-z]/g, '');
   });
 
+  $('#addStudentID, #editStudentID').on('input', function () {
+    let cleaned = $(this).val()
+      .replace(/[^0-9\-]/g, '')
+    $(this).val(cleaned);
+  });
+
   $('#firstName, #lastName, #gender').on('input', function () {
     let cleaned = $(this).val().replace(/[^a-zA-Z\s]/g, '');
     $(this).val(cleaned);

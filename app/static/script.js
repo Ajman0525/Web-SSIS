@@ -119,6 +119,9 @@ $(document).ready(function () {
     });
   });
 
+
+  // --------- COLLEGE MODALS --------- //
+
   // Add College Popup
   $("#addCollegeForm").submit(function (e) {
     e.preventDefault();
@@ -276,7 +279,7 @@ $(document).ready(function () {
   });
 
 
-  // --------- PROGRAM SCREEN --------- //
+  // --------- PROGRAM MODALS --------- //
   //Add Program Popup
   $("#addProgramForm").submit(function (e) {
     e.preventDefault();
@@ -429,7 +432,7 @@ $(document).ready(function () {
     });
   });
 
-  // --------- STUDENT SCREEN --------- //
+  // --------- STUDENT MODALS --------- //
   //Add Student Popup
   $("#addStudentForm").submit(function (e) {
     e.preventDefault();

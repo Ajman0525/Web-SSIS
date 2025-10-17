@@ -160,6 +160,14 @@ $(document).ready(function () {
     });
   });
 
+  $("#addCollege").on("hidden.bs.modal", function () {
+    $("#addCollegeForm")[0].reset(); // clear inputs
+    $("#collegeCode, #collegeName").removeClass("is-invalid");
+    $("#addCodeError").text("");
+    $("#addNameError").text("");
+  });
+
+
 
   //Edit College Popup
   $('#editCollege').on('show.bs.modal', function (event) {
@@ -198,7 +206,7 @@ $(document).ready(function () {
             location.reload();
           });
         } else if (response.no_change) {
-            $("#editCollege").modal("hide");
+          $("#editCollege").modal("hide");
         }
       },
       error: function (xhr) {
@@ -312,6 +320,13 @@ $(document).ready(function () {
     });
   });
 
+  $("#addProgram").on("hidden.bs.modal", function () {
+    $("#addProgramForm")[0].reset(); // clear inputs
+    $("#programCode, #programName").removeClass("is-invalid");
+    $("#addProgramCodeError").text("");
+    $("#addProgramNameError").text("");
+  });
+
   //Edit Program Popup
   $('#editProgram').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
@@ -350,8 +365,8 @@ $(document).ready(function () {
           $('#editConfirmation').on('hidden.bs.modal', function () {
             location.reload(); // reload table to show changes
           });
-        } else if (response.no_change){
-            $("#editProgram").modal('hide');
+        } else if (response.no_change) {
+          $("#editProgram").modal('hide');
         }
       },
       error: function (xhr) {
@@ -454,6 +469,12 @@ $(document).ready(function () {
     });
   });
 
+  $("#addStudent").on("hidden.bs.modal", function () {
+    $("#addStudentForm")[0].reset(); // clear inputs
+    $("#addStudentID").removeClass("is-invalid");
+    $("#addStudentIDError").text("");
+  });
+
   //Edit Student Popup
   $('#editStudent').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
@@ -498,8 +519,8 @@ $(document).ready(function () {
           $('#editConfirmation').on('hidden.bs.modal', function () {
             location.reload(); // reload table to show changes
           });
-        } else if (response.no_change){
-            $("#editStudent").modal('hide');
+        } else if (response.no_change) {
+          $("#editStudent").modal('hide');
         }
       },
       error: function (xhr) {

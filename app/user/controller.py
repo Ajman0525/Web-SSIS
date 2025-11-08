@@ -22,7 +22,7 @@ def login():
             session["user_id"] = user[0]
             session["username"] = user[1]
             flash("Login successful!", "success")
-            return redirect(url_for("home.home"))  # make sure you have this route!
+            return redirect(url_for("home.home"))  
         else:
             login_form.username.errors.append("Incorrect username or password")
 

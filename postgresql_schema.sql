@@ -2,28 +2,6 @@
 -- Database: SSIS_Webapp
 -- ==========================================
 
--- Ensure proper environment
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
--- Optional: Create the database (run only if needed)
--- CREATE DATABASE SSIS_Webapp
---     WITH ENCODING 'UTF8'
---     LC_COLLATE = 'English_United States.1252'
---     LC_CTYPE = 'English_United States.1252'
---     TEMPLATE = template0;
-
--- Use the database
--- \c SSIS_Webapp
-
--- ==========================================
--- TABLE DEFINITIONS
--- ==========================================
-
 -- Colleges Table
 CREATE TABLE public.colleges (
     code VARCHAR(20) PRIMARY KEY,

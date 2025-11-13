@@ -40,10 +40,10 @@
                 </div>
 
                 <div class="input-box animation" style="--D:2; --S:23">
-                    {{ login_form.password(class_="input", placeholder = " ") }}
+                    {{ login_form.password(class_="input", placeholder = " ", id="login-password-field") }}
                     <label>Password</label>
                     <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
-                    <i class="bxr bx-eye eye-icon"></i>
+                    <i class="bxs bx-eye-closed eye-icon" id="toggle-password-eye"></i>
                     {% for error in login_form.password.errors %}
                         <small class="error">
                             <i class="bi bi-exclamation-circle-fill"></i> {{ error }}

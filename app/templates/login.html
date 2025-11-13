@@ -10,6 +10,9 @@
 
     <!--BOOTSTRAP CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!--BOXICON CSS-->
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
@@ -39,8 +42,10 @@
                 <div class="input-box animation" style="--D:2; --S:23">
                     {{ login_form.password(class_="input", placeholder = " ") }}
                     <label>Password</label>
-                    <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
-                    <i id="toggle-password-eye" class='bxr bx-eye' style="cursor:pointer"></i>
+                    <div class="password-icons">
+                        <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
+                        <i class="bxr bx-eye" style="color: black;"></i>
+                    </div>
                     {% for error in login_form.password.errors %}
                         <small class="error">
                             <i class="bi bi-exclamation-circle-fill"></i> {{ error }}

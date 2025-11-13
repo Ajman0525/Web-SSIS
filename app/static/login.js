@@ -30,7 +30,7 @@ $(document).ready(function () {
       const type = $password.attr("type") === "password" ? "text" : "password";
       $password.attr("type", type);
 
-      $(this).toggleClass("bx-eye bx-eye-closed"); 
+      $(this).toggleClass("bx-eye bx-eye-slash"); 
     });
 
 });

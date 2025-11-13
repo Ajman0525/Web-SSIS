@@ -181,8 +181,8 @@ input[type="password"]::-ms-reveal {
 .input-box .eye-icon {
     position: absolute;
     top: 50%;
-    right: 8%;
-    font-size: 28px;
+    right: 10%;
+    font-size: 24px;
     transform: translateY(-50%);
     color: black;
 }

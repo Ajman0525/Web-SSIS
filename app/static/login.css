@@ -178,7 +178,7 @@ input[type="password"]::-ms-reveal {
     color: #fff;
 }
 
-.input-box .eye-icon {
+.input-box .login-eye-icon {
     position: absolute;
     top: 50%;
     right: 10%;

@@ -18,6 +18,14 @@ $(document).ready(function () {
     const $password = $("#login-password-field"); 
     const $toggle = $("#toggle-password-eye"); 
 
+    $password.on("input", function () {
+      if ($(this).val().length > 0) {
+        $toggle.show();
+      } else {
+        $toggle.hide();
+      }
+    });
+
     $toggle.on("click", function () {
       const type = $password.attr("type") === "password" ? "text" : "password";
       $password.attr("type", type);

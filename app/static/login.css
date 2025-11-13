@@ -200,7 +200,7 @@ input[type="password"]::-ms-reveal {
     color: black;
 }
 
-.input-box .signup-eye-hidden::before {
+.input-box .signup-eye-hidden{
     display: none;
 }
 

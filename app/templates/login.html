@@ -42,10 +42,8 @@
                 <div class="input-box animation" style="--D:2; --S:23">
                     {{ login_form.password(class_="input", placeholder = " ") }}
                     <label>Password</label>
-                    <div class="password-icons">
-                        <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
-                        <i class="bxr bx-eye" style="color: black;"></i>
-                    </div>
+                    <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
+                    <i class="bxr bx-eye eye-icon" style="color: black;"></i>
                     {% for error in login_form.password.errors %}
                         <small class="error">
                             <i class="bi bi-exclamation-circle-fill"></i> {{ error }}

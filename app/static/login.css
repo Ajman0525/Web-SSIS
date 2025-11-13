@@ -187,6 +187,10 @@ input[type="password"]::-ms-reveal {
     color: black;
 }
 
+.input-box .hidden-icon{
+    display: none;
+}
+
 .input-box input:focus~box-icon,
 .input-box input:valid~box-icon {
     color: #e46033;

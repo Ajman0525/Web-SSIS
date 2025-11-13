@@ -10,4 +10,19 @@ $(document).ready(function () {
     $loginLink.on('click', function () {
         $container.removeClass('active');
     });
+
+    //-----------------------
+    // Password Eye Toggle
+    //-----------------------
+
+    const $password = $("#{{ login_form.password.id }}"); 
+    const $toggle = $("#toggle-password-eye"); 
+
+    $toggle.on("click", function () {
+      const type = $password.attr("type") === "password" ? "text" : "password";
+      $password.attr("type", type);
+
+      $(this).toggleClass("bxr  bx-eye-closed"); 
+    });
+
 });

@@ -33,4 +33,22 @@ $(document).ready(function () {
       $(this).toggleClass("bx-eye bx-eye-slash"); 
     });
 
+    const $signupPassword = $("#signup-password-field"); 
+    const $signupToggle = $("#signup-toggle-password-eye"); 
+
+    $signupPassword.on("input", function () {
+      if ($(this).val().length > 0) {
+        $signupToggle.show();
+      } else {
+        $signupToggle.hide();
+      }
+    });
+
+    $signupToggle.on("click", function () {
+      const type = $signupPassword.attr("type") === "password" ? "text" : "password";
+      $signupPassword.attr("type", type);
+
+      $(this).toggleClass("bx-eye bx-eye-slash");
+    });
+
 });

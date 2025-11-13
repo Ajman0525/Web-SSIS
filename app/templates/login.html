@@ -100,9 +100,10 @@
                 </div>
 
                 <div class="input-box animation" style="--li:19; --S:3">
-                    {{ signup_form.password(class_="input", placeholder = " ") }}
+                    {{ signup_form.password(class_="input", placeholder = " ", id="signup-password-field") }}
                     <label>Password</label>
                     <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
+                    <i class="bx bx-eye-slash signup-eye-icon signup-eye-hidden" id="signup-toggle-password-eye"></i>
                     {% for error in signup_form.password.errors %}
                         <small class="error">
                             <i class="bi bi-exclamation-circle-fill"></i> {{ error }}

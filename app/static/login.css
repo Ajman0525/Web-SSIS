@@ -191,6 +191,19 @@ input[type="password"]::-ms-reveal {
     display: none;
 }
 
+.input-box .signup-eye-icon::before{
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    font-size: 24px;
+    transform: translateY(-50%);
+    color: black;
+}
+
+.input-box .signup-eye-hidden::before {
+    display: none;
+}
+
 .input-box input:focus~box-icon,
 .input-box input:valid~box-icon {
     color: #e46033;

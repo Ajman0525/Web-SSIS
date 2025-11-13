@@ -43,7 +43,7 @@
                     {{ login_form.password(class_="input", placeholder = " ") }}
                     <label>Password</label>
                     <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
-                    <i class="bxr bx-eye eye-icon" style="color: black;"></i>
+                    <i class="bxr bx-eye eye-icon"></i>
                     {% for error in login_form.password.errors %}
                         <small class="error">
                             <i class="bi bi-exclamation-circle-fill"></i> {{ error }}

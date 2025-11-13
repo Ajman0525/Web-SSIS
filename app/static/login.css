@@ -165,6 +165,10 @@ small.error i{
     font-size: 0.7rem;
 }
 
+input[type="password"]::-ms-reveal {
+    display: none;
+}
+
 .input-box box-icon {
     position: absolute;
     top: 50%;

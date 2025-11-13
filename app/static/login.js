@@ -15,14 +15,14 @@ $(document).ready(function () {
     // Password Eye Toggle
     //-----------------------
 
-    const $password = $("#{{ login_form.password.id }}"); 
+    const $password = $("#login-password-field"); 
     const $toggle = $("#toggle-password-eye"); 
 
     $toggle.on("click", function () {
       const type = $password.attr("type") === "password" ? "text" : "password";
       $password.attr("type", type);
 
-      $(this).toggleClass("bxr  bx-eye-closed"); 
+      $(this).toggleClass("bx-eye bx-eye-closed"); 
     });
 
 });

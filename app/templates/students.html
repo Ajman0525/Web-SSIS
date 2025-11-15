@@ -178,19 +178,26 @@
                     <input type="hidden" id="original_id" name="original_id"> <!-- Hidden input -->
 
                     <div class="mb-3 text-center">
-                        <div class="mb-2" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <div class="mb-2" style="display: inline-block; position: relative;">
                             <img id="editPhotoPreview" src="" alt="Photo preview" class="rounded-circle"
-                                style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #dee2e6; display: block;">
+                                style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #dee2e6; display: none;">
+                            <div id="editPhotoPlaceholder"
+                                class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center"
+                                style="width: 120px; height: 120px; border: 3px dashed #dee2e6; display: none;">
+                                <i class="bi bi-person fs-1 text-muted"></i>
+                            </div>
                         </div>
-                        <label for="editStudentPhoto" class="btn btn-outline-primary btn-sm">
-                            <i class="bi bi-camera"></i> Change Photo
-                        </label>
-                        <button type="button" class="btn btn-outline-danger btn-sm" id="removePhotoBtn" onclick="removeEditPhoto()">
-                            <i class="bi bi-trash"></i> Remove
-                        </button>
-                        <input type="file" class="d-none" id="editStudentPhoto" name="photo" accept="image/*"
-                            onchange="previewEditPhoto(event)">
-                        <input type="hidden" id="removePhoto" name="remove_photo" value="false">
+                        <div>
+                            <label for="editStudentPhoto" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-camera"></i> Change Photo
+                            </label>
+                            <button type="button" class="btn btn-outline-danger btn-sm" id="removePhotoBtn" onclick="removeEditPhoto()">
+                                <i class="bi bi-trash"></i> Remove
+                            </button>
+                            <input type="file" class="d-none" id="editStudentPhoto" name="photo" accept="image/*"
+                                onchange="previewEditPhoto(event)">
+                            <input type="hidden" id="removePhoto" name="remove_photo" value="false">
+                        </div>
                         <div class="text-muted small mt-1">Max 5MB (JPG, PNG, GIF)</div>
                     </div>
 

@@ -53,7 +53,7 @@
                             data-program-code="{{student.program}}"
                             data-year-level="{{student.year_level}}"
                             data-gender="{{student.gender}}"
-                            data-student-photo="{{student.student_photo}}">
+                            data-photo="{{student.student_photo if student.student_photo else ''}}">
                         <i class="bi bi-pencil-square"></i>
                     </button>
                     <button class="btn btn-danger"

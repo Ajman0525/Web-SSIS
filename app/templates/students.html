@@ -80,6 +80,24 @@
 
             <div class="modal-body">
                 <form id="addStudentForm" method="POST" action="{{ url_for('student.register_student') }}">
+                    <div class="mb-3 text-center">
+                        <div class="mb-2">
+                            <img id="addPhotoPreview" src="" alt="Photo preview" class="rounded-circle d-none"
+                                style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #dee2e6;">
+                            <div id="addPhotoPlaceholder"
+                                class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center"
+                                style="width: 120px; height: 120px; border: 3px dashed #dee2e6;">
+                                <i class="bi bi-person fs-1 text-muted"></i>
+                            </div>
+                        </div>
+                        <label for="addStudentPhoto" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-camera"></i> Upload Photo
+                        </label>
+                        <input type="file" class="d-none" id="addStudentPhoto" name="photo" accept="image/*"
+                            onchange="previewAddPhoto(event)">
+                        <div class="text-muted small mt-1">Max 5MB (JPG, PNG, GIF)</div>
+                    </div>
+
                     <div class="mb-3">
                         <label for="studentID" class="form-label">ID Number:</label>
                         <input type="text" class="form-control" id="addStudentID" name ="id" placeholder="e.g. 2022-0525" required>
@@ -158,6 +176,24 @@
             <div class="modal-body">
                 <form id="editStudentForm">
                     <input type="hidden" id="original_id" name="original_id"> <!-- Hidden input -->
+
+                    <div class="mb-3 text-center">
+                        <div class="mb-2">
+                            <img id="editPhotoPreview" src="" alt="Photo preview" class="rounded-circle"
+                                style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #dee2e6;">
+                        </div>
+                        <label for="editStudentPhoto" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-camera"></i> Change Photo
+                        </label>
+                        <button type="button" class="btn btn-outline-danger btn-sm" id="removePhotoBtn" onclick="removeEditPhoto()">
+                            <i class="bi bi-trash"></i> Remove
+                        </button>
+                        <input type="file" class="d-none" id="editStudentPhoto" name="photo" accept="image/*"
+                            onchange="previewEditPhoto(event)">
+                        <input type="hidden" id="removePhoto" name="remove_photo" value="false">
+                        <div class="text-muted small mt-1">Max 5MB (JPG, PNG, GIF)</div>
+                    </div>
+
                     <div class="mb-3">
                         <label for="studentID" class="form-label">ID Number:</label>
                         <input type="text" class="form-control" id="editStudentID" name ="id" placeholder="e.g. 2022-0525" required>

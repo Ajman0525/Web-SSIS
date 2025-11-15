@@ -436,7 +436,60 @@ $(document).ready(function () {
   });
 
   // --------- STUDENT MODALS --------- //
-  //Add Student Popup
+  function previewAddPhoto(event) {
+    const file = event.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size must be less than 5MB");
+        event.target.value = "";
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        $("#addPhotoPreview")
+          .attr("src", e.target.result)
+          .css("display", "inline-block");
+        $("#addPhotoPlaceholder").css("display", "none");
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function previewEditPhoto(event) {
+    const file = event.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size must be less than 5MB");
+        event.target.value = "";
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        $("#editPhotoPreview")
+          .attr("src", e.target.result)
+          .css("display", "inline-block");
+        $("#editPhotoPlaceholder").css("display", "none");
+      };
+      reader.readAsDataURL(file);
+    }
+    $("#removePhoto").val("false");
+  }
+
+  function removeEditPhoto() {
+    $("#editPhotoPreview").css("display", "none");
+    $("#editPhotoPlaceholder").css("display", "inline-flex");
+    $("#editStudentPhoto").val("");
+    $("#removePhoto").val("true");
+  }
+  // Edit Student Modal
+  $(document).ready(function () {
+    $("#addStudentPhoto").on("change", previewAddPhoto);
+    $("#editStudentPhoto").on("change", previewEditPhoto);
+    $("#removePhotoBtn").on("click", removeEditPhoto);
+  });
+
   $("#addStudentForm").submit(function (e) {
     e.preventDefault();
 
@@ -444,15 +497,23 @@ $(document).ready(function () {
     $("#addStudentIDError").text("");
     $("#addStudentID").removeClass("is-invalid");
 
+    var formData = new FormData(this);
+
     $.ajax({
-      url: $(this).attr("action"),
+      url: "{{ url_for('student.register_student') }}",
       type: "POST",
-      data: $(this).serialize(),
+      data: formData,
+      processData: false,
+      contentType: false,
       success: function (response) {
         if (response.success) {
           $("#addStudent").modal("hide");
           $("#addConfirmation").modal("show");
           $("#addStudentForm")[0].reset();
+
+          // Reset photo preview
+          $("#addPhotoPreview").css("display", "none").attr("src", "");
+          $("#addPhotoPlaceholder").css("display", "inline-flex");
 
           $("#addConfirmation").on("hidden.bs.modal", function () {
             location.reload();
@@ -474,12 +535,16 @@ $(document).ready(function () {
   });
 
   $("#addStudent").on("hidden.bs.modal", function () {
-    $("#addStudentForm")[0].reset(); // clear inputs
+    $("#addStudentForm")[0].reset();
     $("#addStudentID").removeClass("is-invalid");
     $("#addStudentIDError").text("");
+
+    // Reset photo preview
+    $("#addPhotoPreview").css("display", "none").attr("src", "");
+    $("#addPhotoPlaceholder").css("display", "inline-flex");
   });
 
-  //Edit Student Popup
+  // Edit Student Modal
   $("#editStudent").on("show.bs.modal", function (event) {
     var button = $(event.relatedTarget);
     var modal = $(this);
@@ -490,6 +555,7 @@ $(document).ready(function () {
     var programCode = button.data("program-code");
     var yearLevel = button.data("year-level");
     var gender = button.data("gender");
+    var photo = button.data("photo");
 
     modal.find("#editStudentID").val(studentID);
     modal.find("#firstName").val(firstName);
@@ -498,9 +564,20 @@ $(document).ready(function () {
     modal.find("#yearLevel").val(yearLevel);
     modal.find("#gender").val(gender);
     modal.find("#original_id").val(studentID);
+    modal.find("#current_photo").val(photo || "");
+    modal.find("#removePhoto").val("false");
+
+    // Handle photo preview
+    if (photo && photo !== "None" && photo !== "" && photo !== "null") {
+      $("#editPhotoPreview").attr("src", photo).css("display", "inline-block");
+      $("#editPhotoPlaceholder").css("display", "none");
+    } else {
+      $("#editPhotoPreview").css("display", "none");
+      $("#editPhotoPlaceholder").css("display", "inline-flex");
+    }
   });
 
-  // Edit Confirmation Popup
+  // Edit Student Form Submit with File Upload
   $("#editStudentForm").submit(function (e) {
     e.preventDefault();
 
@@ -508,10 +585,15 @@ $(document).ready(function () {
     $("#editStudentIDError").text("");
     $("#editStudentID").removeClass("is-invalid");
 
+    // Create FormData to handle file upload
+    var formData = new FormData(this);
+
     $.ajax({
       url: "/students/edit",
       type: "POST",
-      data: $(this).serialize(),
+      data: formData,
+      processData: false, 
+      contentType: false, 
       success: function (response) {
         if (response.success == true) {
           $("#editStudent").modal("hide");
@@ -519,7 +601,7 @@ $(document).ready(function () {
           $("#editStudentForm")[0].reset();
 
           $("#editConfirmation").on("hidden.bs.modal", function () {
-            location.reload(); // reload table to show changes
+            location.reload();
           });
         } else if (response.no_change) {
           $("#editStudent").modal("hide");
@@ -540,16 +622,20 @@ $(document).ready(function () {
   });
 
   $("#editStudent").on("hidden.bs.modal", function () {
-    $("#editStudentForm")[0].reset(); // clear inputs
+    $("#editStudentForm")[0].reset();
     $("#editStudentID").removeClass("is-invalid");
     $("#editStudentIDError").text("");
+
+    // Reset photo preview
+    $("#editPhotoPreview").css("display", "none").attr("src", "");
+    $("#editPhotoPlaceholder").css("display", "none");
   });
 
-  //Delete Student Popup
+  // Delete Student Modal
   $("#studentDeletionModal").on("show.bs.modal", function (event) {
     var button = $(event.relatedTarget);
     var id = button.data("student-id");
-    $(this).find("#deleteStudentID").val(id); // Set value in hidden input
+    $(this).find("#deleteStudentID").val(id);
   });
 
   $("#deleteStudentForm").submit(function (e) {
@@ -560,10 +646,9 @@ $(document).ready(function () {
       data: $(this).serialize(),
       success: function (response) {
         if (response.success) {
-          $("#studentDeletionModal").modal("hide"); // hide the confirm modal
-          $("#deleteConfirmationModal").modal("show"); // show "College Deleted" modal
+          $("#studentDeletionModal").modal("hide");
+          $("#deleteConfirmationModal").modal("show");
 
-          // optional: reload table or page when deletion modal closes
           $("#deleteConfirmationModal").on("hidden.bs.modal", function () {
             location.reload();
           });

@@ -83,12 +83,9 @@
                 <form id="addStudentForm" method="POST" action="{{ url_for('student.register_student') }}" enctype="multipart/form-data">
                     
                     <div class="mb-3 text-center">
-                        <div class="mb-2" style="display: inline-block; position: relative;">
-                            <img id="addPhotoPreview" src="" alt="Photo preview" class="rounded-circle"
-                                style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #dee2e6; display: none;">
-                            <div id="addPhotoPlaceholder"
-                                class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center"
-                                style="width: 120px; height: 120px; border: 3px dashed #dee2e6;">
+                        <div class="mb-2 add-student-photo">
+                            <img id="addPhotoPreview" src="" alt="Photo preview" class="rounded-circle">
+                            <div id="addPhotoPlaceholder" class="rounded-circle bg-light d-flex align-items-center justify-content-center">
                                 <i class="bi bi-person fs-1 text-muted"></i>
                             </div>
                         </div>
@@ -182,12 +179,9 @@
                     <input type="hidden" id="current_photo" name="current_photo"> 
 
                     <div class="mb-3 text-center">
-                        <div class="mb-2" style="display: inline-block; position: relative;">
-                            <img id="editPhotoPreview" src="" alt="Photo preview" class="rounded-circle"
-                                style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #dee2e6; display: none;">
-                            <div id="editPhotoPlaceholder"
-                                class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center"
-                                style="width: 120px; height: 120px; border: 3px dashed #dee2e6; display: none;">
+                        <div class="mb-2 edit-student-photo" style="position: relative; width: 120px; height: 120px; margin: 0 auto;">
+                            <img id="editPhotoPreview" src="" alt="Photo preview" class="rounded-circle">
+                            <div id="editPhotoPlaceholder" class="rounded-circle bg-light d-flex align-items-center justify-content-center">
                                 <i class="bi bi-person fs-1 text-muted"></i>
                             </div>
                         </div>
@@ -203,7 +197,7 @@
                         </div>
                         <div class="text-muted small mt-1">Max 5MB (JPG, PNG, GIF)</div>
                     </div>
-
+                    
                     <div class="mb-3">
                         <label for="studentID" class="form-label">ID Number:</label>
                         <input type="text" class="form-control" id="editStudentID" name ="id" placeholder="e.g. 2022-0525" required>

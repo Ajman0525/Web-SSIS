@@ -195,11 +195,10 @@
                             <label for="editStudentPhoto" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-camera"></i> Change Photo
                             </label>
-                            <button type="button" class="btn btn-outline-danger btn-sm" id="removePhotoBtn" onclick="removeEditPhoto()">
+                            <button type="button" class="btn btn-outline-danger btn-sm" id="removePhotoBtn">
                                 <i class="bi bi-trash"></i> Remove
                             </button>
-                            <input type="file" class="d-none" id="editStudentPhoto" name="photo" accept="image/*"
-                                onchange="previewEditPhoto(event)">
+                            <input type="file" class="d-none" id="editStudentPhoto" name="photo" accept="image/*">
                             <input type="hidden" id="removePhoto" name="remove_photo" value="false">
                         </div>
                         <div class="text-muted small mt-1">Max 5MB (JPG, PNG, GIF)</div>

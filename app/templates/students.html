@@ -80,7 +80,7 @@
             </div>
 
             <div class="modal-body">
-                <form id="addStudentForm" method="POST" action="{{ url_for('student.register_student') }}">
+                <form id="addStudentForm" method="POST" action="{{ url_for('student.register_student') }}" enctype="multipart/form-data">
                     
                     <div class="mb-3 text-center">
                         <div class="mb-2" style="display: inline-block; position: relative;">
@@ -177,7 +177,7 @@
             </div>
 
             <div class="modal-body">
-                <form id="editStudentForm">
+                <form id="editStudentForm" enctype="multipart/form-data">
                     <input type="hidden" id="original_id" name="original_id">
                     <input type="hidden" id="current_photo" name="current_photo"> 
 

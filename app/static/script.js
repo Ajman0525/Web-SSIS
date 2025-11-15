@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
   const $body = $("body"),
     $sidebar = $(".sidebar"),
@@ -48,36 +47,36 @@ $(document).ready(function () {
   });
 
   // --------- DATA TABLE INITIALIZATION --------- //
-  var table = $('#myDataTable').DataTable({
+  var table = $("#myDataTable").DataTable({
     columnDefs: [
-      { orderable: false, targets: -1 } // disable sorting on last column
+      { orderable: false, targets: -1 }, // disable sorting on last column
     ],
-    "rowCallback": function (row, data, index) {
-      if ($(row).hasClass('placeholder-row')) {
-        $(row).addClass('dtr-disabled'); // optional styling
-        $(row).attr('data-search', 'false'); // ignore search
-        $(row).attr('data-order', 'false');  // ignore sort
+    rowCallback: function (row, data, index) {
+      if ($(row).hasClass("placeholder-row")) {
+        $(row).addClass("dtr-disabled"); // optional styling
+        $(row).attr("data-search", "false"); // ignore search
+        $(row).attr("data-order", "false"); // ignore sort
       }
     },
-    "drawCallback": function (settings) {
+    drawCallback: function (settings) {
       // Always move placeholder-row back to the top after sorting or searching
-      var placeholder = $('.placeholder-row').detach();
-      $('#myDataTable tbody').prepend(placeholder);
+      var placeholder = $(".placeholder-row").detach();
+      $("#myDataTable tbody").prepend(placeholder);
     },
-    "infoCallback": function (settings, start, end, max, total, pre) {
+    infoCallback: function (settings, start, end, max, total, pre) {
       // Count only real rows
-      var realRows = $(settings.nTBody).find('tr:not(.placeholder-row)').length;
+      var realRows = $(settings.nTBody).find("tr:not(.placeholder-row)").length;
 
       if (realRows === 0) {
         start = 0;
         end = 0;
       } else {
-        start = 1;          // first real row
-        end = realRows;     // last real row
+        start = 1; // first real row
+        end = realRows; // last real row
       }
 
-      return 'Showing ' + start + ' to ' + end + ' of ' + realRows + ' entries';
-    }
+      return "Showing " + start + " to " + end + " of " + realRows + " entries";
+    },
   });
 
   $(".progress-circle").each(function () {
@@ -94,38 +93,47 @@ $(document).ready(function () {
     $progress.css("stroke-dashoffset", circumference);
 
     // animate stroke
-    $({ percent: 0 }).animate({ percent: value }, {
-      duration: 1500,
-      step: function (now) {
-        let offset = circumference - (now / 100) * circumference;
-        $progress.css("stroke-dashoffset", offset);
-        $number.text(Math.floor(now) + "%");
+    $({ percent: 0 }).animate(
+      { percent: value },
+      {
+        duration: 1500,
+        step: function (now) {
+          let offset = circumference - (now / 100) * circumference;
+          $progress.css("stroke-dashoffset", offset);
+          $number.text(Math.floor(now) + "%");
+        },
       }
-    });
+    );
   });
-
 
   // --------- INPUT RESTRICTIONS --------- //
-  $('#collegeName, #editCollegeName, #programName, #editProgramName').on('input', function () {
-    this.value = this.value.replace(/[^a-zA-Z\s,]/g, '');
-  });
+  $("#collegeName, #editCollegeName, #programName, #editProgramName").on(
+    "input",
+    function () {
+      this.value = this.value.replace(/[^a-zA-Z\s,]/g, "");
+    }
+  );
 
-  $('#collegeCode, #editCollegeCode, #programCode, #editProgramCode').on('input', function () {
-    this.value = this.value.replace(/[^A-Za-z]/g, '');
-  });
+  $("#collegeCode, #editCollegeCode, #programCode, #editProgramCode").on(
+    "input",
+    function () {
+      this.value = this.value.replace(/[^A-Za-z]/g, "");
+    }
+  );
 
-  $('#addStudentID, #editStudentID').on('input', function () {
-    let cleaned = $(this).val()
-      .replace(/[^0-9\-]/g, '')
+  $("#addStudentID, #editStudentID").on("input", function () {
+    let cleaned = $(this)
+      .val()
+      .replace(/[^0-9\-]/g, "");
     $(this).val(cleaned);
   });
 
-  $('#firstName, #lastName, #gender').on('input', function () {
-    let cleaned = $(this).val().replace(/[^a-zA-Z\s]/g, '');
+  $("#firstName, #lastName, #gender").on("input", function () {
+    let cleaned = $(this)
+      .val()
+      .replace(/[^a-zA-Z\s]/g, "");
     $(this).val(cleaned);
   });
-
-
 
   // --------- COLLEGE MODALS --------- //
   // Add College Popup
@@ -176,21 +184,18 @@ $(document).ready(function () {
     $("#addNameError").text("");
   });
 
-
-
   //Edit College Popup
-  $('#editCollege').on('show.bs.modal', function (event) {
+  $("#editCollege").on("show.bs.modal", function (event) {
     var button = $(event.relatedTarget);
     var modal = $(this);
 
-    var collegeCode = button.data('collegeCode');
-    var collegeName = button.data('collegeName');
+    var collegeCode = button.data("collegeCode");
+    var collegeName = button.data("collegeName");
 
-    modal.find('#editCollegeCode').val(collegeCode);
-    modal.find('#editCollegeName').val(collegeName);
-    modal.find('#originalCode').val(collegeCode);
+    modal.find("#editCollegeCode").val(collegeCode);
+    modal.find("#editCollegeName").val(collegeName);
+    modal.find("#originalCode").val(collegeCode);
   });
-
 
   // Edit College jQuery
   $("#editCollegeForm").submit(function (e) {
@@ -235,7 +240,6 @@ $(document).ready(function () {
     });
   });
 
-
   $("#editCollege").on("hidden.bs.modal", function () {
     $("#editCollegeForm")[0].reset(); // clear inputs
     $("#editCollegeCode, #editCollegeName").removeClass("is-invalid");
@@ -243,17 +247,15 @@ $(document).ready(function () {
     $("#editNameError").text("");
   });
 
-
-
   // Delete Popup
   // When opening the delete modal, set the college code
-  $('#collegeDeletionModal').on('show.bs.modal', function (event) {
+  $("#collegeDeletionModal").on("show.bs.modal", function (event) {
     var button = $(event.relatedTarget); // Button that triggered the modal
-    var code = button.data('college-code'); // Extract code from data attribute
-    $(this).find('#deleteCode').val(code); // Set value in hidden input
+    var code = button.data("college-code"); // Extract code from data attribute
+    $(this).find("#deleteCode").val(code); // Set value in hidden input
   });
 
-  $('#deleteCollegeForm').submit(function (e) {
+  $("#deleteCollegeForm").submit(function (e) {
     e.preventDefault();
 
     $.ajax({
@@ -263,13 +265,13 @@ $(document).ready(function () {
       success: function (response) {
         if (response.success) {
           // Hide delete confirmation prompt modal
-          $('#collegeDeletionModal').modal('hide');
+          $("#collegeDeletionModal").modal("hide");
 
           // Show success message modal
-          $('#deleteConfirmationModal').modal('show');
+          $("#deleteConfirmationModal").modal("show");
 
           // Reload after success modal closes
-          $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
+          $("#deleteConfirmationModal").on("hidden.bs.modal", function () {
             location.reload();
           });
         } else {
@@ -280,10 +282,9 @@ $(document).ready(function () {
       error: function (xhr) {
         const response = xhr.responseJSON;
         alert(response?.message || "An error occurred while deleting.");
-      }
+      },
     });
   });
-
 
   // --------- PROGRAM MODALS --------- //
   //Add Program Popup
@@ -294,8 +295,6 @@ $(document).ready(function () {
     $("#addProgramCodeError").text("");
     $("#addProgramNameError").text("");
     $("#programCode, #programName").removeClass("is-invalid");
-
-
 
     $.ajax({
       url: $(this).attr("action"),
@@ -337,19 +336,18 @@ $(document).ready(function () {
   });
 
   //Edit Program Popup
-  $('#editProgram').on('show.bs.modal', function (event) {
+  $("#editProgram").on("show.bs.modal", function (event) {
     var button = $(event.relatedTarget);
     var modal = $(this);
 
-    var programCode = button.data('programCode');
-    var programName = button.data('programName');
-    var collegeCode = button.data('collegeCode');
+    var programCode = button.data("programCode");
+    var programName = button.data("programName");
+    var collegeCode = button.data("collegeCode");
 
-    modal.find('#editProgramCode').val(programCode);
-    modal.find('#editProgramName').val(programName);
-    modal.find('#collegeCode').val(collegeCode);
-    modal.find('#originalCode').val(programCode);
-
+    modal.find("#editProgramCode").val(programCode);
+    modal.find("#editProgramName").val(programName);
+    modal.find("#collegeCode").val(collegeCode);
+    modal.find("#originalCode").val(programCode);
   });
 
   // Edit Confirmation Popup
@@ -367,15 +365,15 @@ $(document).ready(function () {
       data: $(this).serialize(),
       success: function (response) {
         if (response.success == true) {
-          $("#editProgram").modal('hide');
-          $("#editConfirmation").modal('show');
+          $("#editProgram").modal("hide");
+          $("#editConfirmation").modal("show");
           $("#editProgramForm")[0].reset();
 
-          $('#editConfirmation').on('hidden.bs.modal', function () {
+          $("#editConfirmation").on("hidden.bs.modal", function () {
             location.reload(); // reload table to show changes
           });
         } else if (response.no_change) {
-          $("#editProgram").modal('hide');
+          $("#editProgram").modal("hide");
         }
       },
       error: function (xhr) {
@@ -402,15 +400,14 @@ $(document).ready(function () {
     $("#editProgramNameError").text("");
   });
 
-
   // Delete Program Popup
-  $('#programDeletionModal').on('show.bs.modal', function (event) {
+  $("#programDeletionModal").on("show.bs.modal", function (event) {
     var button = $(event.relatedTarget); // Button that triggered the modal
-    var code = button.data('program-code'); // Extract code from data attribute
-    $(this).find('#deleteCode').val(code); // Set value in hidden input
+    var code = button.data("program-code"); // Extract code from data attribute
+    $(this).find("#deleteCode").val(code); // Set value in hidden input
   });
 
-  $('#deleteProgramForm').submit(function (e) {
+  $("#deleteProgramForm").submit(function (e) {
     e.preventDefault();
 
     $.ajax({
@@ -419,12 +416,12 @@ $(document).ready(function () {
       data: $(this).serialize(),
       success: function (response) {
         if (response.success) {
-          $('#programDeletionModal').modal('hide'); // hide the confirm modal
+          $("#programDeletionModal").modal("hide"); // hide the confirm modal
 
-          $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
+          $("#deleteConfirmationModal").modal("show"); // show "College Deleted" modal
 
           // optional: reload table or page when deletion modal closes
-          $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
+          $("#deleteConfirmationModal").on("hidden.bs.modal", function () {
             location.reload();
           });
         } else {
@@ -434,7 +431,7 @@ $(document).ready(function () {
       error: function (xhr) {
         const response = xhr.responseJSON;
         alert(response?.message || "An error occurred while deleting.");
-      }
+      },
     });
   });
 
@@ -446,7 +443,6 @@ $(document).ready(function () {
     // Clear previous errors
     $("#addStudentIDError").text("");
     $("#addStudentID").removeClass("is-invalid");
-
 
     $.ajax({
       url: $(this).attr("action"),
@@ -473,7 +469,6 @@ $(document).ready(function () {
         } else {
           alert(response?.message || "An unexpected error occurred.");
         }
-
       },
     });
   });
@@ -485,25 +480,24 @@ $(document).ready(function () {
   });
 
   //Edit Student Popup
-  $('#editStudent').on('show.bs.modal', function (event) {
+  $("#editStudent").on("show.bs.modal", function (event) {
     var button = $(event.relatedTarget);
     var modal = $(this);
 
-    var studentID = button.data('student-id');
-    var firstName = button.data('first-name');
-    var lastName = button.data('last-name');
-    var programCode = button.data('program-code');
-    var yearLevel = button.data('year-level');
-    var gender = button.data('gender');
+    var studentID = button.data("student-id");
+    var firstName = button.data("first-name");
+    var lastName = button.data("last-name");
+    var programCode = button.data("program-code");
+    var yearLevel = button.data("year-level");
+    var gender = button.data("gender");
 
-    modal.find('#editStudentID').val(studentID);
-    modal.find('#firstName').val(firstName);
-    modal.find('#lastName').val(lastName);
-    modal.find('#programCode').val(programCode);
-    modal.find('#yearLevel').val(yearLevel);
-    modal.find('#gender').val(gender);
-    modal.find('#original_id').val(studentID);
-
+    modal.find("#editStudentID").val(studentID);
+    modal.find("#firstName").val(firstName);
+    modal.find("#lastName").val(lastName);
+    modal.find("#programCode").val(programCode);
+    modal.find("#yearLevel").val(yearLevel);
+    modal.find("#gender").val(gender);
+    modal.find("#original_id").val(studentID);
   });
 
   // Edit Confirmation Popup
@@ -520,16 +514,15 @@ $(document).ready(function () {
       data: $(this).serialize(),
       success: function (response) {
         if (response.success == true) {
-          $("#editStudent").modal('hide');
-          $("#editConfirmation").modal('show');
+          $("#editStudent").modal("hide");
+          $("#editConfirmation").modal("show");
           $("#editStudentForm")[0].reset();
 
-
-          $('#editConfirmation').on('hidden.bs.modal', function () {
+          $("#editConfirmation").on("hidden.bs.modal", function () {
             location.reload(); // reload table to show changes
           });
         } else if (response.no_change) {
-          $("#editStudent").modal('hide');
+          $("#editStudent").modal("hide");
         }
       },
       error: function (xhr) {
@@ -553,13 +546,13 @@ $(document).ready(function () {
   });
 
   //Delete Student Popup
-  $('#studentDeletionModal').on('show.bs.modal', function (event) {
+  $("#studentDeletionModal").on("show.bs.modal", function (event) {
     var button = $(event.relatedTarget);
-    var id = button.data('student-id');
-    $(this).find('#deleteStudentID').val(id); // Set value in hidden input
+    var id = button.data("student-id");
+    $(this).find("#deleteStudentID").val(id); // Set value in hidden input
   });
 
-  $('#deleteStudentForm').submit(function (e) {
+  $("#deleteStudentForm").submit(function (e) {
     e.preventDefault();
     $.ajax({
       url: "/students/delete",
@@ -567,11 +560,11 @@ $(document).ready(function () {
       data: $(this).serialize(),
       success: function (response) {
         if (response.success) {
-          $('#studentDeletionModal').modal('hide'); // hide the confirm modal
-          $('#deleteConfirmationModal').modal('show'); // show "College Deleted" modal
+          $("#studentDeletionModal").modal("hide"); // hide the confirm modal
+          $("#deleteConfirmationModal").modal("show"); // show "College Deleted" modal
 
           // optional: reload table or page when deletion modal closes
-          $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
+          $("#deleteConfirmationModal").on("hidden.bs.modal", function () {
             location.reload();
           });
         } else {
@@ -581,6 +574,3 @@ $(document).ready(function () {
     });
   });
 });
-
-
-

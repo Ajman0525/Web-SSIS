@@ -47,22 +47,7 @@ $(document).ready(function () {
     }
   });
 
-  // --------- DATA TABLE --------- //
-  // Disable sorting in "Action" column
-  // $("table").each(function () {
-  //   var actionsIndex = $(this).find("thead th")
-  //     .filter(function () { return $(this).text().trim() === "Action"; })
-  //     .index();
-
-
-  //   $(this).DataTable({
-  //     columnDefs: [
-  //       { orderable: false, targets: actionsIndex } // disable sorting
-  //     ]
-  //   });
-  // });
-
-
+  // --------- DATA TABLE INITIALIZATION --------- //
   var table = $('#myDataTable').DataTable({
     columnDefs: [
       { orderable: false, targets: -1 } // disable sorting on last column

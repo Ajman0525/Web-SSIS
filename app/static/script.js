@@ -500,7 +500,7 @@ $(document).ready(function () {
     var formData = new FormData(this);
 
     $.ajax({
-      url: "{{ url_for('student.register_student') }}",
+      url: $(this).attr("action"),
       type: "POST",
       data: formData,
       processData: false,

@@ -483,7 +483,7 @@ $(document).ready(function () {
     $("#editStudentPhoto").val("");
     $("#removePhoto").val("true");
   }
-  // Edit Student Modal
+  // Add Student Modal
   $(document).ready(function () {
     $("#addStudentPhoto").on("change", previewAddPhoto);
     $("#editStudentPhoto").on("change", previewEditPhoto);

@@ -14,7 +14,8 @@ class StudentModel:
                     "l_name": s[2], 
                     "program": s[3], 
                     "year_level": s[4], 
-                    "gender": s[5]} 
+                    "gender": s[5],
+                    "student_photo": s[6]} 
                 for s in students_data]
     
     @staticmethod
@@ -36,7 +37,7 @@ class StudentModel:
         return count > 0
     
     @staticmethod
-    def add(student_id, first_name, last_name, program, year_level, gender):
+    def add(student_id, first_name, last_name, program, year_level, gender, student_photo=None):
         if StudentModel.exists_by_id(student_id):
             return False, "Student ID already exists. Please use a different ID.", "id"
 
@@ -44,8 +45,8 @@ class StudentModel:
         cursor = db.cursor()
         try:
             cursor.execute(
-                "INSERT INTO students (id, f_name, l_name, program, year_level, gender) VALUES (%s, %s, %s, %s, %s, %s)", 
-                (student_id, first_name, last_name, program, year_level, gender)
+                "INSERT INTO students (id, f_name, l_name, program, year_level, gender, student_photo) VALUES (%s, %s, %s, %s, %s, %s, %s)", 
+                (student_id, first_name, last_name, program, year_level, gender, student_photo)
             )
             db.commit()
             cursor.close()
@@ -56,7 +57,7 @@ class StudentModel:
             return False, str(e), None 
         
     @staticmethod
-    def edit(original_id, student_id, first_name, last_name, program, year_level, gender):
+    def edit(original_id, student_id, first_name, last_name, program, year_level, gender, student_photo=None):
         db = get_db()
         cursor = db.cursor()
         try:
@@ -65,7 +66,8 @@ class StudentModel:
                            l_name, 
                            program, 
                            year_level, 
-                           gender 
+                           gender,
+                           student_photo
                     FROM   students
                     WHERE  id = %s   
                     """, 
@@ -76,7 +78,7 @@ class StudentModel:
                 cursor.close()
                 return False, "Student not found.", None
             
-            original_fname, original_lname, original_program, original_year, original_gender = row
+            original_fname, original_lname, original_program, original_year, original_gender, original_photo = row
 
             # Check for changes
             if (student_id == original_id and
@@ -84,7 +86,8 @@ class StudentModel:
                 last_name == original_lname and
                 program == original_program and
                 year_level == original_year and 
-                gender == original_gender):
+                gender == original_gender and
+                student_photo == original_photo):
                 return "no_change", None, None
             
             # Check for duplicates
@@ -93,8 +96,8 @@ class StudentModel:
                 return False, "Student ID already exists. Please use a different ID.", "student_id"
 
             cursor.execute(
-                "UPDATE students SET id = %s, f_name = %s, l_name = %s, program = %s, year_level = %s, gender = %s WHERE id = %s",
-                (student_id, first_name, last_name, program, year_level, gender, original_id),
+                "UPDATE students SET id = %s, f_name = %s, l_name = %s, program = %s, year_level = %s, gender = %s, student_photo = %s WHERE id = %s",
+                (student_id, first_name, last_name, program, year_level, gender, student_photo, original_id),
             )
             db.commit()
             cursor.close()
@@ -109,15 +112,16 @@ class StudentModel:
         db = get_db()
         cursor = db.cursor()
         try:
-            cursor.execute("SELECT f_name, l_name FROM students WHERE id = %s", (student_id,))
+            cursor.execute("SELECT f_name, l_name, student_photo FROM students WHERE id = %s", (student_id,))
             row = cursor.fetchone()
             student_name = f"{row[0]} {row[1]}" if row else student_id
+            student_photo = row[2] if row else None
 
             cursor.execute("DELETE FROM students WHERE id = %s", (student_id,))
             db.commit()
             cursor.close()
-            return True, f"Deleted student record: {student_name} ({student_id})"
+            return True, f"Deleted student record: {student_name} ({student_id})", student_photo
         except Exception as e:
             db.rollback()
             cursor.close()
-            return False, str(e)
+            return False, str(e), None

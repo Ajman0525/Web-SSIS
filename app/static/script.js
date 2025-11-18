@@ -592,8 +592,8 @@ $(document).ready(function () {
       url: "/students/edit",
       type: "POST",
       data: formData,
-      processData: false, 
-      contentType: false, 
+      processData: false,
+      contentType: false,
       success: function (response) {
         if (response.success == true) {
           $("#editStudent").modal("hide");
@@ -657,5 +657,67 @@ $(document).ready(function () {
         }
       },
     });
+  });
+
+  // Student Profile Card with delay
+  let hoverTimer = null;
+
+  $(".student-row").on("mouseenter", function (e) {
+    const $row = $(this);
+    const $card = $row.find(".student-profile-card");
+
+    // Clear any existing timer
+    clearTimeout(hoverTimer);
+
+    // Set a timer to show the card after 500ms (0.5 seconds)
+    hoverTimer = setTimeout(function () {
+      // Reset positioning
+      $card.css({
+        left: "50%",
+        top: "50%",
+      });
+
+      // Get positions
+      const cardRect = $card[0].getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth;
+
+      // Adjust if card goes off-screen
+      let adjustTop = 0;
+      let adjustLeft = 0;
+
+      if (cardRect.bottom > viewportHeight) {
+        adjustTop = viewportHeight - cardRect.bottom - 20;
+      }
+      if (cardRect.top < 0) {
+        adjustTop = Math.abs(cardRect.top) + 20;
+      }
+      if (cardRect.right > viewportWidth) {
+        adjustLeft = viewportWidth - cardRect.right - 20;
+      }
+      if (cardRect.left < 0) {
+        adjustLeft = Math.abs(cardRect.left) + 20;
+      }
+
+      if (adjustTop !== 0 || adjustLeft !== 0) {
+        $card.css({
+          top: `calc(50% + ${adjustTop}px)`,
+          left: `calc(50% + ${adjustLeft}px)`,
+        });
+      }
+
+      // Show the card after 0.75 seconds delay
+      $card.addClass("show-card");
+    }, 750); 
+  });
+
+  $(".student-row").on("mouseleave", function () {
+    const $card = $(this).find(".student-profile-card");
+
+    // Clear the timer if user leaves before delay completes
+    clearTimeout(hoverTimer);
+
+    // Hide the card immediately
+    $card.removeClass("show-card");
   });
 });

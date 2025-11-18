@@ -463,8 +463,6 @@ html:not(.ready) .sidebar .text {
 /* ---------------------------*/
 /*    STUDENT PROFILE CARD    */
 /* --------------------------*/
-
-/* Student Profile Card on Hover */
 .student-row {
   position: relative;
   cursor: pointer;
@@ -480,7 +478,7 @@ html:not(.ready) .sidebar .text {
 }
 
 .student-profile-card {
-  position: fixed; /* Changed from absolute to fixed */
+  position: fixed; 
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -501,7 +499,6 @@ html:not(.ready) .sidebar .text {
   visibility: visible;
 }
 
-/* Rest of your CSS stays the same */
 .profile-card-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 30px 20px 80px;

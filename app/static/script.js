@@ -659,18 +659,18 @@ $(document).ready(function () {
     });
   });
 
-  // Student Profile Card with delay
-  let hoverTimer = null;
+  // --------- STUDENT PROFILE CARD --------- //
+  let hoverDisplayDelay = null;
 
   $(".student-row").on("mouseenter", function (e) {
     const $row = $(this);
     const $card = $row.find(".student-profile-card");
 
     // Clear any existing timer
-    clearTimeout(hoverTimer);
+    clearTimeout(hoverDisplayDelay);
 
-    // Set a timer to show the card after 500ms (0.5 seconds)
-    hoverTimer = setTimeout(function () {
+    // Set a timer to show the card after 0.75 seconds
+    hoverDisplayDelay = setTimeout(function () {
       // Reset positioning
       $card.css({
         left: "50%",
@@ -708,14 +708,14 @@ $(document).ready(function () {
 
       // Show the card after 0.75 seconds delay
       $card.addClass("show-card");
-    }, 750); 
+    }, 750);
   });
 
   $(".student-row").on("mouseleave", function () {
     const $card = $(this).find(".student-profile-card");
 
     // Clear the timer if user leaves before delay completes
-    clearTimeout(hoverTimer);
+    clearTimeout(hoverDisplayDelay);
 
     // Hide the card immediately
     $card.removeClass("show-card");

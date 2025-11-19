@@ -80,18 +80,12 @@
                         <div class="profile-card-body">
                             <div class="profile-card-header-info">
                                 <h3 class="profile-card-name">{{student.f_name}} {{student.l_name}}</h3>
-                                <span class="profile-card-gender">{{student.gender}}</span>
+                                <span class="profile-card-gender">{{student.id}}</span>
                             </div>
-                            <div class="profile-card-details">
-                                <div class="profile-detail-item">
-                                    <span class="profile-detail-value">{{student.program}}</span>
-                                </div>
-                                <div class="profile-detail-item">
-                                    <span class="profile-detail-value">{{student.year_level}}</span>
-                                </div>
-                                <div class="profile-detail-item">
-                                    <span class="profile-detail-value">{{student.gender}}</span>
-                                </div>
+                            <div class="profile-card-body-info">
+                                <p class="profile-card-gender">{{student.gender}}</p>
+                                <p class="profile-card-year">{{student.year_level}} Year</p>
+                                <p class="profile-card-program">{{student.program}}</p>
                             </div>
                         </div>
                     </div>

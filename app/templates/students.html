@@ -87,7 +87,11 @@
                             <div class="profile-card-body-info">
                                 <p class="profile-card-gender">{{student.gender}}</p>
                                 <p class="profile-card-year">{{student.year_level}} Year</p>
-                                <p class="profile-card-program">{{student.program}}</p>
+                                {% for program in programs %}
+                                    {% if program.code == student.program %}
+                                        <p class="profile-card-program">{{program.name}}</p>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

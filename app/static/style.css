@@ -510,7 +510,7 @@ html:not(.ready) .sidebar .text {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 5px solid white;
+  border: 3px solid white;
   overflow: hidden;
   background: #f0f0f0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);

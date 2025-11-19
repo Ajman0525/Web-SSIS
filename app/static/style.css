@@ -470,9 +470,9 @@ html:not(.ready) .sidebar .text {
 
 .student-profile-card {
   position: fixed; 
-  left: 50%;
+  /* left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   z-index: 1050;
   width: 400px;
   background: white;
@@ -483,6 +483,11 @@ html:not(.ready) .sidebar .text {
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   pointer-events: all;
+
+  /* Add default positioning relative to the row/cell */
+  left: 100%; /* Start just to the right of the row/cell */
+  top: 50%; /* Center vertically relative to the row/cell */
+  transform: translateY(-50%); /* Fine-tune vertical centering */
 }
 
 .student-profile-card.show-card {

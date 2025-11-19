@@ -671,40 +671,46 @@ $(document).ready(function () {
 
     // Set a timer to show the card after 0.75 seconds
     hoverDisplayDelay = setTimeout(function () {
-      // Reset positioning
-      $card.css({
-        left: "50%",
-        top: "50%",
-      });
 
       // Get positions
-      const cardRect = $card[0].getBoundingClientRect();
+      const rowRect = $row[0].getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const viewportWidth = window.innerWidth;
 
-      // Adjust if card goes off-screen
-      let adjustTop = 0;
-      let adjustLeft = 0;
+      const cardWidth = 400;
+      const cardHeight = 250;
 
-      if (cardRect.bottom > viewportHeight) {
-        adjustTop = viewportHeight - cardRect.bottom - 20;
-      }
-      if (cardRect.top < 0) {
-        adjustTop = Math.abs(cardRect.top) + 20;
-      }
-      if (cardRect.right > viewportWidth) {
-        adjustLeft = viewportWidth - cardRect.right - 20;
-      }
-      if (cardRect.left < 0) {
-        adjustLeft = Math.abs(cardRect.left) + 20;
+      let cardLeft = rowRect.right + rowRect.width / 2 - cardWidth / 2;
+      let cardTop = rowRect.top + (rowRect.height / 2) - (cardHeight / 2);
+
+      // Check if card goes off-screen on the right
+      if (cardLeft + cardWidth > viewportWidth) {
+        // Position on the left side of the row instead
+        cardLeft = rowRect.left - cardWidth - 20;
       }
 
-      if (adjustTop !== 0 || adjustLeft !== 0) {
-        $card.css({
-          top: `calc(50% + ${adjustTop}px)`,
-          left: `calc(50% + ${adjustLeft}px)`,
-        });
+      // Check if card goes off-screen on the left
+      if (cardLeft < 20) {
+        // Center it horizontally with padding
+        cardLeft = 20;
       }
+
+      // Check if card goes off-screen at the bottom
+      if (cardTop + cardHeight > viewportHeight - 20) {
+        cardTop = viewportHeight - cardHeight - 20;
+      }
+
+      // Check if card goes off-screen at the top
+      if (cardTop < 20) {
+        cardTop = 20;
+      }
+
+      // Position the card
+      $card.css({
+        left: cardLeft + "px",
+        top: cardTop + "px",
+        transform: "none", // Remove the translate transform
+      });
 
       // Show the card after 0.75 seconds delay
       $card.addClass("show-card");

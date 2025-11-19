@@ -556,6 +556,15 @@ html:not(.ready) .sidebar .text {
    margin-top: 8px;
 }
 
+.profile-card-gender{
+  font-size: 1rem;
+  color: #3c4043;
+  margin: 0 0 4px 0;
+  font-weight: 500;
+}
+
+
+
 
 /* --------------------------------------------  */
 /*      DATA TABLE LIGHT MODE CUSTOMIZATION     */

@@ -67,15 +67,16 @@
                 <td style="position: relative; padding: 0; border: none;">
                     <div class="student-profile-card">
                         <div class="profile-card-header">
-                            <div class="profile-photo-container">
-                                {% if student.student_photo %}
-                                <img src="{{student.student_photo}}" alt="{{student.f_name}} {{student.l_name}}">
-                                {% else %}
-                                <div class="profile-photo-placeholder">
-                                    <i class="bi bi-person"></i>
-                                </div>
-                                {% endif %}
+                            
+                        </div>
+                        <div class="profile-photo-container">
+                            {% if student.student_photo %}
+                            <img src="{{student.student_photo}}" alt="{{student.f_name}} {{student.l_name}}">
+                            {% else %}
+                            <div class="profile-photo-placeholder">
+                                <i class="bi bi-person"></i>
                             </div>
+                            {% endif %}
                         </div>
                         <div class="profile-card-body">
                             <div class="profile-card-header-info">

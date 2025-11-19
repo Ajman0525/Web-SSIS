@@ -493,8 +493,9 @@ html:not(.ready) .sidebar .text {
 .profile-card-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 30px 20px 80px;
-  border-radius: 12px 12px 0 0;
+  border-radius: 12px;
   position: relative;
+  margin: 12px;
 }
 
 .profile-card-body {

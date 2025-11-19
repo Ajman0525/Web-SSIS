@@ -476,7 +476,7 @@ html:not(.ready) .sidebar .text {
   z-index: 1050;
   width: 400px;
   background: white;
-  border-radius: 12px;
+  border-radius: 30px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   padding: 0;
   opacity: 0;
@@ -493,7 +493,7 @@ html:not(.ready) .sidebar .text {
 .profile-card-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 30px 20px 80px;
-  border-radius: 12px;
+  border-radius: 20px;
   position: relative;
   margin: 12px;
 }

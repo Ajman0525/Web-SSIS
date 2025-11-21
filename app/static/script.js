@@ -683,24 +683,24 @@ $(document).ready(function () {
       let cardLeft = rowRect.right + rowRect.width / 2 - cardWidth / 2;
       let cardTop = rowRect.top + (rowRect.height / 2) - (cardHeight / 2);
 
-      // Check if card goes off-screen on the right
+      
       if (cardLeft + cardWidth > viewportWidth) {
         // Position on the left side of the row instead
         cardLeft = rowRect.left - cardWidth - 20;
       }
 
-      // Check if card goes off-screen on the left
+      
       if (cardLeft < 20) {
         // Center it horizontally with padding
         cardLeft = 20;
       }
 
-      // Check if card goes off-screen at the bottom
+      
       if (cardTop + cardHeight > viewportHeight - 20) {
         cardTop = viewportHeight - cardHeight - 20;
       }
 
-      // Check if card goes off-screen at the top
+      
       if (cardTop < 20) {
         cardTop = 20;
       }
@@ -709,10 +709,10 @@ $(document).ready(function () {
       $card.css({
         left: cardLeft + "px",
         top: cardTop + "px",
-        transform: "none", // Remove the translate transform
+        transform: "none", 
       });
 
-      // Show the card after 0.75 seconds delay
+      
       $card.addClass("show-card");
     }, 750);
   });

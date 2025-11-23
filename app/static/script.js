@@ -671,36 +671,33 @@ $(document).ready(function () {
 
     // Set a timer to show the card after 0.75 seconds
     hoverDisplayDelay = setTimeout(function () {
-
-      // Get positions
-      const rowRect = $row[0].getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const viewportWidth = window.innerWidth;
 
       const cardWidth = 400;
       const cardHeight = 250;
+      const spacing = 15;
 
-      let cardLeft = rowRect.right + rowRect.width / 2 - cardWidth / 2;
-      let cardTop = rowRect.top + (rowRect.height / 2) - (cardHeight / 2);
+      // Use mouse position from the event
+      let cardLeft = e.pageX + spacing;
+      let cardTop = e.pageY - cardHeight / 2;
 
-      
+      // If card would go off right edge, show on left of cursor
       if (cardLeft + cardWidth > viewportWidth) {
-        // Position on the left side of the row instead
-        cardLeft = rowRect.left - cardWidth - 20;
+        cardLeft = e.pageX - cardWidth - spacing;
       }
 
-      
+      // If card would go off left edge
       if (cardLeft < 20) {
-        // Center it horizontally with padding
         cardLeft = 20;
       }
 
-      
+      // If card would go off bottom
       if (cardTop + cardHeight > viewportHeight - 20) {
         cardTop = viewportHeight - cardHeight - 20;
       }
 
-      
+      // If card would go off top
       if (cardTop < 20) {
         cardTop = 20;
       }
@@ -709,10 +706,9 @@ $(document).ready(function () {
       $card.css({
         left: cardLeft + "px",
         top: cardTop + "px",
-        transform: "none", 
+        transform: "none",
       });
 
-      
       $card.addClass("show-card");
     }, 750);
   });

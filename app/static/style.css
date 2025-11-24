@@ -470,10 +470,7 @@ html:not(.ready) .sidebar .text {
 
 .student-profile-card {
   position: fixed; 
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1050;
+  z-index: 9999;
   width: 400px;
   background: white;
   border-radius: 30px;
@@ -488,6 +485,7 @@ html:not(.ready) .sidebar .text {
 .student-profile-card.show-card {
   opacity: 1;
   visibility: visible;
+  pointer-events: all;
 }
 
 .profile-card-header {

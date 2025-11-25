@@ -135,6 +135,118 @@ $(document).ready(function () {
     $(this).val(cleaned);
   });
 
+  // ----------- PHOTO UPLOAD RESTRICTIONS ----------- //
+  function isImageAllowed(fileName) {
+    const allowedExtensions = ["jpg", "jpeg", "png", "gif"];
+    const fileExtension = fileName.split(".").pop().toLowerCase();
+    return allowedExtensions.includes(fileExtension);
+  }
+
+  // ADD STUDENT PHOTO VALIDATION
+  $("#addStudentPhoto").on("change", function () {
+    const fileInput = this;
+    const file = fileInput.files[0];
+    const errorDiv = $("#addStudentIDError").text("");
+
+    const photoErrorDiv = $(fileInput)
+      .closest(".mb-3.text-center")
+      .find(".text-muted.small.mt-1");
+    photoErrorDiv
+      .removeClass("text-muted")
+      .addClass("text-danger")
+      .text("Max 5MB (JPG, PNG, GIF)");
+
+    if (file) {
+      if (!isImageAllowed(file.name)) {
+        photoErrorDiv.text(
+          "Invalid file type. Only JPG, PNG, and GIF are allowed."
+        );
+
+        $(fileInput).val("");
+
+        $("#addPhotoPreview").attr("src", "");
+        $("#addPhotoPreview").hide();
+        $("#addPhotoPlaceholder").show();
+      } else if (file.size > 5 * 1024 * 1024) {
+        photoErrorDiv.text("File size exceeds 5MB limit.");
+
+        $(fileInput).val("");
+
+        $("#addPhotoPreview").attr("src", "");
+        $("#addPhotoPreview").hide();
+        $("#addPhotoPlaceholder").show();
+      } else {
+        photoErrorDiv
+          .removeClass("text-danger")
+          .addClass("text-muted")
+          .text("Max 5MB (JPG, PNG, GIF)");
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          $("#addPhotoPreview").attr("src", e.target.result);
+          $("#addPhotoPlaceholder").hide();
+          $("#addPhotoPreview").show();
+        };
+        reader.readAsDataURL(file);
+      }
+    } else {
+      photoErrorDiv
+        .removeClass("text-danger")
+        .addClass("text-muted")
+        .text("Max 5MB (JPG, PNG, GIF)");
+      $("#addPhotoPreview").attr("src", "");
+      $("#addPhotoPreview").hide();
+      $("#addPhotoPlaceholder").show();
+    }
+  });
+
+  // EDIT STUDENT PHOTO VALIDATION
+  $("#editStudentPhoto").on("change", function () {
+    const fileInput = this;
+    const file = fileInput.files[0];
+
+    const photoErrorDiv = $(fileInput)
+      .closest(".mb-3.text-center")
+      .find(".text-muted.small.mt-1");
+    photoErrorDiv
+      .removeClass("text-muted")
+      .addClass("text-danger")
+      .text("Max 5MB (JPG, PNG, GIF)");
+
+    if (file) {
+      if (!isImageAllowed(file.name)) {
+        photoErrorDiv.text(
+          "Invalid file type. Only JPG, PNG, and GIF are allowed."
+        );
+
+        $(fileInput).val("");
+      } else if (file.size > 5 * 1024 * 1024) {
+        photoErrorDiv.text("File size exceeds 5MB limit.");
+
+        $(fileInput).val("");
+      } else {
+        photoErrorDiv
+          .removeClass("text-danger")
+          .addClass("text-muted")
+          .text("Max 5MB (JPG, PNG, GIF)");
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          $("#editPhotoPreview").attr("src", e.target.result);
+          $("#editPhotoPlaceholder").hide();
+          $("#editPhotoPreview").show();
+          $("#removePhoto").val("false");
+        };
+        reader.readAsDataURL(file);
+      }
+    } else {
+      photoErrorDiv
+        .removeClass("text-danger")
+        .addClass("text-muted")
+        .text("Max 5MB (JPG, PNG, GIF)");
+    }
+  });
+
   // --------- COLLEGE MODALS --------- //
   // Add College Popup
   $("#addCollegeForm").submit(function (e) {
@@ -535,9 +647,15 @@ $(document).ready(function () {
   });
 
   $("#addStudent").on("hidden.bs.modal", function () {
+    const modal = $(this);
+
     $("#addStudentForm")[0].reset();
     $("#addStudentID").removeClass("is-invalid");
     $("#addStudentIDError").text("");
+
+    //Reset Upload Error
+    const hintDiv = modal.find(".mb-3.text-center").find(".text-danger, .small.text-muted");
+    hintDiv.removeClass("text-danger").addClass("text-muted").text("Max 5MB (JPG, PNG, GIF)");
 
     // Reset photo preview
     $("#addPhotoPreview").css("display", "none").attr("src", "");
@@ -622,9 +740,15 @@ $(document).ready(function () {
   });
 
   $("#editStudent").on("hidden.bs.modal", function () {
+    const modal = $(this);
+
     $("#editStudentForm")[0].reset();
     $("#editStudentID").removeClass("is-invalid");
     $("#editStudentIDError").text("");
+
+    //Reset Upload Error
+    const hintDiv = modal.find(".mb-3.text-center").find(".text-danger, .small.text-muted");
+    hintDiv.removeClass("text-danger").addClass("text-muted").text("Max 5MB (JPG, PNG, GIF)");
 
     // Reset photo preview
     $("#editPhotoPreview").css("display", "none").attr("src", "");
@@ -713,7 +837,7 @@ $(document).ready(function () {
 
   $(".student-row").on("mouseleave", function () {
     const $card = $(this).find(".student-profile-card");
-   
+
     clearTimeout(hoverDisplayDelay);
 
     $card.removeClass("show-card");

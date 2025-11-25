@@ -666,10 +666,8 @@ $(document).ready(function () {
     const $row = $(this);
     const $card = $row.find(".student-profile-card");
 
-    // Clear any existing timer
     clearTimeout(hoverDisplayDelay);
 
-    // Set a timer to show the card after 0.75 seconds
     hoverDisplayDelay = setTimeout(function () {
       const viewportHeight = window.innerHeight;
       const viewportWidth = window.innerWidth;
@@ -678,7 +676,7 @@ $(document).ready(function () {
       const cardHeight = 250;
       const spacing = 15;
 
-      // Use mouse position from the event
+      // Profile card appears relative to the mouse pointer
       let cardLeft = e.pageX + spacing;
       let cardTop = e.pageY - cardHeight / 2;
 
@@ -715,11 +713,9 @@ $(document).ready(function () {
 
   $(".student-row").on("mouseleave", function () {
     const $card = $(this).find(".student-profile-card");
-
-    // Clear the timer if user leaves before delay completes
+   
     clearTimeout(hoverDisplayDelay);
 
-    // Hide the card immediately
     $card.removeClass("show-card");
   });
 });

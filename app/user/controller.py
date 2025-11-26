@@ -9,6 +9,10 @@ user_blueprint = Blueprint("user", __name__, template_folder="templates")
 # --- LOGIN ---
 @user_blueprint.route("/login", methods=["GET", "POST"])
 def login():
+    if session.get("user_id"):
+        flash("You are already logged in.", "info")
+        return redirect(url_for("home.home")) 
+
     login_form = LoginForm()
     signup_form = SignupForm()
 
@@ -39,6 +43,10 @@ def logout():
 # --- SIGNUP ---
 @user_blueprint.route("/signup", methods=["GET", "POST"])
 def signup():
+    if session.get("user_id"):
+        flash("You are already logged in.", "info")
+        return redirect(url_for("home.home")) 
+
     login_form = LoginForm()
     signup_form = SignupForm()
 

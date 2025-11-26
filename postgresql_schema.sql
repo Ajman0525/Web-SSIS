@@ -28,6 +28,7 @@ CREATE TABLE public.students (
     program VARCHAR(20),
     year_level VARCHAR(10) NOT NULL,
     gender VARCHAR(20) NOT NULL,
+    student_photo text,
     CONSTRAINT student_program_code_fkey
         FOREIGN KEY (program)
         REFERENCES public.programs (code)
